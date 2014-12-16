@@ -39,13 +39,20 @@ class SimpleSuffixTree extends AbstractSuffixTree {
 	
 	private void constructTree() {
 	    super.root = new SuffixTreeNode();
+	    //Add other way
+	    //int pathCounter=0;
+	    
 	    char[] s = super.text.toCharArray();
 	    for (int i = 0; i < s.length; i++) {
 	        List<String> suffixList = new ArrayList<String>();
 	        for (int k = i; k < s.length; k++) {
 	            suffixList.add(s[k] + "");
 	        }
+	        //Add other way
+		   //pathCounter++;
+	        
 	        super.root.addSuffix(suffixList, i+1);
+		    //super.root.addSuffix(suffixList,pathCounter);
 	    }
 	}
 }
@@ -61,11 +68,16 @@ class CompactSuffixTree extends AbstractSuffixTree {
 	    for (SuffixTreeNode child : node.children) {
 	        while (child.children.size() == 1) {
 	            SuffixTreeNode grandchild = child.children.iterator().next();
-	            child.incomingEdge.label += ", " + grandchild.incomingEdge.label;
+	            /*child.incomingEdge.label += ", " + grandchild.incomingEdge.label;
 	            child.stringDepth += grandchild.incomingEdge.label.length();
 	            child.children = grandchild.children;
 	            for (SuffixTreeNode grandchild : child.children)
-	                grandchild.parent = node;
+	                grandchild.parent = node;*/
+	            child.incomingEdge.label = child.incomingEdge.label + ", "
+	            		+ grandchild.incomingEdge.label;
+	            		child.stringDepth = child.stringDepth
+	            		+ grandchild.incomingEdge.label.length();
+	            		child.children = grandchild.children;
 	        }
 	        child = compactNodes(child, nodeDepth + 1);
 	    }
@@ -87,16 +99,19 @@ class SuffixTreeNode {
 	        int depth, int label, int id) {
 	    children = new ArrayList<SuffixTreeNode>();
 	    incomingEdge = new SuffixTreeEdge(incomingLabel, label);
-	    nodeDepth = depth;
+	    //nodeDepth = depth;
+	    this.nodeDepth=depth;
 	    this.label = label;
 	    this.parent = parent;
-	    stringDepth = parent.stringDepth + incomingLabel.length();
+	    //stringDepth = parent.stringDepth + incomingLabel.length();
+	    this.stringDepth = parent.stringDepth + incomingLabel.length();
 	    this.id = id;
 	}
 	public SuffixTreeNode() {
 	    children = new ArrayList<SuffixTreeNode>();
 	    nodeDepth = 0;
-	    label = 0;
+	    //label = 0;
+	    this.label=0;
 	}
 	
 	public void addSuffix(List<String> suffix, int pathIndex) {
@@ -126,9 +141,10 @@ class SuffixTreeNode {
 	private void insert(SuffixTreeNode insertAt, List<String> suffix,
 	        int pathIndex) {
 	    for (String x : suffix) {
-	        SuffixTreeNode child = new SuffixTreeNode(insertAt, x,
-	            insertAt.nodeDepth + 1, pathIndex, id);
-	        insertAt.children.add(child);
+		//for(int j = 0; j < suffix.size(); j++){
+	        SuffixTreeNode child = new SuffixTreeNode(insertAt, x,insertAt.nodeDepth + 1, pathIndex, id);
+			//SuffixTreeNode child = new SuffixTreeNode(insertAt, suffix.get(j)+ "", insertAt.nodeDepth + 1, pathIndex, id);
+			insertAt.children.add(child);
 	        insertAt = child;
 	    }
 	}
@@ -147,6 +163,9 @@ class SuffixTreeNode {
 	        result.append(this.id + "[label=\"" + incomingLabel + "\"];\n");
 	    }
 	    for (SuffixTreeNode child : children) {
+	    	//Add other way
+	    	child.parent.id =this.id;
+	    	
 	        c++;
 	        child.id = c;
 	        result.append(child.toString());
@@ -162,8 +181,8 @@ class SuffixTreeNode {
 	    return children.size() == 0;
 	}
 }
+
 class SuffixTreeEdge {
-	
 	String label = null;
 	@SuppressWarnings("unused")
 	private int branchIndex = -1;
