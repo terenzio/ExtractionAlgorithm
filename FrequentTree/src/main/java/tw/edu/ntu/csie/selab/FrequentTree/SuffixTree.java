@@ -10,9 +10,23 @@ public class SuffixTree {
 	@Test
 	public void sampleUsage() {
 		
-		CompactSuffixTree tree = new CompactSuffixTree(new SimpleSuffixTree("bananas"));
+		CompactSuffixTree tree = new CompactSuffixTree(new SimpleSuffixTree
+				("please call me assap"));
 		String properties = "rankdir=LR; node[shape=box fillcolor=gray95 style=filled]\n";
 		System.out.println("digraph {\n" + properties + tree.root + "}");
+		
+		 tree = new CompactSuffixTree(new SimpleSuffixTree			
+				("please call if you"));
+		 System.out.println("digraph {\n" + properties + tree.root + "}");
+		
+		 tree = new CompactSuffixTree(new SimpleSuffixTree			
+					("please call asap"));
+			 System.out.println("digraph {\n" + properties + tree.root + "}");
+
+			 tree = new CompactSuffixTree(new SimpleSuffixTree			
+						("if you call me asap"));
+				 System.out.println("digraph {\n" + properties + tree.root + "}");
+		
 
 	}
 }
@@ -23,11 +37,14 @@ abstract class AbstractSuffixTree {
 	int inputAlphabetSize = -1;
 	
 	AbstractSuffixTree(String text) {
-	    if (text.length() > 0 && text.charAt(text.length() - 1) == '$') {
+	    /*if (text.length() > 0 && text.charAt(text.length() - 1) == '$') {
 	        this.text = text;
 	    } else {
 	        this.text = text + "$";
-	    }
+	    }*/
+		this.text = text;
+		
+		
 	}
 }
 class SimpleSuffixTree extends AbstractSuffixTree {
@@ -42,7 +59,8 @@ class SimpleSuffixTree extends AbstractSuffixTree {
 	    //Add other way
 	    //int pathCounter=0;
 	    
-	    char[] s = super.text.toCharArray();
+	    //char[] s = super.text.toCharArray();
+	    String [] s= super.text.split(" ");
 	    for (int i = 0; i < s.length; i++) {
 	        List<String> suffixList = new ArrayList<String>();
 	        for (int k = i; k < s.length; k++) {
@@ -73,6 +91,7 @@ class CompactSuffixTree extends AbstractSuffixTree {
 	            child.children = grandchild.children;
 	            for (SuffixTreeNode grandchild : child.children)
 	                grandchild.parent = node;*/
+	            
 	            child.incomingEdge.label = child.incomingEdge.label + ", "
 	            		+ grandchild.incomingEdge.label;
 	            		child.stringDepth = child.stringDepth
@@ -192,4 +211,3 @@ class SuffixTreeEdge {
 	    this.branchIndex = branchIndex;
 	}
 }
-
