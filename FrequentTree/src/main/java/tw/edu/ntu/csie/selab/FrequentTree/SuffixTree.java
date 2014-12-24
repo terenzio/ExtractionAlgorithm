@@ -7,35 +7,40 @@ import java.util.List;
 import org.junit.Test;
 
 public class SuffixTree {
-	
-	//List<String> suffixList = new ArrayList<String>();
-	
+						
+     //List<String> suffixList = new ArrayList<String>();
 	@Test
 	public void sampleUsage() {
 
-	SuffixTreeNode root = new SuffixTreeNode();	
+	//SuffixTreeNode root = new SuffixTreeNode();	
 		
-	CompactSuffixTree tree = new CompactSuffixTree(new SimpleSuffixTree("please call me assap"), root);
+	//CompactSuffixTree tree = new CompactSuffixTree(new SimpleSuffixTree("please call me assap"), root);
+	CompactSuffixTree tree1 = new CompactSuffixTree(new SimpleSuffixTree ("please call me assap"));
+	CompactSuffixTree tree2 = new CompactSuffixTree(new SimpleSuffixTree ("please call if you"));
+	CompactSuffixTree tree3 = new CompactSuffixTree(new SimpleSuffixTree ("please call assap"));
+	CompactSuffixTree tree4 = new CompactSuffixTree(new SimpleSuffixTree ("if you call me asap"));
 	String properties = "rankdir=LR; node[shape=box fillcolor=gray95 style=filled]\n";
-	System.out.println("digraph {\n" + properties + tree.root + "}");
+	
+	System.out.println("digraph {\n" + properties + tree1.root + tree2.root + tree3.root + tree4.root + "}");
 		
-	tree = new CompactSuffixTree(new SimpleSuffixTree("please call if you"), root);
+	/*tree = new CompactSuffixTree(new SimpleSuffixTree("please call if you"), root);
 	System.out.println("digraph {\n" + properties + tree.root + "}");
 		
 	tree = new CompactSuffixTree(new SimpleSuffixTree("please call asap"), root);
 	System.out.println("digraph {\n" + properties + tree.root + "}");
 
 	tree = new CompactSuffixTree(new SimpleSuffixTree("if you call me asap"), root);
-	System.out.println("digraph {\n" + properties + tree.root + "}");
+	System.out.println("digraph {\n" + properties + tree.root + "}");*/
 		
 	}
 }
 abstract class AbstractSuffixTree {
 	    
 	String text = null;
-	SuffixTreeNode root = new SuffixTreeNode();
-
-	List<String> suffixList = new ArrayList<String>();
+	//SuffixTreeNode root = new SuffixTreeNode();
+	SuffixTreeNode root=null;
+	
+	//List<String> suffixList = new ArrayList<String>();
 	
 	int inputAlphabetSize = -1;
 	
@@ -59,7 +64,7 @@ class SimpleSuffixTree extends AbstractSuffixTree {
 	}
 	
 	private void constructTree() {
-	    //super.root = new SuffixTreeNode();
+	    super.root = new SuffixTreeNode();
 	    //Add other way
 	    //int pathCounter=0;
 	    
@@ -80,10 +85,11 @@ class SimpleSuffixTree extends AbstractSuffixTree {
 }
 class CompactSuffixTree extends AbstractSuffixTree {
 	
-	public CompactSuffixTree(SimpleSuffixTree simpleSuffixTree, SuffixTreeNode rootIn) {
-	    super(simpleSuffixTree.text);
-	    //super.root = compactNodes(simpleSuffixTree.root, 0);
-	    super.root = compactNodes(rootIn, 0);
+	//public CompactSuffixTree(SimpleSuffixTree simpleSuffixTree, SuffixTreeNode rootIn) {
+	public CompactSuffixTree(SimpleSuffixTree simpleSuffixTree) {
+		super(simpleSuffixTree.text);
+	    super.root = compactNodes(simpleSuffixTree.root, 0);
+	    //super.root = compactNodes(rootIn, 0);
 	}
 	
 	private SuffixTreeNode compactNodes(SuffixTreeNode node, int nodeDepth) {
@@ -99,9 +105,12 @@ class CompactSuffixTree extends AbstractSuffixTree {
 	            
 	            child.incomingEdge.label = child.incomingEdge.label + ", "
 	            		+ grandchild.incomingEdge.label;
-	            		child.stringDepth = child.stringDepth
+	            		
+	            child.stringDepth = child.stringDepth
 	            		+ grandchild.incomingEdge.label.length();
-	            		child.children = grandchild.children;
+	            
+	            child.children = grandchild.children;
+	            
 	        }
 	        child = compactNodes(child, nodeDepth + 1);
 	    }
