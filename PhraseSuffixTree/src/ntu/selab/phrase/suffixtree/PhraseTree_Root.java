@@ -7,16 +7,18 @@ public class PhraseTree_Root implements Aggregator {
 	
 	private Set<PhraseTree_Node> nodes;
 	
-	public PhraseTree_Root() {
-		nodes = new HashSet<PhraseTree_Node>();
-	}
+//	public PhraseTree_Root() {
+//		nodes = new HashSet<PhraseTree_Node>();
+//	}
 	
 	protected void finalize() {
 		nodes = null;
 	}
 	
 	public void addNode(PhraseTree_Node word) {
+		nodes = new HashSet<PhraseTree_Node>();
 		nodes.add(word);
+	
 	}
 	
 	
