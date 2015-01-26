@@ -1,5 +1,5 @@
 package ntu.selab.phrase.suffixtree;
 
-public class PhraseTree_Root {
+public class PhraseTree_Root implements Aggregator {
 
 }

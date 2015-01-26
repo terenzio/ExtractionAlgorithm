@@ -1,5 +1,5 @@
 package ntu.selab.phrase.suffixtree;
 
-public class Aggregator {
+public interface Aggregator {
 
 }
