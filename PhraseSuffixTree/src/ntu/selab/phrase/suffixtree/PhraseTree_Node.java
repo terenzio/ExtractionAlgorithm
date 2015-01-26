@@ -44,6 +44,7 @@ public class PhraseTree_Node {
 	}
 	public void setWord(String word) {
 		this.word = word;
+		System.out.println("Node Created... adding: " + word +  " to the tree!");
 	}
 	
 	public int getSignificanceFactorNode() {
