@@ -1,5 +1,7 @@
 package ntu.selab.phrase.suffixtree;
 
+import java.util.Map;
+
 public class Scanner{
 
 	private Table table;
@@ -23,5 +25,8 @@ public class Scanner{
 	public void printM()
 	{
 		table.printMix();
+	}
+	public Map<String, Float> getTable(){
+		return table.getMap();
 	}
 }

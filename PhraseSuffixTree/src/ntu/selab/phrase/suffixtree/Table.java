@@ -1,9 +1,6 @@
 package ntu.selab.phrase.suffixtree;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Iterator;
 import java.util.TreeMap;
 
 public class Table {
@@ -29,5 +26,7 @@ public class Table {
 			System.out.println(key + "=" + value);
 		}
 	}
-
+	public Map<String, Float> getMap(){
+		return mixed;
+	}
 }
