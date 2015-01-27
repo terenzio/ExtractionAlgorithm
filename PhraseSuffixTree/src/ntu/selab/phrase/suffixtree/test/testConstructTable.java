@@ -15,13 +15,13 @@ public class testConstructTable {
 	@Test
 	public void test() {
 		Scanner sc = new Scanner();
-		File file = new File("d:\\doc1.txt");
+		File file = new File("doc1.txt");
 		try{
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		while((line=br.readLine()) != null){
 			//sc.scan(line);
-			sc.scanToMix(line, 2);
+			sc.scanToMix(line, 3);
 		}
 		sc.printM();
 		br.close();
