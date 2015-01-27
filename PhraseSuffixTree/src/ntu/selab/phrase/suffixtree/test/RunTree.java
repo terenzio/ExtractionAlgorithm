@@ -22,16 +22,19 @@ public class RunTree extends TestCase {
 			
 	
 		 PhraseTree_Root phraseTree = new PhraseTree_Root(root1);
-		 	
-		
-		// phraseTree.addNode("Hello");
-		// phraseTree.addNode("How");
-		// phraseTree.addNode("Are");
-		// phraseTree.addNode("You");
 		 
-		 phraseTree.addNode("I");
-		 phraseTree.addNode("Love");
-		 phraseTree.addNode("You");
+		 //Level 1:
+		 phraseTree.addNode("please");
+		 phraseTree.addNode("call");
+		 phraseTree.addNode("me");
+		 phraseTree.addNode("asap");
+		 phraseTree.addNode("if");
+		 phraseTree.addNode("you");
+		 
+		//Level 2:
+		 //phraseTree.addNode("call", 2, 1);
+		 
+		 
 		 
 		 
 		 phraseTree.displayPhraseTree(root1);

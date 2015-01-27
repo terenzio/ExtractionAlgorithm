@@ -1,13 +1,17 @@
 package ntu.selab.phrase.suffixtree;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class PhraseTree_Node {
 
 	private PhraseTree_Root root;
 	private PhraseTree_Edge startEdge;
 	private PhraseTree_Edge endEdge; 
-	private ArrayList<String> childNodes = new ArrayList<String>();
+
+	private Collection<PhraseTree_Node> childNodes = null;
+
+	
 	private String word; 
 	private int significanceFactorNode;
 	
@@ -36,11 +40,11 @@ public class PhraseTree_Node {
 		this.endEdge = endEdge;
 	}
 	
-	public ArrayList<String> getChildNodes() {
+	public Collection<PhraseTree_Node> getChildNodes() {
 		return childNodes;
 	}
 	
-	public void setChildNodes(ArrayList<String> childNodes) {
+	public void addChildNodes(Collection<PhraseTree_Node> childNodes) {
 		this.childNodes = childNodes;
 	}
 	
