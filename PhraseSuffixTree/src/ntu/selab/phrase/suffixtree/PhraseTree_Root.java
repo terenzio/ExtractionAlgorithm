@@ -26,6 +26,7 @@ public class PhraseTree_Root implements Aggregator {
 		nodes = null;
 	}
 	
+
 	
 	public void addNode(String word) {
 		PhraseTree_Node nodeData = new PhraseTree_Node(word);
