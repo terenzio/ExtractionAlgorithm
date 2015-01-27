@@ -11,6 +11,10 @@ public class PhraseTree_Node {
 	private String word; 
 	private int significanceFactorNode;
 	
+	public PhraseTree_Node(String word) {
+		setWord(word);
+	}
+	
 	public PhraseTree_Root getRoot() {
 		return root;
 	}
@@ -35,6 +39,7 @@ public class PhraseTree_Node {
 	public ArrayList<String> getChildNodes() {
 		return childNodes;
 	}
+	
 	public void setChildNodes(ArrayList<String> childNodes) {
 		this.childNodes = childNodes;
 	}
