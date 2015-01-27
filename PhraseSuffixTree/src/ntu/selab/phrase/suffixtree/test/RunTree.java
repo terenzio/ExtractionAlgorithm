@@ -4,11 +4,13 @@ package ntu.selab.phrase.suffixtree.test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 import ntu.selab.phrase.suffixtree.*;
 import junit.framework.TestCase;
 
 import org.junit.Test;
+
 
 
 
@@ -25,19 +27,18 @@ public class RunTree extends TestCase {
 		 
 		 String root1 = "FirstTree";
 			
-//		 Scanner sc = new Scanner();
-//		 SuffixTokenizer st = new SuffixTokenizer();
-//		 
-//			File file = new File("doc1.txt");
-//			try{
-//			BufferedReader br = new BufferedReader(new FileReader(file));
-//			String line;
-//			while((line=br.readLine()) != null){
-//				//sc.scan(line);
-//				st.readLine(line);
-//				sc.scanToMix(line, 3);
-//			}
-		
+		 SuffixTokenizer document = new SuffixTokenizer();
+		 File file = new File("doc1.txt");
+		 try{
+			 BufferedReader br = new BufferedReader(new FileReader(file));
+			 String line;
+				while((line=br.readLine()) != null){
+					document.readLine(line);
+				}
+				br.close();
+			} catch(IOException e){
+				e.printStackTrace();
+			}
 		 
 		 PhraseTree_Root phraseTree = new PhraseTree_Root(root1);
 		 
@@ -48,15 +49,15 @@ public class RunTree extends TestCase {
 		 
 		 
 		 //Sentence 1: "please call me asap if you"
-		 phraseTree.addNode("please", 1);
-		 phraseTree.addNode("call", 1);
-		 phraseTree.addNode("me", 1);
-		 phraseTree.addNode("asap");
-		 phraseTree.addNode("if");
-		 phraseTree.addNode("you");
+//		 phraseTree.addNode("please");
+//		 phraseTree.addNode("call");
+//		 phraseTree.addNode("me");
+//		 phraseTree.addNode("asap");
+//		 phraseTree.addNode("if");
+//		 phraseTree.addNode("you");
 		 
 		//Sentence 2:
-		 phraseTree.addNode("call", 2);
+//		 phraseTree.addNode("call");
 		 
 		 
 		 
