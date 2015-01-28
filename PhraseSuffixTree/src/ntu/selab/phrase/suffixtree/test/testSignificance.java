@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 
 import ntu.selab.phrase.suffixtree.Scanner;
 import ntu.selab.phrase.suffixtree.Significance;
@@ -29,9 +30,17 @@ public class testSignificance {
 		} catch(IOException e){
 			e.printStackTrace();
 		}
+		System.out.println("------------------------------");
 		
+		float thr = (float) 1/16;
 		Significance sig = new Significance();
-		HashSet<String> si = sig.markSignificant(sc.getTable());
+		Map<String, Float> t = sig.threshold(sc.getTable(), thr);
+	
+		for(Map.Entry<String, Float> entry: t.entrySet())
+		{
+			System.out.println(entry.getKey() + " : "+entry.getValue());
+		}
+		HashSet<String> si = sig.markSignificant(t);
 		for(String s: si)
 			System.out.println("* "+s);
 		

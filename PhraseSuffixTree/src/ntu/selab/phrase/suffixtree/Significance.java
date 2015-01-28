@@ -2,7 +2,7 @@ package ntu.selab.phrase.suffixtree;
 
 import java.util.HashSet;
 import java.util.Map;
-
+import java.util.Iterator;
 public class Significance {
 	
 
@@ -20,7 +20,7 @@ public class Significance {
 		float z = 2;
 		return ab >= (a/z);
 	}
-	public HashSet<String> markSignificant(Map<String,Float> table){
+	public HashSet<String> markSignificant(final Map<String,Float>  table){
 		 HashSet<String> sig = new HashSet<String>();
 		 String tmpS = null;
 		 float tmpF = 0;
@@ -46,11 +46,19 @@ public class Significance {
 				}
 				else if(isSignificant != false){
 					if(!isUnique(tmpF, entry.getValue()))
-							isSignificant = false;
+						isSignificant = false;
 				}
 			
 			}
 		 return sig;
 	}
-	
+	public Map<String,Float> threshold(Map<String, Float> table, float thr){
+		 for(Iterator<Map.Entry<String, Float>> it = table.entrySet().iterator(); it.hasNext(); ) {
+		      Map.Entry<String, Float> entry = it.next();
+	    	  if( entry.getValue() <= thr) {
+		    	 it.remove();
+		      }
+		    }
+		return table;
+	}
 }
