@@ -34,13 +34,12 @@ public class testSignificance {
 		
 		float thr = (float) 1/16;
 		Significance sig = new Significance();
-		Map<String, Float> t = sig.threshold(sc.getTable(), thr);
-	
-		for(Map.Entry<String, Float> entry: t.entrySet())
+		sig.threshold(sc.getTable(), thr);
+		for(Map.Entry<String, Float> entry: sc.getTable().entrySet())
 		{
 			System.out.println(entry.getKey() + " : "+entry.getValue());
 		}
-		HashSet<String> si = sig.markSignificant(t);
+		HashSet<String> si = sig.markSignificant(sc.getTable());
 		for(String s: si)
 			System.out.println("* "+s);
 		

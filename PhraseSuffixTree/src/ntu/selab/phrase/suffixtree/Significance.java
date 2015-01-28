@@ -52,13 +52,13 @@ public class Significance {
 			}
 		 return sig;
 	}
-	public Map<String,Float> threshold(Map<String, Float> table, float thr){
+	public void threshold(Map<String, Float> table, float thr){
 		 for(Iterator<Map.Entry<String, Float>> it = table.entrySet().iterator(); it.hasNext(); ) {
 		      Map.Entry<String, Float> entry = it.next();
 	    	  if( entry.getValue() <= thr) {
 		    	 it.remove();
 		      }
 		    }
-		return table;
+		
 	}
 }
