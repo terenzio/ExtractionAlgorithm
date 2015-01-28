@@ -5,11 +5,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 import ntu.selab.phrase.suffixtree.*;
 import junit.framework.TestCase;
 
 import org.junit.Test;
+
+
 
 
 
@@ -24,7 +27,7 @@ public class RunTree extends TestCase {
 		//CompactSuffixTree tree = new CompactSuffixTree(new SimpleSuffixTree("bananas$"));
 	
 	 public void testBasicTreeGeneration() {
-		 
+		 String childNodes = null;
 		 String root1 = "FirstTree";
 			
 		 SuffixTokenizer document = new SuffixTokenizer();
@@ -33,8 +36,10 @@ public class RunTree extends TestCase {
 			 BufferedReader br = new BufferedReader(new FileReader(file));
 			 String line;
 				while((line=br.readLine()) != null){
-					document.readLine(line);
+					childNodes = document.readLine(line);
+					System.out.println("childNodes: " + childNodes);
 				}
+				
 				br.close();
 			} catch(IOException e){
 				e.printStackTrace();
