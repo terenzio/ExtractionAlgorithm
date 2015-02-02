@@ -6,9 +6,7 @@ import java.util.Iterator;
 public class Significance {
 	
 
-	public void Frequency(){
-		
-	}
+	
 	private boolean coOccurrence(float ab, float a, float b){
 		return ab > a * b;
 	}
@@ -26,11 +24,9 @@ public class Significance {
 		 float tmpF = 0;
 		 boolean isSignificant = true;
 		 for(Map.Entry<String, Float> entry : table.entrySet()) {
-				 
-			 	if(entry.getKey().split(" ").length == 1){
+				if(entry.getKey().split(" ").length == 1){
 			 		if(tmpS != null && isSignificant)
 						sig.add(tmpS.split(" ")[1]);
-					
 				}
 				else if(entry.getKey().split(" ").length == 2)
 				{
@@ -48,7 +44,6 @@ public class Significance {
 					if(!isUnique(tmpF, entry.getValue()))
 						isSignificant = false;
 				}
-			
 			}
 		 return sig;
 	}

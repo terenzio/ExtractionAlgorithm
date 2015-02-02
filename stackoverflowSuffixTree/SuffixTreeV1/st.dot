@@ -1,0 +1,18 @@
+digraph {
+	rankdir = LR;
+	edge [arrowsize=0.4,fontsize=10]
+	node1 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];
+//------leaves------
+	node2 [label="",shape=point]
+	node4 [label="",shape=point]
+	node5 [label="",shape=point]
+//------internal nodes------
+	node3 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]
+//------edges------
+	node1 -> node3 [label="are",weight=3]
+	node3 -> node2 [label="are you",weight=3]
+	node3 -> node4 [label="you",weight=3]
+	node1 -> node5 [label="you",weight=3]
+//------suffix links------
+	node3 -> node1 [label="",weight=1,style=dotted]
+}
