@@ -1,9 +1,13 @@
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.TreeMap;
+
 public class ST {
     BufferedReader in;
     PrintWriter out;
@@ -18,6 +22,7 @@ public class ST {
                 remainder;
 
         int active_node, active_length, active_edge;
+        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
 
         class Node {
 
@@ -48,9 +53,12 @@ public class ST {
         }
 
         private void addSuffixLink(int node) {
-            if (needSuffixLink > 0)
+            if (needSuffixLink > 0){
                 nodes[needSuffixLink].link = node;
+                hasLink.add(node);
+            }
             needSuffixLink = node;
+            
         }
 
         String active_edge() {
@@ -77,10 +85,11 @@ public class ST {
             needSuffixLink = -1;
             remainder++;
             while(remainder > 0) {
+            	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
                 if (active_length == 0) active_edge = position;
-                if (!nodes[active_node].next.containsKey(active_edge())){
+                if (!nodes[active_node].next.containsKey(active_edge()) ){
                     int leaf = newNode(position, oo);
-                    nodes[active_node].next.put(active_edge(), leaf);
+                    nodes[active_node].next.put(active_edge(), leaf); 
                     addSuffixLink(active_node); //rule 2
                 } else {
                     int next = nodes[active_node].next.get(active_edge());
@@ -88,7 +97,7 @@ public class ST {
                     if (text[nodes[next].start + active_length].equals(c) ) { //observation 1
                         active_length++;
                         addSuffixLink(active_node); // observation 3
-                        break;
+                       	break;
                     }
                     int split = newNode(nodes[next].start, nodes[next].start + active_length);
                     nodes[active_node].next.put(active_edge(), split);
@@ -107,7 +116,22 @@ public class ST {
                     active_node = nodes[active_node].link > 0 ? nodes[active_node].link : root; //rule 3
             }
         }
-
+        public void sep(){
+        	 remainder = 0;
+        	 active_node = root;
+        	 active_length = 0;
+        	 active_edge = 0;
+        	 for(int i = 0; i < hasLink.size(); i++)
+        		 nodes[hasLink.get(i)].link=0;
+        	 for(int i = 1; i < nodes.length; ++i)
+        	 {
+        		 if(nodes[i] == null)
+        			 break;
+        		 nodes[i].end=Math.min(position + 1, nodes[i].end);
+        	 }
+    
+        }
+       
         /*
             printing the Suffix Tree in a format understandable by graphviz. The output is written into
             st.dot file. In order to see the suffix tree as a PNG image, run the following command:
@@ -172,19 +196,51 @@ public class ST {
             for (int child : nodes[x].next.values())
                 printSLinks(child);
         }
+        
+        void printNodes(){
+        	for(int i = 1; i < nodes.length;++i)
+        	{
+        		if(nodes[i]==null) break;
+        		System.out.println("node: "+" start: "+nodes[i].start+"end: "+nodes[i].end);
+        	}
+        }
     }
 
     public ST() throws Exception {
         in = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new FileWriter("st.dot"));
-        
-        String[] word = in.readLine().split(" ");
-        SuffixTree st1 = new SuffixTree(word.length);
+      
+        SuffixTree st1 = new SuffixTree(16);
+       	String[] word = in.readLine().split(" ");
         for(int i = 0; i < word.length; ++i)
         {
-            st1.addChar(word[i]);
+        	 st1.addChar(word[i]);
         }
+     
+        st1.sep();
+        word=in.readLine().split(" ");
+        for(int i = 0; i < word.length; ++i)
+    	{
+        	st1.addChar(word[i]);
+    	}
         
+        st1.sep();
+        word=in.readLine().split(" ");
+        for(int i = 0; i < word.length; ++i)
+    	{
+        	st1.addChar(word[i]);
+    	}
+        
+        st1.sep();
+        word=in.readLine().split(" ");
+        for(int i = 0; i < word.length; ++i)
+    	{
+        	st1.addChar(word[i]);
+    	}
+        
+        
+        
+       // st1.printNodes();
         st1.printTree();
         out.close();
     }
