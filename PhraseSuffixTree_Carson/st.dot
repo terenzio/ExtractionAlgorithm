@@ -1,0 +1,6 @@
+digraph {
+	rankdir = LR;
+	edge [arrowsize=0.4,fontsize=10]
+	node1 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];
+//------edges------
+}
