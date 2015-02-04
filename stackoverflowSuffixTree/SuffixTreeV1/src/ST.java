@@ -1,4 +1,4 @@
-import java.awt.List;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
@@ -207,39 +207,26 @@ public class ST {
     }
 
     public ST() throws Exception {
+    	
         in = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new FileWriter("st.dot"));
-      
-        SuffixTree st1 = new SuffixTree(16);
-       	String[] word = in.readLine().split(" ");
+        Scanner input = new Scanner(System.in);
+        int f = input.nextInt();
+        
+        SuffixTree st1 = new SuffixTree(500);
+        //Suppose a document has 500 words at most
+        
+       	String[] word; 
+       	
+       	while(f-->0){
+       	word=in.readLine().split(" ");
         for(int i = 0; i < word.length; ++i)
         {
         	 st1.addChar(word[i]);
         }
-     
         st1.sep();
-        word=in.readLine().split(" ");
-        for(int i = 0; i < word.length; ++i)
-    	{
-        	st1.addChar(word[i]);
-    	}
-        
-        st1.sep();
-        word=in.readLine().split(" ");
-        for(int i = 0; i < word.length; ++i)
-    	{
-        	st1.addChar(word[i]);
-    	}
-        
-        st1.sep();
-        word=in.readLine().split(" ");
-        for(int i = 0; i < word.length; ++i)
-    	{
-        	st1.addChar(word[i]);
-    	}
-        
-        
-        
+       	}
+  
        // st1.printNodes();
         st1.printTree();
         out.close();
