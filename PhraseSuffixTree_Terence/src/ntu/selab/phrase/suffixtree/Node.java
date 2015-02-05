@@ -6,7 +6,6 @@ public class Node {
 	
 	
 	 final int oo = Integer.MAX_VALUE/2;
-	 int position = -1;
 	 
 	 
 	 /*
@@ -25,7 +24,7 @@ public class Node {
  }
 
  public int edgeLength() {
-     return Math.min(end, position + 1) - start;
+     return Math.min(end, SuffixTree.position + 1) - start;
  }
 
 }

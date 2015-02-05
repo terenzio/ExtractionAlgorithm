@@ -15,11 +15,11 @@ public class runStackOverF_Tree extends TestCase {
 	
 
 	
-	public void testSO_TreeGeneration() {
+	public void testSO_TreeGeneration() throws Exception{
 		
 			BufferedReader in;
 		    PrintWriter out = null;
-		 	String[] word = null; 
+//		 	String[] word = null; 
 		
 		  	in = new BufferedReader(new InputStreamReader(System.in));
 	        try {
@@ -34,23 +34,13 @@ public class runStackOverF_Tree extends TestCase {
 	        SuffixTree st1 = new SuffixTree(500);
 	        //Suppose a document has 500 words at most
 	        
-	      
+	        String[] word; 
 	       	
 	       	while(f-->0){
-	       	try {
-				word=in.readLine().split(" ");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	       	word=in.readLine().split(" ");
 	        for(int i = 0; i < word.length; ++i)
 	        {
-	        	 try {
-					st1.addChar(word[i]);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	        	 st1.addChar(word[i]);
 	        }
 	        st1.sep();
 	       	}
@@ -58,7 +48,7 @@ public class runStackOverF_Tree extends TestCase {
 	       // st1.printNodes();
 	        st1.printTree(out);
 	        out.close();
-		
+	       	
 		
 	}
 	

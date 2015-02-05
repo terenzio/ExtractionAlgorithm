@@ -9,14 +9,13 @@ import java.util.Arrays;
 
 public class SuffixTree {
 	
-	   BufferedReader in;  //WRONG!
-	   PrintWriter out;
+	  
 
 
 	   final int oo = Integer.MAX_VALUE/2;
        Node [] nodes;
        String [] text;
-       int root, position = -1,
+       static int root, position = -1,
                currentNode,
                needSuffixLink,
                remainder;
@@ -134,33 +133,33 @@ public class SuffixTree {
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
            out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
-           out.println("//------leaves------");
-           printLeaves(root, out);
-           out.println("//------internal nodes------");
-           printInternalNodes(root, out);
+//           out.println("//------leaves------");
+//           printLeaves(root, out);
+//           out.println("//------internal nodes------");
+//           printInternalNodes(root, out);
            out.println("//------edges------");
            printEdges(root, out);
-           out.println("//------suffix links------");
-           printSLinks(root);
+//           out.println("//------suffix links------");
+//           printSLinks(root);
            out.println("}");
        } 
 
-       void printLeaves(int x, PrintWriter out) {
-           if (nodes[x].next.size() == 0)
-               out.println("\tnode"+x+" [label=\"\",shape=point]");
-           else {
-               for (int child : nodes[x].next.values())
-                   printLeaves(child, out);
-           }
-       }
-
-       void printInternalNodes(int x, PrintWriter out) {
-           if (x != root && nodes[x].next.size() > 0)
-               out.println("\tnode"+x+" [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]");
-
-           for (int child : nodes[x].next.values())
-               printInternalNodes(child, out);
-       }
+//       void printLeaves(int x, PrintWriter out) {
+//           if (nodes[x].next.size() == 0)
+//               out.println("\tnode"+x+" [label=\"\",shape=point]");
+//           else {
+//               for (int child : nodes[x].next.values())
+//                   printLeaves(child, out);
+//           }
+//       }
+//
+//       void printInternalNodes(int x, PrintWriter out) {
+//           if (x != root && nodes[x].next.size() > 0)
+//               out.println("\tnode"+x+" [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]");
+//
+//           for (int child : nodes[x].next.values())
+//               printInternalNodes(child, out);
+//       }
 
        void printEdges(int x, PrintWriter out) {
            for (int child : nodes[x].next.values()) {
@@ -169,20 +168,20 @@ public class SuffixTree {
            }
        }
 
-       void printSLinks(int x) {
-           if (nodes[x].link > 0)
-               out.println("\tnode"+x+" -> node"+nodes[x].link+" [label=\"\",weight=1,style=dotted]");
-           for (int child : nodes[x].next.values())
-               printSLinks(child);
-       }
-       
-       void printNodes(){
-       	for(int i = 1; i < nodes.length;++i)
-       	{
-       		if(nodes[i]==null) break;
-       		System.out.println("node: "+" start: "+nodes[i].start+"end: "+nodes[i].end);
-       	}
-       }
+//       void printSLinks(int x) {
+//           if (nodes[x].link > 0)
+//               out.println("\tnode"+x+" -> node"+nodes[x].link+" [label=\"\",weight=1,style=dotted]");
+//           for (int child : nodes[x].next.values())
+//               printSLinks(child);
+//       }
+//       
+//       void printNodes(){
+//       	for(int i = 1; i < nodes.length;++i)
+//       	{
+//       		if(nodes[i]==null) break;
+//       		System.out.println("node: "+" start: "+nodes[i].start+"end: "+nodes[i].end);
+//       	}
+//       }
    }
 
        
