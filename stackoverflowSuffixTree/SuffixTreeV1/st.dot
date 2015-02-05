@@ -3,16 +3,23 @@ digraph {
 	edge [arrowsize=0.4,fontsize=10]
 	node1 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];
 //------leaves------
+	node7 [label="",shape=point]
+	node3 [label="",shape=point]
 	node2 [label="",shape=point]
-	node4 [label="",shape=point]
+	node8 [label="",shape=point]
 	node5 [label="",shape=point]
 //------internal nodes------
-	node3 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]
+	node6 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]
+	node4 [label="",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]
 //------edges------
-	node1 -> node3 [label="are",weight=3]
-	node3 -> node2 [label="are you",weight=3]
-	node3 -> node4 [label="you",weight=3]
-	node1 -> node5 [label="you",weight=3]
+	node1 -> node6 [label="are",weight=3]
+	node6 -> node7 [label="ok",weight=3]
+	node6 -> node3 [label="you",weight=3]
+	node1 -> node2 [label="how are you",weight=3]
+	node1 -> node8 [label="ok",weight=3]
+	node1 -> node4 [label="you",weight=3]
+	node4 -> node5 [label="are ok",weight=3]
 //------suffix links------
-	node3 -> node1 [label="",weight=1,style=dotted]
+	node6 -> node1 [label="",weight=1,style=dotted]
+	node4 -> node1 [label="",weight=1,style=dotted]
 }
