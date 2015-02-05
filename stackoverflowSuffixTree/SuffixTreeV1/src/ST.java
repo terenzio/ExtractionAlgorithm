@@ -1,11 +1,11 @@
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class ST {
@@ -80,18 +80,25 @@ public class ST {
             return currentNode;
         }
 
-        public void addChar(String c) throws Exception {
+        public void addWord(String c, boolean isFrequent) throws Exception {
             text[++position] = c;
             needSuffixLink = -1;
+            
             remainder++;
+          
             while(remainder > 0) {
-            	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
+      //      	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
                 if (active_length == 0) active_edge = position;
                 if (!nodes[active_node].next.containsKey(active_edge()) ){
+                	if(!isFrequent) {
+                		remainder--;
+                		break;
+                	}
                     int leaf = newNode(position, oo);
                     nodes[active_node].next.put(active_edge(), leaf); 
                     addSuffixLink(active_node); //rule 2
                 } else {
+                	
                     int next = nodes[active_node].next.get(active_edge());
                     if (walkDown(next)) continue;   //observation 2
                     if (text[nodes[next].start + active_length].equals(c) ) { //observation 1
@@ -108,7 +115,7 @@ public class ST {
                     addSuffixLink(split); //rule 2
                 }
                 remainder--;
-                
+              if(!isFrequent) break;
                 if (active_node == root && active_length > 0) {  //rule 1
                     active_length--;
                     active_edge = position - remainder + 1;
@@ -116,7 +123,8 @@ public class ST {
                     active_node = nodes[active_node].link > 0 ? nodes[active_node].link : root; //rule 3
             }
         }
-        public void sep(){
+        //Use it to end a phrase
+         void sep(){
         	 remainder = 0;
         	 active_node = root;
         	 active_length = 0;
@@ -206,33 +214,48 @@ public class ST {
         }
     }
 
-    public ST() throws Exception {
+    public ST( Map<String, Integer> table) throws Exception {
     	
         in = new BufferedReader(new InputStreamReader(System.in));
         out = new PrintWriter(new FileWriter("st.dot"));
         Scanner input = new Scanner(System.in);
-        int f = input.nextInt();
+        System.out.println("Enter the number of phrases:");
+        int numberOfPhrase = input.nextInt();
         
         SuffixTree st1 = new SuffixTree(500);
         //Suppose a document has 500 words at most
         
        	String[] word; 
        	
-       	while(f-->0){
+       	while(numberOfPhrase-- > 0){
+       	System.out.println("Enter a phrase:");
        	word=in.readLine().split(" ");
-        for(int i = 0; i < word.length; ++i)
+        boolean inTable = true;
+       	for(int i = 0; i < word.length; ++i)
         {
-        	 st1.addChar(word[i]);
+       		 inTable = true;
+        	 if(i+1 < word.length){
+        		 String s = word[i]+" "+word[i+1];
+        		 if(!table.containsKey(s))
+        			inTable=false;
+        	 }
+        	 
+        		 st1.addWord(word[i], inTable);
         }
         st1.sep();
        	}
-  
+       	
        // st1.printNodes();
         st1.printTree();
         out.close();
     }
 
     public static void main(String ... args) throws Exception{
-        new ST();
+    	Map<String, Integer> table = new TreeMap<String,Integer>();
+    	table.put("please call",3);
+    	table.put("call me", 2);
+    	table.put("if you", 2);
+    	table.put("me asap", 2);
+    	new ST(table);
     }
 }
