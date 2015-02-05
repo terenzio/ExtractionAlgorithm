@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import junit.framework.TestCase;
-import ntu.selab.phrase.suffixtree.SuffixTree;
+import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
 
 public class runStackOverF_Tree extends TestCase {
 	
@@ -31,7 +31,7 @@ public class runStackOverF_Tree extends TestCase {
 	        Scanner input = new Scanner(System.in);
 	        int f = input.nextInt();
 	        
-	        SuffixTree st1 = new SuffixTree(500);
+	        PhraseSuffix_Tree st1 = new PhraseSuffix_Tree(500);
 	        //Suppose a document has 500 words at most
 	        
 	        String[] word; 

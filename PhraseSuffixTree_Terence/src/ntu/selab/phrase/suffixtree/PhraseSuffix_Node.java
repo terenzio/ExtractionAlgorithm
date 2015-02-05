@@ -2,7 +2,7 @@ package ntu.selab.phrase.suffixtree;
 
 import java.util.TreeMap;
 
-public class Node {
+public class PhraseSuffix_Node {
 	
 	
 	 final int oo = Integer.MAX_VALUE/2;
@@ -18,13 +18,13 @@ public class Node {
  int start, end = oo, link;
  public TreeMap<String, Integer> next = new TreeMap<String, Integer>();
 
- public Node(int start, int end) {
+ public PhraseSuffix_Node(int start, int end) {
      this.start = start;
      this.end = end;
  }
 
  public int edgeLength() {
-     return Math.min(end, SuffixTree.position + 1) - start;
+     return Math.min(end, PhraseSuffix_Tree.position + 1) - start;
  }
 
 }

@@ -7,13 +7,10 @@ import java.util.Arrays;
 
 //import ST.SuffixTree.Node;
 
-public class SuffixTree {
+public class PhraseSuffix_Tree {
 	
-	  
-
-
 	   final int oo = Integer.MAX_VALUE/2;
-       Node [] nodes;
+       PhraseSuffix_Node [] nodes;
        String [] text;
        static int root, position = -1,
                currentNode,
@@ -24,8 +21,8 @@ public class SuffixTree {
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
        
        
-       public SuffixTree(int length) {
-           nodes = new Node[2* length + 2];
+       public PhraseSuffix_Tree(int length) {
+           nodes = new PhraseSuffix_Node[2* length + 2];
            text = new String[length];
            root = active_node = newNode(-1, -1);
        }
@@ -54,7 +51,7 @@ public class SuffixTree {
        }
 
        int newNode(int start, int end) {
-           nodes[++currentNode] = new Node(start, end);
+           nodes[++currentNode] = new PhraseSuffix_Node(start, end);
            return currentNode;
        }
 
