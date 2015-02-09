@@ -179,6 +179,18 @@ public class PhraseSuffix_Tree {
 //       		System.out.println("node: "+" start: "+nodes[i].start+"end: "+nodes[i].end);
 //       	}
 //       }
+       
+       void searchTree(int x, String searchWord) {
+       	for (int child : nodes[x].next.values()) {
+       		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
+       		if (edgeString(child).equals(searchWord)) { 
+       			System.out.println("Searching for:"+searchWord+ " Found Node is:" + child);
+       		}
+       		searchTree(child, searchWord);
+       	}
+       }
+       
+       
    }
 
        
