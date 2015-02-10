@@ -42,7 +42,7 @@ public class runStackOverF_Tree extends TestCase {
 	       	word=in.readLine().split(" ");
 	        for(int i = 0; i < word.length; ++i)
 	        {
-	        	 st1.addChar(word[i]);
+	        	 st1.addWord(word[i]);
 	        }
 	        st1.sep();
 	       	}
@@ -64,11 +64,11 @@ public class runStackOverF_Tree extends TestCase {
 			String[] ta = phrase.split(" ");
 			  for(int i = 0; i < ta.length; ++i)
 		        {
-		        	 st.addChar(ta[i]);
+		        	 st.addWord(ta[i]);
 		        }
 			st.sep();
 		}
-		st.printAllphrase(1,"");//1 is the root
+		st.printAllPhrases(1,"");//1 is the root
 	}
 	
 	

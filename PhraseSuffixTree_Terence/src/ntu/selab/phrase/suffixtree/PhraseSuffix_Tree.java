@@ -56,7 +56,7 @@ public class PhraseSuffix_Tree {
            return currentNode;
        }
 
-       public void addChar(String c) throws Exception {
+       public void addWord(String c) throws Exception {
            text[++position] = c;
            needSuffixLink = -1;
            remainder++;
@@ -191,7 +191,7 @@ public class PhraseSuffix_Tree {
        	}
        }
        
-       public void printAllphrase(int nodeNumber, String str){
+       public void printAllPhrases(int nodeNumber, String str){
     	   if (nodes[nodeNumber].next.isEmpty()){
     		   System.out.println(str);
     		   return;
@@ -206,7 +206,7 @@ public class PhraseSuffix_Tree {
 //    				   if(i != nodes[entry.getValue()].end - 1)
     					   s+=" ";
     			   }
-    			   printAllphrase(entry.getValue(), str+s);
+    			   printAllPhrases(entry.getValue(), str+s);
     		   }
     	   
        }
