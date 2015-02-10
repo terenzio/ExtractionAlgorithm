@@ -61,7 +61,7 @@ public class PhraseSuffix_Tree {
            needSuffixLink = -1;
            remainder++;
            while(remainder > 0) {
-           	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
+//           	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
                if (active_length == 0) active_edge = position;
                if (!nodes[active_node].next.containsKey(active_edge()) ){
                    int leaf = newNode(position, oo);
@@ -140,6 +140,7 @@ public class PhraseSuffix_Tree {
 //           out.println("//------suffix links------");
 //           printSLinks(root);
            out.println("}");
+           telescope(root,out,-1);
        } 
 
 //       void printLeaves(int x, PrintWriter out) {
@@ -158,11 +159,28 @@ public class PhraseSuffix_Tree {
 //           for (int child : nodes[x].next.values())
 //               printInternalNodes(child, out);
 //       }
+       
+       String tmp=null;
+       int Parent=-1;
+       void telescope(int x, PrintWriter out, int parent) {
+           if (nodes[x].next.size() == 0)
+               out.println("\tnode"+x+" [label=\"\",shape=point]");
+           else {
+               for (int child : nodes[x].next.values()){
+            	   Parent=child;
+            	   tmp=nodes[x].next.keySet().toString();
+            	   System.out.println(tmp);
+            	   telescope(child, out, Parent);
+               }
+           }
+       }
 
        void printEdges(int x, PrintWriter out) {
            for (int child : nodes[x].next.values()) {
-               out.println("\tnode"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
-               printEdges(child, out);
+        	   if(nodes[child]!=null){
+        		   out.println("\tnode"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+        		   printEdges(child, out);
+        	   }
            }
        }
 
@@ -195,7 +213,6 @@ public class PhraseSuffix_Tree {
           		if(nodes[i]==null) break;
           		if (nodes[i].Significance){
           			System.out.println("node: "+i);
-          			nodes[i]=null;
           		}
           	}
        }
