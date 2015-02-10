@@ -127,6 +127,7 @@ public class PhraseSuffix_Tree {
        }
 
        public void printTree(PrintWriter out) {
+    	   telescope(root,-1);
            out.println("digraph {");
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
@@ -140,7 +141,6 @@ public class PhraseSuffix_Tree {
 //           out.println("//------suffix links------");
 //           printSLinks(root);
            out.println("}");
-           telescope(root,out,-1);
        } 
 
 //       void printLeaves(int x, PrintWriter out) {
@@ -162,19 +162,22 @@ public class PhraseSuffix_Tree {
        
        String tmp=null;
        int Parent=-1;
-       void telescope(int x, PrintWriter out, int parent) {
-           if (nodes[x].next.size() == 0)
-               out.println("\tnode"+x+" [label=\"\",shape=point]");
-           else {
-               for (int child : nodes[x].next.values()){
-            	   Parent=child;
-            	   tmp=nodes[x].next.keySet().toString();
-            	   System.out.println(tmp);
-            	   telescope(child, out, Parent);
-               }
+       void telescope(int x, int parent) {
+    	   if (x != root && nodes[x].next.size() > 0){
+    		   Parent=x;
+    		   System.out.println("node: "+Parent+" start: "+nodes[x].start+" end: "+nodes[x].end+ " context: " + edgeString(Parent));
+    		   for (int child : nodes[x].next.values()){
+    			   tmp=edgeString(Parent)+" "+edgeString(child);
+    			   System.out.println(tmp);
+//    			   System.out.println(edgeString(child));
+    			   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+    		   }
+           }
+    	   for (int child : nodes[x].next.values()){
+        	   telescope(child,Parent);
            }
        }
-
+       
        void printEdges(int x, PrintWriter out) {
            for (int child : nodes[x].next.values()) {
         	   if(nodes[child]!=null){
