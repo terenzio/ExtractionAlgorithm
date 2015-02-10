@@ -181,6 +181,26 @@ public class PhraseSuffix_Tree {
 //       	}
 //       }
        
+       
+       public void signSignificance(){
+        	for(int i = 1; i < nodes.length;++i){
+        		if(nodes[i]==null) break;
+        		if (nodes[i].next.size() == 0)   nodes[i].Significance=true;
+        		System.out.println("node: "+i+" start: "+nodes[i].start+"end: "+nodes[i].end);
+        	}
+       }
+       
+       public void printSignificanceNodes(){
+          	for(int i = 1; i < nodes.length;++i){
+          		if(nodes[i]==null) break;
+          		if (nodes[i].Significance){
+          			System.out.println("node: "+i);
+          			nodes[i]=null;
+          		}
+          	}
+       }
+       
+       
        void searchTree(int x, String searchWord) {
        	for (int child : nodes[x].next.values()) {
        		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));

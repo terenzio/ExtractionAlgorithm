@@ -48,6 +48,8 @@ public class runStackOverF_Tree extends TestCase {
 	       	}
 	  
 	       // st1.printNodes();
+	       	st1.signSignificance();
+	       	st1.printSignificanceNodes();
 	        st1.printTree(out);
 	        out.close();
 	
