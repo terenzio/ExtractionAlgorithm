@@ -1,6 +1,8 @@
 package ntu.selab.phrase.suffixtree.test;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -48,8 +50,25 @@ public class runStackOverF_Tree extends TestCase {
 	       // st1.printNodes();
 	        st1.printTree(out);
 	        out.close();
-	       	
-		
+	
+	}
+	
+	public void testFile() throws Exception {
+		BufferedReader in = new BufferedReader(new FileReader("input.txt"));
+		PhraseSuffix_Tree st = new PhraseSuffix_Tree(500);
+	
+		while(true){
+		String phrase=in.readLine();
+		System.out.println(phrase);
+		if(phrase == null) break;
+			String[] ta = phrase.split(" ");
+			  for(int i = 0; i < ta.length; ++i)
+		        {
+		        	 st.addChar(ta[i]);
+		        }
+			st.sep();
+		}
+		st.printAllphrase(1,"");//1 is the root
 	}
 	
 	

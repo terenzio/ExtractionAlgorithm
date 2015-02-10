@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 //import ST.SuffixTree.Node;
 
@@ -190,7 +191,25 @@ public class PhraseSuffix_Tree {
        	}
        }
        
-       
+       public void printAllphrase(int nodeNumber, String str){
+    	   if (nodes[nodeNumber].next.isEmpty()){
+    		   System.out.println(str);
+    		   return;
+    	   }
+    		   
+    	   else
+    		   for(Map.Entry<String, Integer> entry : nodes[nodeNumber].next.entrySet()){
+    			   String s="";
+    			   for(int i = nodes[entry.getValue()].start; i < nodes[entry.getValue()].end; i++)
+    			   {
+    				   s+=text[i];
+//    				   if(i != nodes[entry.getValue()].end - 1)
+    					   s+=" ";
+    			   }
+    			   printAllphrase(entry.getValue(), str+s);
+    		   }
+    	   
+       }
    }
 
        
