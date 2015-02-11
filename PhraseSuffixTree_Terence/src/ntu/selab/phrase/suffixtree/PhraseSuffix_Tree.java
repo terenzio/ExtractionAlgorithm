@@ -324,9 +324,13 @@ public class PhraseSuffix_Tree {
        
        public void labelLowFrequency(String lowfreqPhrase) {
    	 	int[] targetNodes = new int[1000];
+   	 	int[] targetNodes2 = new int[1000];
    		int LowFreqNode = 1;
    		
-   		foundNodesCt = 0;
+   		 foundNodesCt = 0;
+   		 
+   		 
+   		 targetNodes2 = searchTree_Basic(root, lowfreqPhrase);   
    		 targetNodes = searchTree_Advanced(root, lowfreqPhrase);   
    		 
    		 
@@ -365,6 +369,32 @@ public class PhraseSuffix_Tree {
            }
            return a;
         }
+       
+       
+       int[] searchTree_Basic(int x, String searchWord) {
+       	
+       	for (int child : nodes[x].next.values()) {
+       //		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
+       		
+       	    //String[] s= Arrays.copyOfRange(text, nodes[child ].start, nodes[child ].start+1);
+       	//    System.out.println("First word: " + firstWord(child));
+       	//    System.out.println("Second word: " + secondWord(child));
+       		
+       		if (edgeString(child).equals(searchWord)) { 
+       		//	System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+       		//	System.out.println("Inserted Node: <"+child+ "> at Index: <" + foundNodesCt +">");
+       			
+       			foundNodes[foundNodesCt++] = child;
+       			
+       			nodesToIgnore[nodesToIgnoreCt++] = child;
+       			//nodes[child].isSignificant.put(searchWord, 2);
+       		}
+              		searchTree(child, searchWord);
+       	}
+       	
+       
+       	return foundNodes;
+       }
        
        int[] searchTree_Advanced(int x, String searchWord) {
           	
