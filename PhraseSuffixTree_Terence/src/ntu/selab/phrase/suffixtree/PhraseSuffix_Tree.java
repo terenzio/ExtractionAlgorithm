@@ -17,7 +17,12 @@ public class PhraseSuffix_Tree {
                currentNode,
                needSuffixLink,
                remainder;
-
+       
+       int foundNodesCt = 0;
+       int[] foundNodes = new int[1000];
+       int nodesToIgnoreCt = 0;
+       int[] nodesToIgnore = new int[1000];
+       
        int active_node, active_length, active_edge;
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
        
@@ -274,7 +279,7 @@ public class PhraseSuffix_Tree {
        
 //Terence's Code: *********************************************************************************************************************
        
-       void printFullTree(PrintWriter out) {
+       public void printFullTree(PrintWriter out) {
            out.println("digraph {");
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
@@ -315,6 +320,128 @@ public class PhraseSuffix_Tree {
            for (int child : nodes[x].next.values())
         	   printFullSLinks(child, out);
        }
+       
+       
+       public void labelLowFrequency(String lowfreqPhrase) {
+   	 	int[] targetNodes = new int[1000];
+   		int LowFreqNode = 1;
+   		
+   		foundNodesCt = 0;
+   		 targetNodes = searchTree_Advanced(root, lowfreqPhrase);   
+   		 
+   		 
+   			for (int i=0; i<foundNodesCt; i++) {
+           //		System.out.println("Found Nodes: "+ targetNodes[i]);
+           	}
+   		 
+   		 for (int i=0; i<foundNodesCt;i++) {        			 
+   			// System.out.println("targetNode"+i+": " +targetNodes[i] );
+   			 nodes[ targetNodes[i] ].frequencyCount = LowFreqNode;
+       		// System.out.println("New FreqCt:"+nodes[ targetNodes[i] ].frequencyCount); 
+   		 }
+   		 //System.out.println("Label Node No:" + targetNode + " Content: <"+ edgeString(targetNode) + ">"); 
+       }
+       
+       String firstWord(int node) {
+           String[] s= Arrays.copyOfRange(text, nodes[node].start, nodes[node].start+1);
+           String a = "";
+           int count = 0;
+           for(String t:s){
+        	   ++count;
+         	   a+=t;
+        	   if(count != s.length) a+=" ";
+           }
+           return a;
+        }
+       
+       String secondWord(int node) {
+           String[] s= Arrays.copyOfRange(text, nodes[node].start, nodes[node].start+2);
+           String a = "";
+           int count = 0;
+           for(String t:s){
+        	   ++count;
+         	   a+=t;
+        	   if(count != s.length) a+=" ";
+           }
+           return a;
+        }
+       
+       int[] searchTree_Advanced(int x, String searchWord) {
+          	
+       	
+        	String[] word; 
+        	int[] matchedChildrenNode = new int[10];
+        	int matchedCount = 0;
+       	
+		       	for (int child : nodes[x].next.values()) {
+		       	    
+		       	    word = searchWord.split(" ");
+		       	    
+		       	 		for(int i = 0; i < word.length; ++i) {
+		       	 	 //	  System.out.println("word" + i + "is" + word[i]);          	 	   
+		       	 		}
+		       	 	
+			       	 	if (word[0].equals(firstWord(child))) {
+			       	 		System.out.println("We got a MATCH! at Node:"+child + " with children count of: "+nodes[child].next.size());      
+			
+			       	 		//continue to check for the first word in the child branch:
+			       	 		///	System.out.println("Its children are nodes: "+nodes[child].next.values());           	 
+			       	 		//matchedChildrenNode = nodes[child].next.values();
+			       	 		
+			       	 			for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
+			       	 			  String key = entry.getKey();
+			       	 			  Integer value = entry.getValue();
+			       	 			  matchedChildrenNode[matchedCount++] = value;
+			       	 			  //	  System.out.println("With Values:" +key + " => " + value);
+			       	 			}
+			       	 		
+			//       	 		for(Map.Entry<String, Integer> entry : nodes[child].next.entrySet()){
+			//        			   String s="";
+			//        			   for(int i = nodes[entry.getValue()].start; i < nodes[entry.getValue()].end; i++)
+			//        			   {
+			//        				   s+=text[i];
+			////        				   if(i != nodes[entry.getValue()].end - 1)
+			//        					   s+=" ";
+			//        			   }
+			//        			   printAllphrase(entry.getValue(), str+s);
+			//        		   }
+			       	 		
+			       	 		
+			       	 			for (int i = 0; i < nodes[child].next.size(); i++) {
+			       	 			//		System.out.println("Its children are nodes2: "+nodes[child].next.);
+			       	 			//		matchedChildrenNode[i] = (int) nodes[child].next.get(i);
+			       	 			//		System.out.println("Its children are nodes2: "+matchedChildrenNode[i]);    
+			       	 				if (word[1].equals(firstWord(matchedChildrenNode[i]))) {
+			       	 					System.out.println("We got a SECOND MATCH! at Node:"+ matchedChildrenNode[i] );
+			       	 					  nodesToIgnore[nodesToIgnoreCt++] = matchedChildrenNode[i];
+			       	 				}
+			       	 			}
+			       	 		
+			       	 	}
+		       		
+		       		if (edgeString(child).equals(searchWord)) { 
+		       			//System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+		       			//System.out.println("Inserted Node: <"+child+ "> at Index: <" + foundNodesCt +">");
+		       			foundNodes[foundNodesCt++] = child;
+		       			
+		       			//nodes[child].isSignificant.put(searchWord, 2);
+		       		}
+		       		searchTree_Advanced(child, searchWord);
+		       	}
+       	return foundNodes;
+       }
+       
+       
+       public void displayLowFrequencyNodes() {
+    	
+    	   System.out.println("Nodes To Ignore due to Low Frequency: ");
+   			for(int i = 0; i < nodesToIgnoreCt; ++i)
+   			{
+   				System.out.println("nodesToIgnore: "+ nodesToIgnore[i]);
+   			}
+    	   
+       }
+     
        
        
 //Terence's Code END: *********************************************************************************************************************

@@ -21,7 +21,7 @@ public class ST {
                 currentNode,
                 needSuffixLink,
                 remainder;
-        int ct = 0;
+        int foundNodesCt = 0;
         int[] foundNodes = new int[1000];
         int active_node, active_length, active_edge;
         ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
@@ -42,8 +42,8 @@ public class ST {
             int frequencyCount = 10;
             public TreeMap<String, Integer> next = new TreeMap<String, Integer>();
             
-            public TreeMap<String, Integer> isSignificant = new TreeMap<String, Integer>();
-            public TreeMap<String, Integer> isFrequent = new TreeMap<String, Integer>();
+          //  public TreeMap<String, Integer> isSignificant = new TreeMap<String, Integer>();
+           // public TreeMap<String, Integer> isFrequent = new TreeMap<String, Integer>();
             
             
             public Node(int start, int end,  boolean isFrequent) {
@@ -266,32 +266,32 @@ public class ST {
         	}
         }
         
-        int[] searchTree(int x, String searchWord) {
-        	
-        	
-        	
-        	for (int child : nodes[x].next.values()) {
-        //		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
-        		
-        	    //String[] s= Arrays.copyOfRange(text, nodes[child ].start, nodes[child ].start+1);
-        	//    System.out.println("First word: " + firstWord(child));
-        	//    System.out.println("Second word: " + secondWord(child));
-        	    
-        		
-        		if (edgeString(child).equals(searchWord)) { 
-        		//	System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
-        		//	System.out.println("Inserted Node: <"+child+ "> at Index: <" + ct +">");
-        			foundNodes[ct++] = child;
-        			
-        			
-        			//nodes[child].isSignificant.put(searchWord, 2);
-        		}
-               		searchTree(child, searchWord);
-        	}
-        	
-        
-        	return foundNodes;
-        }
+//        int[] searchTree(int x, String searchWord) {
+//        	
+//        	
+//        	
+//        	for (int child : nodes[x].next.values()) {
+//        //		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
+//        		
+//        	    //String[] s= Arrays.copyOfRange(text, nodes[child ].start, nodes[child ].start+1);
+//        	//    System.out.println("First word: " + firstWord(child));
+//        	//    System.out.println("Second word: " + secondWord(child));
+//        	    
+//        		
+//        		if (edgeString(child).equals(searchWord)) { 
+//        		//	System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+//        		//	System.out.println("Inserted Node: <"+child+ "> at Index: <" + foundNodesCt +">");
+//        			foundNodes[foundNodesCt++] = child;
+//        			
+//        			
+//        			//nodes[child].isSignificant.put(searchWord, 2);
+//        		}
+//               		searchTree(child, searchWord);
+//        	}
+//        	
+//        
+//        	return foundNodes;
+//        }
         
         int[] searchTree_Advanced(int x, String searchWord) {
        	
@@ -367,18 +367,20 @@ public class ST {
         		
         		if (edgeString(child).equals(searchWord)) { 
         			//System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
-        			//System.out.println("Inserted Node: <"+child+ "> at Index: <" + ct +">");
-        			foundNodes[ct++] = child;
+        			//System.out.println("Inserted Node: <"+child+ "> at Index: <" + foundNodesCt +">");
+        			foundNodes[foundNodesCt++] = child;
         			
         			
         			//nodes[child].isSignificant.put(searchWord, 2);
         		}
-               		searchTree(child, searchWord);
+        		searchTree_Advanced(child, searchWord);
         	}
         	
         
         	return foundNodes;
         }
+        
+        
         
         void labelLowFrequency(String lowfreqPhrase) {
         	 	int[] targetNodes = new int[1000];
@@ -389,18 +391,18 @@ public class ST {
         		 //nodes[root].isSignificant.put("how", 11);
         		 //nodes[root].isSignificant.put("are", 10);
         		 //nodes[root].isSignificant.put("you", 12);
-        		 ct = 0;
+        		 foundNodesCt = 0;
         		 //targetNodes = searchTree(root, lowfreqPhrase);   
         		 targetNodes = searchTree_Advanced(root, lowfreqPhrase);   
         		 
-        		// System.out.println("targetNodes Length: "+ ct);
+        		// System.out.println("targetNodes Length: "+ foundNodesCt);
         		 
-        			for (int i=0; i<ct; i++) {
+        			for (int i=0; i<foundNodesCt; i++) {
                 //		System.out.println("Found Nodes: "+ targetNodes[i]);
                 	}
-             //   	ct=0;
+             //   	foundNodesCt=0;
         		 
-        		 for (int i=0; i<ct;i++) {        			 
+        		 for (int i=0; i<foundNodesCt;i++) {        			 
         			// System.out.println("targetNode"+i+": " +targetNodes[i] );
         			 nodes[ targetNodes[i] ].frequencyCount = LowFreqNode;
             		// System.out.println("New FreqCt:"+nodes[ targetNodes[i] ].frequencyCount); 
