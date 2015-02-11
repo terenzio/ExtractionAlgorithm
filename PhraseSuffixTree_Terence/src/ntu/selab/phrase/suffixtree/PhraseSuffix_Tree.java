@@ -127,7 +127,6 @@ public class PhraseSuffix_Tree {
        }
 
        public void printTree(PrintWriter out) {
-    	   telescope(root,-1);
            out.println("digraph {");
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
@@ -141,7 +140,8 @@ public class PhraseSuffix_Tree {
 //           out.println("//------suffix links------");
 //           printSLinks(root);
            out.println("}");
-           traveralNode(root,parentNode,childNode);
+           telescope(root);
+           traveralNode(root);
        } 
 
 //       void printLeaves(int x, PrintWriter out) {
@@ -165,7 +165,7 @@ public class PhraseSuffix_Tree {
        int count=0;
        int [] parentNode = new int[500];
        int [] childNode = new int[500];
-       void telescope(int x, int parent) {
+       void telescope(int x) {
     	   if (x != root && nodes[x].next.size() == 1){
 			   parentNode[count]=x;
 //    		   System.out.println("node: "+parentNode[count]+" start: "+nodes[x].start+" end: "+nodes[x].end+ " context: " + edgeString(parentNode[count]));
@@ -178,25 +178,24 @@ public class PhraseSuffix_Tree {
     		   }
            }
     	   for (int child : nodes[x].next.values()){
-        	   telescope(child,parentNode[count]);
+        	   telescope(child);
            }
        }
        
-       
-       void traveralNode (int x, int [] telescopingParentNode, int [] telescopingChildNode) {
-    	   boolean telescopingOK=false;
+       boolean telescoping=false;
+       void traveralNode (int x) {
     	   for (int child : nodes[x].next.values()){
     		   if(nodes[child]!=null){
     			   for(int i = 0 ; i < count ; i++){
-    				   if(child==telescopingParentNode[i]){
+    				   if(child==parentNode[i]){
         				   System.out.println("node"+x+" -> node"+child+" [label=\""+telescopeStrings[i]+"\",weight=3]");
-        				   nodes[telescopingChildNode[i]]=null;
-        				   telescopingOK=true;
+        				   nodes[childNode[i]]=null;
+        				   telescoping=true;
         			   }
     			   }
-    			   if(!telescopingOK)
-    				   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
-    			   traveralNode(child,telescopingParentNode,telescopingChildNode);
+    			   if (!telescoping)  System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+    			   telescoping=false;
+    			   traveralNode(child);
     		   }
            }
        }
@@ -230,7 +229,6 @@ public class PhraseSuffix_Tree {
         	for(int i = 1; i < nodes.length;++i){
         		if(nodes[i]==null) break;
         		if (nodes[i].next.size() == 0)   nodes[i].Significance=true;
-//        		System.out.println("node: "+i+" start: "+nodes[i].start+"end: "+nodes[i].end);
         	}
        }
        
