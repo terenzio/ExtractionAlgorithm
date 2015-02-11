@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 //import ST.SuffixTree.Node;
 
@@ -55,12 +56,12 @@ public class PhraseSuffix_Tree {
            return currentNode;
        }
 
-       public void addChar(String c) throws Exception {
+       public void addWord(String c) throws Exception {
            text[++position] = c;
            needSuffixLink = -1;
            remainder++;
            while(remainder > 0) {
-           	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
+//           	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
                if (active_length == 0) active_edge = position;
                if (!nodes[active_node].next.containsKey(active_edge()) ){
                    int leaf = newNode(position, oo);
@@ -126,6 +127,7 @@ public class PhraseSuffix_Tree {
        }
 
        public void printTree(PrintWriter out) {
+    	   telescope(root,-1);
            out.println("digraph {");
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
@@ -157,11 +159,31 @@ public class PhraseSuffix_Tree {
 //           for (int child : nodes[x].next.values())
 //               printInternalNodes(child, out);
 //       }
-
+       
+       String tmp=null;
+       int Parent=-1;
+       void telescope(int x, int parent) {
+    	   if (x != root && nodes[x].next.size() > 0){
+    		   Parent=x;
+    		   System.out.println("node: "+Parent+" start: "+nodes[x].start+" end: "+nodes[x].end+ " context: " + edgeString(Parent));
+    		   for (int child : nodes[x].next.values()){
+    			   tmp=edgeString(Parent)+" "+edgeString(child);
+    			   System.out.println(tmp);
+//    			   System.out.println(edgeString(child));
+    			   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+    		   }
+           }
+    	   for (int child : nodes[x].next.values()){
+        	   telescope(child,Parent);
+           }
+       }
+       
        void printEdges(int x, PrintWriter out) {
            for (int child : nodes[x].next.values()) {
-               out.println("\tnode"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
-               printEdges(child, out);
+        	   if(nodes[child]!=null){
+        		   out.println("\tnode"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+        		   printEdges(child, out);
+        	   }
            }
        }
 
@@ -180,6 +202,25 @@ public class PhraseSuffix_Tree {
 //       	}
 //       }
        
+       
+       public void signSignificance(){
+        	for(int i = 1; i < nodes.length;++i){
+        		if(nodes[i]==null) break;
+        		if (nodes[i].next.size() == 0)   nodes[i].Significance=true;
+        		System.out.println("node: "+i+" start: "+nodes[i].start+"end: "+nodes[i].end);
+        	}
+       }
+       
+       public void printSignificanceNodes(){
+          	for(int i = 1; i < nodes.length;++i){
+          		if(nodes[i]==null) break;
+          		if (nodes[i].Significance){
+          			System.out.println("node: "+i);
+          		}
+          	}
+       }
+       
+       
        void searchTree(int x, String searchWord) {
        	for (int child : nodes[x].next.values()) {
        		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
@@ -190,9 +231,25 @@ public class PhraseSuffix_Tree {
        	}
        }
        
-       
+       public void printAllPhrases(int nodeNumber, String str){
+    	   if (nodes[nodeNumber].next.isEmpty()){
+    		   System.out.println(str);
+    		   return;
+    	   }
+    		   
+    	   else
+    		   for(Map.Entry<String, Integer> entry : nodes[nodeNumber].next.entrySet()){
+    			   String s="";
+    			   for(int i = nodes[entry.getValue()].start; i < nodes[entry.getValue()].end; i++)
+    			   {
+    				   s+=text[i];
+//    				   if(i != nodes[entry.getValue()].end - 1)
+    					   s+=" ";
+    			   }
+    			   printAllPhrases(entry.getValue(), str+s);
+    		   }
+    	   
+       }
    }
 
        
-		
-
