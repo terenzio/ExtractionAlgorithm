@@ -166,11 +166,11 @@ public class PhraseSuffix_Tree {
        void telescope(int x, int parent) {
     	   if (x != root && nodes[x].next.size() == 1){
 			   parentNode=x;
-    		   System.out.println("node: "+parentNode+" start: "+nodes[x].start+" end: "+nodes[x].end+ " context: " + edgeString(parentNode));
+//    		   System.out.println("node: "+parentNode+" start: "+nodes[x].start+" end: "+nodes[x].end+ " context: " + edgeString(parentNode));
     		   for (int child : nodes[x].next.values()){
     			   tmp=edgeString(parentNode)+" "+edgeString(child);
-    			   System.out.println(tmp);
-    			   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+//    			   System.out.println(tmp);
+//    			   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
     			   childNode=child;
     		   }
            }
@@ -184,11 +184,11 @@ public class PhraseSuffix_Tree {
     	   for (int child : nodes[x].next.values()){
     		   if(nodes[child]!=null){
     			   if(child==telescopingParentNode){
-//    				   System.out.println("node"+x+" -> node"+child+" [label=\""+tmp+"\",weight=3]");
+    				   System.out.println("node"+x+" -> node"+child+" [label=\""+tmp+"\",weight=3]");
     				   nodes[telescopingChildNode]=null;
     			   }
     			   else
-//    				   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+    				   System.out.println("node"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
     			   traveralNode(child,telescopingParentNode,telescopingChildNode);
     		   }
            }
@@ -269,3 +269,4 @@ public class PhraseSuffix_Tree {
    }
 
        
+		
