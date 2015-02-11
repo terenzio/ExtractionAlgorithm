@@ -230,12 +230,7 @@ public class ST {
             if (nodes[x].next.size() == 0)
                 out.println("\tnode"+x+" [label=\"\",shape=point]");
             else {
-                for (int child : nodes[x].
-                		
-                		
-                		
-                		
-                		next.values())
+                for (int child : nodes[x].next.values())
                     printLeaves(child);
                
             }

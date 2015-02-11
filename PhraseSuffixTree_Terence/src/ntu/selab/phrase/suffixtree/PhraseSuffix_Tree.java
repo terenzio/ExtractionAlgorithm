@@ -266,7 +266,55 @@ public class PhraseSuffix_Tree {
     		   }
     	   
        }
-   }
+       
+//Terence's Code: *********************************************************************************************************************
+       
+       void printFullTree(PrintWriter out) {
+           out.println("digraph {");
+           out.println("\trankdir = LR;");
+           out.println("\tedge [arrowsize=0.4,fontsize=10]");
+           out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
+           out.println("//------leaves------");
+           printFullLeaves(root, out);
+           out.println("//------internal nodes------");
+           printFullInternalNodes(root, out);
+           out.println("//------edges------");
+           printEdges(root, out);
+           out.println("//------suffix links------");
+           printFullSLinks(root, out);
+           out.println("}");
+          // printSignificance(root);
+       } 
+       
+       void printFullLeaves(int x, PrintWriter out) {
+           if (nodes[x].next.size() == 0)
+               out.println("\tnode"+x+" [label=\"\",shape=point]");
+           else {
+               for (int child : nodes[x].next.values())
+            	   printFullLeaves(child, out);
+              
+           }
+       }
+
+       void printFullInternalNodes(int x,PrintWriter out) {
+           if (x != root && nodes[x].next.size() > 0)
+               out.println("\tnode"+x+" [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.07,height=.07]");
+
+           for (int child : nodes[x].next.values())
+        	   printFullInternalNodes(child, out);
+       }
+       
+       void printFullSLinks(int x ,PrintWriter out) {
+           if (nodes[x].link > 0)
+               out.println("\tnode"+x+" -> node"+nodes[x].link+" [label=\"\",weight=1,style=dotted]");
+           for (int child : nodes[x].next.values())
+        	   printFullSLinks(child, out);
+       }
+       
+       
+//Terence's Code END: *********************************************************************************************************************
+       
+   } //End of Class PhraseSuffix_Node.java
 
        
 		
