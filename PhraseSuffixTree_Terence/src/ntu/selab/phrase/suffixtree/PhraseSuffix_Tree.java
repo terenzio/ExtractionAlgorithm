@@ -25,6 +25,8 @@ public class PhraseSuffix_Tree {
        int[] nodesToIgnoreParent = new int[1000];
        String[] nodesToIgnoreKey = new String[1000];
        
+       String[] tempPrediction = new String[1000];
+       
        int active_node, active_length, active_edge;
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
        
@@ -393,7 +395,7 @@ public class PhraseSuffix_Tree {
        public void removeLowFrequencyNodes() {
     	   for(int i = 0; i < nodesToIgnoreCt; ++i)
   			{
-  			  System.out.println("Removing link from parent node=" + nodesToIgnoreParent[i] + "to child node=" + nodesToIgnore[i] + " with Key: " + nodesToIgnoreKey[i]  );
+  		//	  System.out.println("Removing link from parent node=" + nodesToIgnoreParent[i] + "to child node=" + nodesToIgnore[i] + " with Key: " + nodesToIgnoreKey[i]  );
   			  nodes[nodesToIgnoreParent[i]].next.remove(nodesToIgnoreKey[i]);
   			}
        }
@@ -418,14 +420,26 @@ public class PhraseSuffix_Tree {
 		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
 		 	 			  String key = entry.getKey();
 		 	 			  Integer value = entry.getValue();
-		 	 			  //System.out.println("With Key:" +key + " => Value:" + value);
+		 	 			//  System.out.println("With Key:" +key + " => Value:" + value);
 		 	 			  suggestionCt++;
-		 	 			  System.out.println("Suggestion"+suggestionCt+": "+ edgeString(value));
+		 	 			  tempPrediction[suggestionCt] = edgeString(value);
+		 	 			  System.out.println("Next phrase prediction"+suggestionCt+": "+ edgeString(value));
 		  	       	}
 	       	}
 	       		queryTree(child, searchWord);
       	}
+	       	
       }
+       
+       public void queryPredictionTable(int x, int searchIndex) {
+	    
+    	   String searchWord;
+    	   searchWord = tempPrediction[searchIndex];
+    	   System.out.println("Selected the phrase: "+ searchWord);
+    	   System.out.println("");
+    	   queryTree(1, searchWord);
+	    	
+	    }
 //Terence's Code END: *********************************************************************************************************************
        
    } //End of Class PhraseSuffix_Node.java
