@@ -79,7 +79,14 @@ public class testLowFrequencyPruning extends TestCase {
 		st1.labelLowFrequency("call asap");
 		st1.labelLowFrequency("you call");
 	//	st1.displayLowFrequencyNodes();
+		
+		//STEP1: 刪掉踏低的frequency在ST1裡面
 		st1.removeLowFrequencyNodes();
+		
+		
+		//STEP2: st1執行TELESCOPE
+		st1.telescope(1);
+		st1.traveralNode(1);
 		
 		st1.printFullTree(out);
 		

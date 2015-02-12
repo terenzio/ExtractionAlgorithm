@@ -172,7 +172,7 @@ public class PhraseSuffix_Tree {
        int count=0;
        int [] parentNode = new int[500];
        int [] childNode = new int[500];
-       void telescope(int x) {
+       public void telescope(int x) {
     	   if (x != root && nodes[x].next.size() == 1){
 			   parentNode[count]=x;
 //    		   System.out.println("node: "+parentNode[count]+" start: "+nodes[x].start+" end: "+nodes[x].end+ " context: " + edgeString(parentNode[count]));
@@ -190,7 +190,7 @@ public class PhraseSuffix_Tree {
        }
        
        boolean telescoping=false;
-       void traveralNode (int x) {
+       public void traveralNode (int x) {
     	   for (int child : nodes[x].next.values()){
     		   if(nodes[child]!=null){
     			   for(int i = 0 ; i < count ; i++){
@@ -205,6 +205,8 @@ public class PhraseSuffix_Tree {
     			   traveralNode(child);
     		   }
            }
+    	   
+    	   //update new frequency to parent node 
        }
        
        void printEdges(int x, PrintWriter out) {
@@ -216,20 +218,7 @@ public class PhraseSuffix_Tree {
            }
        }
 
-//       void printSLinks(int x) {
-//           if (nodes[x].link > 0)
-//               out.println("\tnode"+x+" -> node"+nodes[x].link+" [label=\"\",weight=1,style=dotted]");
-//           for (int child : nodes[x].next.values())
-//               printSLinks(child);
-//       }
-//       
-//       void printNodes(){
-//       	for(int i = 1; i < nodes.length;++i)
-//       	{
-//       		if(nodes[i]==null) break;
-//       		System.out.println("node: "+" start: "+nodes[i].start+"end: "+nodes[i].end);
-//       	}
-//       }
+
        
        
        public void signSignificance(){
@@ -285,14 +274,14 @@ public class PhraseSuffix_Tree {
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
            out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
-           out.println("//------leaves------");
-           printFullLeaves(root, out);
-           out.println("//------internal nodes------");
-           printFullInternalNodes(root, out);
+//           out.println("//------leaves------");
+//           printFullLeaves(root, out);
+//           out.println("//------internal nodes------");
+//           printFullInternalNodes(root, out);
            out.println("//------edges------");
            printEdges(root, out);
-           out.println("//------suffix links------");
-           printFullSLinks(root, out);
+//           out.println("//------suffix links------");
+//           printFullSLinks(root, out);
            out.println("}");
        } 
        
