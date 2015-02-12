@@ -397,6 +397,35 @@ public class PhraseSuffix_Tree {
   			  nodes[nodesToIgnoreParent[i]].next.remove(nodesToIgnoreKey[i]);
   			}
        }
+       
+       
+       public void queryTree(int x, String searchWord) {
+    	   
+    	   int suggestionCt = 0;
+    	   
+    	   
+	       	for (int child : nodes[x].next.values()) {
+	       		
+	       	
+	       		
+	       		if (edgeString(child).equals(searchWord)) { 
+	       			
+//	       		  System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+//	       		  System.out.println("First word: " + firstWord(child));
+//		          System.out.println("Second word: " + secondWord(child));
+//  	       		  System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
+  	       		
+		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
+		 	 			  String key = entry.getKey();
+		 	 			  Integer value = entry.getValue();
+		 	 			  //System.out.println("With Key:" +key + " => Value:" + value);
+		 	 			  suggestionCt++;
+		 	 			  System.out.println("Suggestion"+suggestionCt+": "+ edgeString(value));
+		  	       	}
+	       	}
+	       		queryTree(child, searchWord);
+      	}
+      }
 //Terence's Code END: *********************************************************************************************************************
        
    } //End of Class PhraseSuffix_Node.java

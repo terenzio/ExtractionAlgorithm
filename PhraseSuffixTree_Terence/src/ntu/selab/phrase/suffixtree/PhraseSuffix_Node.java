@@ -7,7 +7,6 @@ public class PhraseSuffix_Node {
 	
 	 final int oo = Integer.MAX_VALUE/2;
 	 boolean Significance=false;
-	 in
 	 /*
     There is no need to create an "Edge" class.
     Information about the edge is stored right in the node.

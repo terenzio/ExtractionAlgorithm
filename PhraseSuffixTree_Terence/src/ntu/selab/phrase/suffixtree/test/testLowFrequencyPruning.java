@@ -85,11 +85,18 @@ public class testLowFrequencyPruning extends TestCase {
 		
 		
 		//STEP2: st1∞ı¶ÊTELESCOPE
-		st1.telescope(1);
-		st1.traveralNode(1);
+		//st1.telescope(1);
+		//st1.traveralNode(1);
 		
 		st1.printFullTree(out);
 		
+		String searchWord; 
+	 	System.out.println("Enter a phrase:");
+	 	searchWord=in.readLine();    
+		st1.queryTree(1, searchWord);
+		System.out.println("Enter another phrase:");
+	 	searchWord=in.readLine();    
+		st1.queryTree(1, searchWord);
 	    out.close();
 	 	
 	 	
