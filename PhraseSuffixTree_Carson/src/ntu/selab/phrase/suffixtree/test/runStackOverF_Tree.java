@@ -69,6 +69,7 @@ public class runStackOverF_Tree extends TestCase {
 		while((phrase=in.readLine()) != null){
 			String [] word=phrase.split(" ");
 			for(int i = 0; i < word.length; i++){
+//				if(i==word.length-1) word[i]+="$";
 				st.addWord(word[i]);
 			}
 			st.sep();

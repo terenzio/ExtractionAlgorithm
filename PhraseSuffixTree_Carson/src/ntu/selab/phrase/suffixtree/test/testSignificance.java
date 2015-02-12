@@ -17,7 +17,7 @@ public class testSignificance {
 	@Test
 	public void test() {
 		Scanner sc = new Scanner();
-		File file = new File("doc1.txt");
+		File file = new File("input.txt");
 		try{
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;

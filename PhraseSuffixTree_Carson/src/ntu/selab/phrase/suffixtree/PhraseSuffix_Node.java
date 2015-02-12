@@ -16,6 +16,8 @@ public class PhraseSuffix_Node {
  */
 
  int start, end = oo, link;
+ int frequencyCount = 10;    //TODO: Terence need to reassign from input
+ 
  public TreeMap<String, Integer> next = new TreeMap<String, Integer>();
 
  public PhraseSuffix_Node(int start, int end) {
