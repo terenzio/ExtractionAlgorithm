@@ -74,11 +74,11 @@ public class testLowFrequencyPruning extends TestCase {
 		//st1.searchTree(1, "are you");
 		//st1.searchTree(1, "you");
 		
-	    st1.labelLowFrequency("me asap");
+	    //st1.labelLowFrequency("me asap");
 		st1.labelLowFrequency("call if");
 		st1.labelLowFrequency("call asap");
 		st1.labelLowFrequency("you call");
-		st1.displayLowFrequencyNodes();
+	//	st1.displayLowFrequencyNodes();
 		st1.removeLowFrequencyNodes();
 		
 		st1.printFullTree(out);
