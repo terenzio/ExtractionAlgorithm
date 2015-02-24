@@ -1,0 +1,21 @@
+592
+
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING,
+
+VOL. 40,
+
+NO. 6,
+
+JUNE 2014
+
+Fig. 9. Design of using MapReduce and HBase for the clustering algorithm.
+
+Fig. 7. Activity diagram of the clustering algorithm.
+
+3.5 Design of the Supporting Tool To ease up the discovery of early aspectual candidates, an ArgoUML-based supporting tool with MapReduce and HBase is developed to integrate our relationships evaluation mechanism plug-in into ArgoUML together with MapReduce programming model and HBase data sets. Thirty four newly added classes and three modified classes to ArgoUML with a total of 5,764 lines of code (LOC), and five more new classes with a total of 1,278 LOC are added for MapReduce. The design of the supporting tool is shown in Fig. 8. The UMLUseCaseDiagram in the upper left corner of the figure represents the GDUC model that diagramed using ArgoUML and provides information needed in evaluating the relationship between goals and use cases, such as goal name, use case name, and association between goals and use cases. The relationship between goals and use cases represented by GDUCRelation (A) is determined by developers and is treated as an input source to the ClusteringAlgorithm (B) through GDUCDirectReader (C). The clustering algorithm then constructs two matrices, similarity matrix (SimilarityMatrix) (D) and interaction relation matrix (InteractionRelation) (E), based on the relationships determined by developers, which is stored in UseCaseGoalRelationship. In the clustering algorithm, the clustering matrix (CM) represented by CompoundSimilarityMatrix (F) continues grouping
+
+Fig. 8. Design of the supporting tool.
+
+goals/goal clusters to derive new clustering matrices (CMs) until there is no further round of clustering left to be processed. To enhance the computation performance of the clustering algorithm, MapReduce programming model [36] is introduced to accelerate the process of all clustering matrices (CMs) in the algorithm. In MapReduce, each input is represented as a key-value pair and is denoted as < K1; V 1 > . A Mapper takes < K1; V 1 > as its input and transforms the key-value pair into < K2; V 2 > , which is then handled by Reducers that reduce < K2; V 2 > to < K3; V 3 > to obtain the final results. The mapping of keyvalue pairs, from < K1; V 1 > to < K2; V 2 > and to < K3; V 3 > , is defined first in order to serve as a basis for establishing transformation rules in Mappers and Reducers, respectively. Furthermore, as these key-value pairs may occupied a vast amount of space, HBase [37] is also used to store intermediate data and final results, since HBase is designed for large data sets and its key-value storage machinery makes it decent for handling sparse data sets. By combining MapReduce and HBase, we proposed a two-stage MapReduce processing model to handle the computation of the algorithm as shown in Fig. 9. The first stage focuses on performing the grouping procedure to group goals, and the second stage counts the occurrence of each goal cluster in the final results stored in HBase Final Result Table. To achieve this, two types of Mappers are developed, Goal Mapper and Result mapper, and two tables are created for storing outputs generated from the two Mappers respectively. One is HBase Temp Table for storing goals/goal/ clusters in CMs that have not yet been fully grouped using goal cluster internal representation form, called GCIR, the other is the HBase Final Result Table for keeping the final grouping results. The input Clustering Matrix (CM) is a matrix of size N Ã N, where N is the number of goals. To represent the matrix in the clustering algorithm using MapReduce, we construct a representation form called GCIR to represent goals and goal clusters in the clustering algorithm. GCIR represents goals and goal clusters in a numerical form such as 1; 2; 3; 4; . . .. Goals are separated by using letter `P' and goals in a same goal cluster are separated by using letter `G'. For example, if a CM has six goals, then we number these goals from one to six (i.e., g1, g2, . . . , g6) and they can be represented as 1P 2P 3P 4P 5P 6. During the process, GCIRs are transferred between Goal Mappers and HBase Temp Tables, in which Goal
+
+

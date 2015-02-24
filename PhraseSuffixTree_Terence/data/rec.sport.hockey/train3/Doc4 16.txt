@@ -1,0 +1,10 @@
+ASPECT-ENHANCED GOAL-DRIVEN SEQUENCE DIAGRAM
+
+727
+
+Figure 8. Aspect-enhanced goal-driven use case model of meeting scheduler system.
+
+We focus on the modeling of the interaction between the aspectual use case, UCHandleFlexibility , and base use case, UCReplanaMeeting , for explaining the proposed approach. To document and specify the responsibilities of an aspectual use case, the extend use case speciﬁcation is used to capture the characteristics of the aspectual
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

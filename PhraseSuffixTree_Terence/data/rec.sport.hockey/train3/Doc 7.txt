@@ -1,0 +1,87 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+7
+
+pubilc interface DataBundle { String[] getAllTexts(); MultimediaInfo[] getText(String query); String[] getAllImages(); MultimediaInfo[] getImage(String title); String[] getAllVideos(); MultimediaInfo[] getVideo(String title); String[] getAllAudios(); MultimediaInfo[] getAudio(String title); }
+
+The network traffic metric is formally defined in Definition 1. Definition 1. Given a set of heterogeneous services  S = {{ss1 , ..., ssn }, {rs1 , ..., rsm }, {os1 , ..., osp }}, where a SOAP service is denoted as ssi , a RESTful service is denoted as rsi and an OSGi service is denoted as osi . In the traditional approach, the network traffics generated in invoking SOAP, tb tb RESTful and OSGi services are denoted as Nsoap , Nrest tb and Nosgi , respectively. The total network traffic is denoted tb as Ntotal and is calculated by equation 1. The adapter that sends and receives messages between RESTful services and SOAP services, denoted as r2si , and the adapter that sends and receives messages between OSGi services and SOAP services, denoted as o2si . In the proposed approach, the network traffics generated in invoking SOAP and RESTful services eb eb are denoted as Nsoap and Nrest , respectively. Because OSGi services are locally invoked, no network traffics are generated. The adapters that sends and receives messages between the extended BPEL engine and SOAP services, RESTful services and OSGi services are denoted as sai , rai and oai , respeceb tively. The total network traffic is denoted as N total and is calculated by equation 5.
+tb tb tb tb Ntotal = Nsoap + Nrest + Nosgi n n tb Nsoap = i=1 m tb Nrest = p tb Nosgi p p i=1
+
+Fig. 12. The interface of web content bundle
+Client Server ss Client Server ss
+
+ss rs
+sa eBPEL ra oa res
+
+rs
+BPEL req
+
+... ...
+os
+
+ss rs
+
+rs
+
+... ...
+
+...
+
+os
+
+os os
+
+Fig. 13. The network traffic generated between client and server through (a) the traditional framework, and (b) the proposed framework.
+
+the videos of the specified title. · getAllAudios(): MultimediaInfo[], to retrieve all audio files · getAudio(String title): MultimediaInfo[], to retrieve the audio files of the specified title. After the folder is ready for packaging, the Bundle Packager automatically generates the manifest file into the folder and starts compressing the folder into a jar file as an OSGi bundle. The manifest file contains the information of the exported OSGi service interfaces of the bundle.
+
+...
+req res
+
+(a)
+
+(b)
+
+(1) (2) (3) (4) (5) (6) (7)
+
+reqi +
+i=1 m
+
+resi resi
+i=1 p
+
+reqi + req"i +
+i=1
+
+=
+i=1
+
+reqi +
+i=1
+
+resi +
+
+res"i
+
+i=1 eb Ntotal = n eb Nsoap = i=1 m eb Nrest = i=1
+
+eb eb Nsoap + Nrest n
+
+reqi +
+i=1 m
+
+resi resi
+i=1
+
+reqi +
+
+4
+
+EXPERIMENTAL EVALUATION
+
+In this section, we conduct experimental evaluations to demonstrate that both network traffic and turnaround time of the proposed framework are better than the traditional frameworks. 4.1 Definition of Evaluation Metrics To evaluate the performance of our approach and the traditional framework, two metrics are adopted: (1) network traffic: data transmitted over a network; and (2) turnaround time: the total time between the submission of a program for execution and the return of the complete output to the customer.
+
+reqi is the size of the request message sent to a SOAP service ssi , and resi is the size of the reply message returned from the SOAP service. reqi is the size of the request message sent from the adapter r2si to the RESTful service rsi , and resi is the size of the reply message returned from the RESTful service. reqi is the size of the request message sent to the OSGi service osi from the adapter o2si , and resi is the size of the reply message returned by OSGi service. As shown in Figure 13(a), the BPEL engine sends request messages to remote SOAP services, RESTful services, and OSGi services and receives response messages from the invoked serviced through the traditional approach. SOAP services located at server-side are built as adapters for the service invocation by the BEPL engine. tb The total network traffic, Ntotal , is the sum of network traffics in between the BPEL engine and SOAP services
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

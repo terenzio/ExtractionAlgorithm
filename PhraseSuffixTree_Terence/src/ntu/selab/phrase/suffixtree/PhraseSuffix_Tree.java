@@ -410,7 +410,7 @@ public class PhraseSuffix_Tree {
 	       		
 	       	
 	       		
-	       		if (edgeString(child).equals(searchWord)) { 
+	       		if (edgeString(child).startsWith(searchWord)) { 
 	       			
 //	       		  System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
 //	       		  System.out.println("First word: " + firstWord(child));

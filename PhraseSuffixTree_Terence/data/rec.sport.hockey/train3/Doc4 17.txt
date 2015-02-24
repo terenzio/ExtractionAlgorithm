@@ -1,0 +1,29 @@
+728
+Use Case ID Use Case Name Woven Base Use Cases Actors Precondition Postcondition
+
+LEE ET AL.
+Flx001 Handle Flexibility
+Type
+
+Aspectual Use Case
+
+Plan a Meeting, Re-plan a Meeting , Resolve Conflicts, Initiator, Participant Meeting initiator has notified to plan or re-plan a meeting None
+The system should provide the flexibility in the following situations: -Preference set modification:
+
+Join-points
+
+-Meeting accommodation: a scheduled meeting can be re-planed to accommodate an important meeting. In case: 1. Pref erence set modification: - Bef ore a meeting date is proposed, all participants are allowed to modify their exclusion set, preference set by .
+Basic Flow
+
+2. Meeting accommodation - When the system allows to accommodate an important meeting, Participant issues a "Meeting to be Re-planed" event to Meeting initiator to accommodate a more important meeting. - Meeting initiator notifies all the participants that this meeting must be re-planed to accommodate a more important meeting.
+
+Alternative Flow
+
+Types of Weaving Operators
+
+Figure 9. Use case speciﬁcation of handle ﬂexibility aspectual use case.
+
+use case. Accordingly, the ﬂexibility handling aspectual use case is documented as in Figure 9. The type of the use case is aspectual. Woven base use cases are UCPlanaMeeting , UCReplanaMeeting , and UCResolveConﬂicts . There are two join points speciﬁed: One is "preference set modiﬁcation," and the other is "meeting accommodation." "Preference set modiﬁcation" join point speciﬁes a weaving point that allows all participants to modify their exclusion/ or preferences sets before the meeting is held. "Meeting accommodation" join point speciﬁes a weaving point that allows all participants to issue a "replan the meeting request" for accommodating a more important meeting. The type of weaving operator to be used is WeaveOPinsert , which means that the aspectual behavior addressed in this speciﬁcation will be inserted into the behavior of base use cases, where the weaving conditions are satisﬁed. Once the aspectual use case speciﬁcation is documented, we can proceed to model the aspectual behavior in the aspectual sequence diagram with interaction operators to be woven into the base use cases. In this stage, an aspect weaver is
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

@@ -1,0 +1,58 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+8
+
+(Equations 2 and 3), and in between OSGi services and adapters (Equation 4). As depicted in Figure 13(b), the extended BPEL engine directly invokes remote heterogeneous services through the bundled adapters sai , rai and oai . The total network eb traffic Ntotal is the sum of the network traffics in between the BPEL engine, SOAP services, and the RESTful services. Definition 2 defines turnaround time that is a metric derived from the transmission time and processing time. The transmission time is the amount of time for sending a message from the start node of a link to its the destination node of a link. The processing time is the amount of time for executing a service after the service receives an invocation request. Definition 2. Definition 2. Given a set of heterogeneous  services S = {{ss1 , ..., ssn }, {rs1 , ..., rsn }, {os1 , ..., osn }}, where a SOAP service is denoted as ssi , a RESTful service is denoted as rsi and an OSGi service is denoted as osi . In the traditional approach, the total turnaround time is denoted as tb Rtotal . The turnaround time for invoking the SOAP, RESTful tb tb tb and OSGi services are denoted as Rsoap , Rrest , and Rosgi , respectively. In the proposed approach, the total turnaround time is denoted as Reb . The turnaround time for invoking eb the SOAP, RESTful and OSGi services are denoted as Rsoap , eb eb Rrest and Rosgi , respectively.
+tb tb tb tb Rtotal = Rsoap + Rrest + Rosgi n tb Rsoap = i=1 tb Rrest = (
+
+in sending and receiving messages for service invon reqi +resi , that is, it counts the time of cations, i=1 bc,si execution process of the related services in server and adapters in client, n spi + n sai . The turnaround i=1 csi i=1 cc tb time of RESTful service, Rrest , is the amount of time spent in sending and receiving messages for service m m req +res +res and adapter invocations, i=1 reqbic,s i + i=1 bis,s i i i , that is, it counts the time of execution process of m spi m r2si the related adapters and services, i=1 cs + i=1 cs . i i tb The turnaround time of OSGi service, Rosgi , is the amount of time spent in sending and receiving messages p reqi +resi + for service and adapter invocations, i=1 bc,s
+req +res
+i
+
+(8)
+n
+
+reqi + resi spi sai +( + ) bc,si csi cc i=1 i=1
+reqi +resi m reqi +resi + m ) i=1 i=1 bc,si bs,si m spi +( i=1 cs + m r2si ) i=1 csi i reqi +resi p reqi +resi + p ) i=1 i=1 bc,si bs,si p spi +( i=1 cc + p o2si ) i=1 csi
+
+n
+
+(9)
+
+i i sump , that is, it counts the time of execution i=1 bs,si p spi process of related adapters and services, i=1 cc + p o2si i=1 csi . In our approach, the turnaround time of SOAP eb service,Rsoap , consists of the time in sending and re+res ceiving messages for service invocations, n reqbic,s i , i=1 i and of the time of execution process of related adapters n n spi sapi and services, i=1 csi + i=1 cc . The turnaround eb time of RESTful service, Rrest , consists of the time in sending and receiving messages for service invocations, m reqi +resi , and of the time of execution processes i=1 bs,si m spi m rapi of related adapters and services, i=1 csi + i=1 cc . eb The turnaround time of OSGi service, Rosgi , consists of the time in sending and receiving messages for service reqi +resi , and of the time of execution invocations, p i=1 bs,si p spi processes of related adapters and services, i=1 cc + p oapi i=1 cc .
+
+(10)
+
+4.2 Experimental Results
+(11) (12)
+
+tb Rosgi
+
+=(
+
+eb eb eb eb Rtotal = Rsoap + Rrest + Rosgi eb Rsoap = n i=1 m eb Rrest = i=1 p eb Rosgi = i=1
+
+reqi + resi spi +( + bc,si csi i=1
+m
+
+n
+
+n i=1 m
+
+sapi ) cc
+
+(13)
+
+reqi + resi spi rapi +( + ) bs,si csi cc i=1 i=1 reqi + resi spi oapi +( + ) bs,si cc cc i=1 i=1
+p p
+
+(14)
+
+(15)
+
+bc,si is the bandwidth between the client and the server si . bs,si is the bandwidth between the servers. spi is the number of time units required for invoking the services on si . api is the number of time units needed to process the results obtained from service invocations. sapi , rapi , oapi are the numbers of time units required for invoking SOAP, RESTful and OSGi services, respectively. cc is the computing capability of the client, and csi is the computing capability of the service s i . In the traditional approach, the turnaround time of tb SOAP service, Rsoap , refers to the amount of time spent
+
+In the experimental environment, the client-side mobile device is Android 2.2 platform with 1 GHz Cortex A8 CPU and 512 MB memory. The server runs Java virtual machine 6.0 and the OSGi platform is Apache Felix. We calculate the turnaround time and the network traffic by adopting our approach and the traditional approach over a wireless network with a 256 KB/s bandwidth which is estimated and controlled by a bandwidth controller software. A site denotes a smart living control environment as described in section 3.1. There are up to 40 sites in the experiment. For each kind of service with a certain number of sites, the turnaround time is the sum of the time gathered for all the sites. Each approach is applied and evaluated 2000 times, and the average of the turnaround time is calculated and depicted in Figures 14, 15, 16, 17, 18, and 19. Figures 14 and 19 show the turnaround time of invoking weather data Android activity and receiving recommendation web contents, respectively. Noted that there is no need to transfer the data by the serverside SOAP service in our approach, which gives us an advantage of less turnaround time over the traditional one. Figure 15 indicates that the differences between our
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

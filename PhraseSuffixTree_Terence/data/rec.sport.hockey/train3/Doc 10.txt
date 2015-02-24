@@ -1,0 +1,52 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+10
+
+5
+Turnaround Time (millisec.)
+The Proposed Approach 40000 35000 30000 25000 20000 15000 10000 5000 0 1 5 10 15 20 25 30 35 40 The Traditional Approach
+
+C ONCLUSION
+
+Number of Sites
+
+Fig. 20. Total turnaround time
+
+TABLE 1 Paired samples t-test of the total turnaround time
+Number of sites 1 5 10 15 20 25 30 35 40 T1-T2 The Traditional Approach The Proposed Approach (T1) (T2) 2501.66 873.32 5945.74 1818.43 7658.31 2347.08 11125.02 3368.5 18510.11 4427.86 22278.28 5837.8 26699.12 7520.16 31390.8 8629.89 35867.63 9634.35 Using  = 0.05 and degrees of freedom=8, t=4.463 (>2.306)
+
+This paper presents a framework for composing SOAP, RESTful, OSGi services, web contents and Android Activities. A BPEL engine is extended and bundled with adapters to enable the direct invocation and composition of SOAP, RESTful and OSGi services with heterogeneous content types: SOAP, JSON, YAML, Protocol Buffer and Java objects. Additionally, two transformation mechanisms are devised to enable the transformation of Web contents and Android activities that are two typical assets on mobile devices into OSGi services so as to be composed by the extended BPEL engine. We also conducted an experiment on a smart living control system to evaluate our approach. In our approach, the request and response messages of the invocations of RESTful services do not need to be transferred via server-side SOAP services. These messages are directly transferred in between the extended BPEL engine and the RESTful services. The experimental results show that our proposed approach generates less network traffic and spends less turnaround time than those of the traditional approaches. With the extended BPEL engine based on Adapter pattern, SOAP, non-SOAP and non-Web services can be integrated through a systematic way. Furthermore, the engine can be considered as a more suitable framework for composing heterogeneous services than the traditional ones from the perspective of resource consumptions in mobile environments.
+
+The Proposed Approach
+
+The Traditional Approach
+
+Transfered Data Size (KB)
+
+1600 1400 1200 1000 800 600 400 200 0 1 5 10 15 20 25 30 35 40
+
+ACKNOWLEDGMENTS
+This research was sponsored by National Science Council (Taiwan) under the grant NSC 102-2622-E-002-007CC1.
+
+R EFERENCES
+[1]
+Number of Sites
+
+[2]
+
+Fig. 21. Network traffic generated between client and servers
+[3]
+
+TABLE 2 Paired samples t-test of the network traffics
+Number of sites 1 5 10 15 20 25 30 35 40 N1-N2 The Traditional Approach The Proposed Approach (N1) (N2) 24.72827 11.78827 230.51311 25.6406 445.47998 50.76045 584.72878 62.7459 783.23135 81.49608 951.99891 95.89873 1089.49562 117.6038 1262.91215 134.16151 1423.30293 148.17036 Using  = 0.05 and degrees of freedom=8, t=4.753 (>2.306)
+
+[4]
+
+[5] [6]
+
+[7] [8] [9]
+
+J. Lee, S.-J. Lee, H.-M. Chen, and K.-H. Hsu. Itinerary-based Mobile Agent as a Basis for Distributed OSGi Services. IEEE Transactions on Computers, 62(10):1988-2000. 2013 Y. Natchetoi, V. Kaufman, and A. Shapiro. Service-oriented architecture for mobile applications. Proceedings of the 1st international workshop on Software architectures and mobility. ACM, 2008. D.-M. Han and J.-H. Lim. Design and implementation of smart home energy management systems based on zigbee. IEEE Transactions on Consumer Electronics, 56(3): 1417-1425, 2010. M. Darianian, and M. P. Michael. Smart home mobile RFID-based Internet-of-Things systems and services. Advanced Computer Theory and Engineering, 2008. IEEE International Conference on ICACTE, 2008. L. Atzori, A. Iera, and G. Morabito. The internet of things: A survey. Computer Networks, 54(15): 2787-2805, 2010. T. Andrews, F. C, et al.. Business Process Execution Language for Web Service (BPEL4WS) 1.1. Technical Report, BEA Systems and International Business Machines Corporation and Microsoft Corporation and SAP AG and Siebel Systems, 2003. W3C Member Submission. OWL-S: Semantic Markup for Web Services. http://www.w3.org/Submission/OWL-S/. 2004. F. Curbera, M. Duftler, R. Khalaf, and D. Lovell. Bite: Workflow composition for the web. ICSOC (2007) 94­106. R. P. Diaz Redondo, A. Fernandez Vilas, M. Ramos Cabrer, J. J. Pazos Arias and M. R. Lopez. Enhancing Residential Gateways: OSGi Service Composition. IEEE Transactions on Consumer Electronics, Vol 53, No 1, February 2007, 87-95.
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

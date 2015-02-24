@@ -1,0 +1,109 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+4
+
+Client Side (Mobile Device) BPEL Engine Weather Data Android Activity
+
+<wsdl:service name="WeatherService"> <wsdlrestful:address protocol="http" format="json" url="http://query.yahooapis.com/v1/public/yql?q=*" /> </wsdl:service>
+SOAP SOAP
+
+SOAP
+
+SOAP
+
+SOAP
+
+SOAP
+
+SOAP Service
+
+Fig. 5. An example of describing a RESTful service
+SOAP Service
+HTTP
+
+SOAP Service
+HTTP
+
+SOAP Service
+HTTP
+
+SOAP Service
+HTTP
+
+weather , temperature, lumen..and so on.
+
+Calculate PMV SOAP service
+
+Motorized roller blinds controller RESTful service Electrical roller blinds
+
+Lighting Controller RESTful service
+
+HVAC Controller RESTful service
+
+Recommendations on energy saving info. Web page
+
+Server Side
+
+Lightings
+
+HVACs
+
+Fig. 3. The heterogeneous service compositions scenario by the traditional approach
+Client Side (Mobile Device) Extended BPEL Engine Adapter
+OSGi
+
+blinds controller, Lighting Controller, and HVAC Controller will be directly invoked with the parameters of the optimal parameter values by the extended BPEL engine. 4) Step 6: The energy saving information web page will be transformed into an OSGi bundle through the web content asset transformer, and to be composed by the extended BPEL engine through the OSGi adapter. 3.2 Composing RESTful Services Protocol: The protocols that a RESTful service supports, e.g., HTTP. · Message Format: The message formats that a RESTful service supports, e.g., JSON, YAML, and protocol buffer. · Url: The URL of a RESTful service. The extension of WSDL for describing RESTful services includes protocols, urls, and message formats. Figure 5 shows an example of describing a Weather RESTful service. The service supports HTTP protocol and is with the content format of JSON. Figure 6 shows the architecture of the RESTful service adapter. During the execution process, the extended BPEL engine parses the WSDL document of the RESTful service. The properties of the <wsdlrestful:address> elements are obtained from the WSDL. The protocol property determines the protocol of the RESTful service. The url property determines the network address of the RESTful service. The format property returns the content type of the RESTful service messages. When the messages return from the RESTful service, they are transformed into Java objects as runtime variables of the composite process through the JSON/YAML/Protocol Bufffer to Java object module based on open source org.json and org.ho.yaml packages. Messages are converted into JSON, YAML or Protocol Buffer messages before they are sent as inputs to another web service.
+·
+
+Adapter
+
+Adapter
+
+Adapter
+
+Adapter
+
+Adapter
+OSGi
+
+OSGi service Weather Data Android Activity
+
+OSGi service
+Energy saving info. Web Content
+
+SOAP
+
+HTTP
+
+HTTP
+
+HTTP
+
+Packaged as
+
+Calculate PMV SOAP Service
+weather , temperature, lumen..and so on.
+
+Motorized roller blinds controller RESTful service Electrical roller blinds
+
+Lighting Controller RESTful service
+
+HVAC Controller RESTful service
+
+Recommendations on energy saving info. Web page
+
+Lightings
+
+Server Side
+
+HVACs
+
+Fig. 4. The heterogeneous service compositions scenario by our approach
+
+blinds controller, Lighting Controller, and HVAC Controller will be invoked with the parameters of the optimal parameter values by the SOAP services. 4) Step 8: The BPEL engine invokes a SOAP service to collect the energy saving information. The SOAP service will parse the web page of the information and return the result back to the BPEL engine. In our proposed approach (Figure 4), the scenario includes an extended BPEL engine bundled with adapters that enable directly invocations of the heterogeneous services in the experimental environment (see Figure 4). The steps of composing the services are as follows: 1) Step 1: As the Weather Data Android Activity is transformed into an OSGi bundle through the mobile applications transformer, the extended BPEL engine can directly invoke the OSGi service to retrieve the weather information. 2) Step 2: The extended BPEL engine sends the weather data to the calculated PMV SOAP service. Based on the temperature, humidity, and illumination value, the optimal parameter values for the HVAC technology, lighting, and motorized roller blinds will be determined and returned to the extended BPEL engine. 3) Steps 3-5: The RESTful services of Motorized roller
+
+3.3 Composing OSGi Services type: The type that an OSGi service locates, e.g., local. · serviceName: The service name that an OSGi services registers in the OSGi register. · filter: The filter is an optional property that identifies a concrete OSGi service. In the framework, we extend WSDL to describe OSGi services including their types, service names and filters.
+·
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

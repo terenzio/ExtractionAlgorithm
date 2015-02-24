@@ -1,0 +1,22 @@
+724
+Aspectual State 1
+
+LEE ET AL.
+Aspectual State 2
+entry/ interactionOP(act3); exit/ interactionOP(act1);
+event trigger/ interactionOP(act2);
+
+exit/ interactionOP(act5); do/ interactionOP(act4);
+
+Aspect interception
+
+Figure 6. Extended state-based join point model.
+
+4.1. Attach State Machines to Aspectual Use Cases To address the crosscutting behavior of early aspects in a software system using a state-based approach, state transition diagrams are adopted as a vehicle to represent the aspectual behavior of an aspectual use case identiﬁed in Section 3 by facilitating the state transitions as weaving conditions. A state machine is attached to an aspectual use case and speciﬁes the behavior of the aspectual use case. An aspectual use case is a coherent unit that addresses crosscutting concerns provided by a classiﬁer,a which may be a subsystem, or a class. The use of an aspectual use case deﬁnes the concept of crosscutting of a classiﬁer, which executes on behalf of a group of cooperative object instances without revealing the internal structure of the classiﬁer itself. The behavior of an aspectual use case can be speciﬁed in three ways: (1) by an interaction describing communication sequences of objects, (2) by an activity speciﬁcation, or (3) by an attached state machine. In our approach, the behavior of an aspectual use case is modeled by attaching a state machine to each aspectual use case and specifying the weaving behavior in a sequence diagram. By doing so, we can depict how an early aspect reacts to system state's transition and elaborates the interactions between base and aspectual behavior with an aspectual sequence diagram from the system point of view. The use of the state transition diagrams in Figure 6 is elaborated as follows: Weaving points are represented as events with/ or without guard conditions followed by different states and aspectual behaviors that are treated as actions/ or activities in each state. A weaving point stands for a place that an aspect participates in a system. However, a criterion is needed for determining whether it is suitable to include the aspect. Therefore, an attempt is made to leverage semantics of the event-transition in the state transition diagrams to represent the criterion for the aspect weaving mechanism. The event with/ or without a guard condition is used as a criterion for matching the weaving condition whether the aspect should be woven into the system. The actions/ or activities in the following state with respect to the event are
+a In UML, a classiﬁer is a model element that describes behavioral and structural features, such as class, subsystem, collaboration and use case.
+
+International Journal of Intelligent Systems
+
+DOI 10.1002/int
+
+

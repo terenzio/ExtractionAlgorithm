@@ -1,0 +1,13 @@
+730
+
+LEE ET AL.
+
+Figure 10. Sequence diagram of replan a meeting use case.
+
+In this work, we proposed an aspect-enhanced goal-driven approach to the modeling of the interactions between aspectual behavior and the base behavior in UML state transition diagrams and sequence diagrams as an attempt toward the investigation of how the crosscutting behavior takes place, in which three main features are devised:
+1. specifying the responsibility with the augment use cases speciﬁcation with early aspects, 2. describing the aspectual behavior based on the extended state-based join point model and clarifying the weaving behavior in aspect-enhanced sequence diagrams, and 3. constructing an aspect-enhanced sequence diagram by composing early aspect behavior with the base behavior to provide an overall picture of the system behavior.
+
+Our future research plan will focus on the investigation of the issues of aspectoriented programming language implementation to support the state-based and runtime weaving mechanism.
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

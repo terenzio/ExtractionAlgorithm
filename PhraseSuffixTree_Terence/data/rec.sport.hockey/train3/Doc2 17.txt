@@ -1,0 +1,25 @@
+600
+
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING,
+
+VOL. 40,
+
+NO. 6,
+
+JUNE 2014
+
+TABLE 9 Comparison of Our Approach with Other Approaches
+
+Table 9 shows the comparison of our approach to the aforementioned approaches. In our approach, the requirements are represented using goals formulation in a tupleform while others use concern-space modeling, V-graph or multi-dimensional way to represents the source where to discovery aspects or concerns. The mechanism used for discovering aspects in our approach is the clustering algorithm which is based on numerical computation of relationships among goals. Others use logical/physical concerns identification, goal model based identification, projection and composition rules, or compositional intersection to discover aspects in their approaches. While discovering aspects, conflicts could occur in different stages during the process. In our approach, conflicts are handled at the grouping of goals using the total interaction degrees. In [46], it uses goal analysis tool to detect conflicts and deteriorations. In [16], [45], a prioritization approach is proposed to resolve conflicts based on attribute weights. In dealing with conflicts while discovering aspects, [35], [51] also propose different ways to handle conflicts. In [35], a technique to support conflict management at the AORE level is proposed based on Analytic Hierarchy Process, AHP. It could be used to support architectural choices during software architecture design. In [51], it aims to assess the suitability of multi-criteria decision making (MCDM) methods to support software engineers' decisions. A HAM (hybrid assessment method) is proposed to give user the ability to perceive the influence different decisions may have on the final result. Comparing with the related work, the benefits of the proposed approach can be summarized as follows: 1) It makes easy for developers to identify early aspects by focusing only on the relationships between goals and use cases in a pairwise fashion. By setting a different threshold, the proposed approach gives an experienced requirements engineer a prism into all the possible potential early aspectual candidates to prevent any neglect or overlook that may occur based purely on intuition. The numerical representation of relationships among goals is more informative and can be more easily processed computationally, which can be used as a basis for discovering early aspects by exploring the existence of common properties shard by goals.
+
+6
+
+CONCLUDING REMARKS
+
+2)
+
+3)
+
+In this work, we propose a goal-driven approach (called GEA) to the discovery of early aspects through goal clustering by means of a clustering algorithm as an attempt towards the analysis of software systems, in which two main features are devised: (1) evaluating the relationships among goals and use cases to obtain the degrees of similarity and interaction relationships among goals; and (2) discovering early aspects through the exploration of interactions among goals and use cases, which engages similarity degree among goals for clustering goals, total interaction degree for checking the validity of the clustering. Introducing early aspects not only helps further enhance the goal-driven requirements modeling to manage crosscutting properties, but also better addresses important stakeholders' concerns in the analysis and design phases of software development. There are also two additional benefits of the proposed approach: one is from the viewpoint of using numerical representation of relationships among goals, and the other is from the developers' viewpoint. Representing relationships among goals numerically is more informative in facilitating the discovery of early aspects as compared with using qualitative terms and is easier to be processed computationally. From the developers' viewpoint, it makes easy for developers to identify early aspects by focusing only on the relationships between goals and use cases in a pairwise fashion, which, we believe, can reduce the effort in looking for crosscutting concerns or common properties across the whole system. The results delivered to developers are represented in a frequency-based manner, which allows developers to set a threshold to determine how strong the likelihood is of an early aspectual candidate containing an early aspect. Moreover, by setting a different threshold, the proposed approach gives an experienced requirements engineer a prism into all the possible potential aspectual candidates. An experiment is conducted to evaluate the benefits of the proposed approach by inviting three groups of people to a survey. The result of the experiment is further validated through Mann-Whitney U-test to show that the difference between with GEA and without GEA is statistically significant.
+
+

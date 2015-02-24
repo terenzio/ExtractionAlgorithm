@@ -1,0 +1,47 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+6
+
+activity. The activator class includes five methods: · void invokeActivity(): This method involves no input parameter value or returns value. Invoking this method will directly invoke the Android activity using Android Intent mechanism. · void invokeActivity(byte[] bytes): This method will invoke the Android activity with a parameter of a byte array. · byte[] invokeActicityForResult(): When the method is invoked, it will invoke the Android activity and wait for the returned value from the activity. · byte[] invokeActivityForResult(byte[] bytes): This method will invoke the Android activity with a parameter of a byte array and wait for the returned value from the activity. · byte[] invokeActivityForResult(Object obj): This method will invoke the Android activity with a parameter of an object and wait for the returned value from the activity. 2) Generate Manifest: This activity is to generate a manifest file for each generated OSGi bundle. The following elements must be declared in the manifest file. 3) Generate and add classes.dex: The OSGi bundles will be compiled into a dex file to enable their executions on the Android platform. 3.5 Composing Web Contents As Web contents in HTML are usually readable only for human and are with diverse information, the web content asset transformer enables a system designer to identify the assets in the web pages and transform them to OSGi services at design time so as to be composed in a composite process at runtime. Figure 10 shows the architecture of the web content asset transformer. The transformer consists of three components: a Webpage list manager, a data parser and a bundle packager. The Webpage list manager enables a user to identify and select the assets in the web pages, such as images or texts. The data parser parses the selected web pages and extract the assets. The bundle packager transforms the extracted assets into an OSGi bundle. In the following, we detail how to extract web content assets and how to transform these assets into an OSGi bundle. As the web pages are selected by the user, the data parser converts the HTML documents into document object model (DOM) trees, and parses the following four types of assets with their corresponding HTML tags:
+· · · ·
+
+Web content asset transformer
+Obtain search results
+
+Webpage list manager
+url Obtain web contents
+
+Web
+
+Data Paser
+data
+
+OSGi Bundle
+
+generate
+
+download web contents
+
+Bundle Packager
+
+Fig. 10. Web content asset transformer architecture
+MultimediaInfo
+
+TextInfo
+
+ImageInfo
+
+VideoInfo
+
+AudioInfo
+
+Fig. 11. Java bean objects for storing the web content assets These assets are stored in four Java bean objects (Figure 11). These Java beans all inherit the same parent class MultimediaInfo. The attributes of each class are as follows: · MultimediaInfo: id, title · TextInfo: content · ImageInfo: alt, width, height, filename, src, content · VideoInfo: poster, width, height, filename, src, content · AudioInfo: filename, src, content Attribute id keeps the identifier of each asset by following the universally unique identifier (UUID) standard. Attribute title stores any "title"-related data attribute. Attribute content stores data with a byte array. Attributes width and height record the resolution of a image or a video. Attribute filename specifies the file name of each asset. After the web content assets are extracted by the data parser, the assets together with the serializations of the Java bean objects will be stored into a folder. Meanwhile, an OSGi bundle activator class that implements the interface showed in Figure 12 will be generated in the folder as well. The class provides OSGi services after the folder is packaged into an OSGi bundle. The exposed OSGi services include: · getAllTexts(): String[], to retrieve the titles of the TextInfo Java bean objects as a string array. · getText(String query): MultimediaInfo[], to retrieve the assets through keyword matchings for the titles. · getAllImages(): MultimediaInfo[], to retrieve all images. · getImage (String title): MultimediaInfo[], to retrieve the images of the specified title. · getAllVideos(): MultimediaInfo[], to retrieve all videos. · getVideo(String title): MultimediaInfo[], to retrieve
+
+Text: <h1> . . . <h6>, <blockquote>, <pre> Image: <img> Video: <video> Audio: <audio>
+
+<p>,
+
+<textarea>,
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

@@ -1,0 +1,10 @@
+720
+
+LEE ET AL.
+
+Figure 3. Combined fragment example.
+
+possible behavior, such as conditionals, loops, parallels, and so on. A combined fragment is the construct for representing a set of possible traces within an interaction that includes an interaction operator keyword and one or more interaction operands, each of which is a fragment of an interaction. The combined fragment is shown as a nested region within a sequence diagram in Figure 3, which shows two possible traces of message passing among three object instances, which are ob1, ob2, and ob3 respectively. It uses a combined fragment with an alternative interaction operator to express that one of the two interaction segments described by the two interaction operands is allowed in run-time circumstance. An interaction operator is an enumeration designating the various kinds of operators of combined fragments. The interaction operator deﬁnes the type of operator of a combined fragment. The original literal values are alt, opt, par, loop, critical, neg, assert, strict, seq, ignore, and consider. The value of the interaction operator is given in text in a small compartment in the upper left corner of a combined fragment. On the basis of the concept of combined fragment, we introduce interaction operators in the combined fragment to express the aspectual behavior to impose constraints on the behavior of the woven use cases. With the proposed interaction operators, we can further specify the weaving semantics by using these operators in the aspectual sequence diagrams. The proposed interaction operators are developed to provide a one-to-one mapping to the weaving operators mentioned in Section 3.1, which are summarized as follows:
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

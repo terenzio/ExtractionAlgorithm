@@ -1,0 +1,33 @@
+584
+
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING,
+
+VOL. 40,
+
+NO. 6,
+
+JUNE 2014
+
+GEA: A Goal-Driven Approach to Discovering Early Aspects
+Jonathan Lee, Senior Member, IEEE and Kuo-Hsun Hsu, Member, IEEE
+Abstract--Aspect-oriented software development has become an important development and maintenance approach to software engineering across requirements, design and implementation phases. However, discovering early aspects from requirements for a better integration of crosscutting concerns into a target system is still not well addressed in the existing works. In this paper, we propose a Goal-driven Early Aspect approach (called GEA) to discovering early aspects by means of a clustering algorithm in which relationships among goals and use cases are utilized to explore similarity degrees of clustering goals, and total interaction degrees are devised to check the validity of the formation of each cluster. Introducing early aspects not only enhances the goal-driven requirements modeling to manage crosscutting concerns, but also provides modularity insights into the analysis and design of software development. Moreover, relationships among goals represented numerically are more informative to discover early aspects and more easily to be processed computationally than qualitative terms. The proposed approach is illustrated by using two problem domains: a meeting scheduler system and a course enrollment system. An experiment is also conducted to evaluate the benefits of the proposed approach with Mann-Whitney U-test to show that the difference between with GEA and without GEA is statistically significant. Index Terms--Early aspects, goals, goals interaction, fuzzy logic, use cases, goal cluster
+
+Ç
+1 INTRODUCTION
+software development process has been deemed as a way to achieve untangled and non-scattered designs and codes and accomplish a common agreement on the views of the involved. In this work, we propose a goal-driven approach, called Goal-driven Early Aspect (GEA), to discovering early aspects through goals interactions by means of a clustering algorithm for grouping goals, in which early aspectual candidates are derived as a basis for finding early aspects. An early aspectual candidate refers to a set of goals with a higher frequency of being grouped together. Early aspects are defined as crosscutting concerns that are discovered in the early life cycle phases of a software systems' development, including requirements analysis, domain analysis and architecture design phases [21]. This work is an extension to our previous research on goal-driven use case model [13], [22], [23], [24], [25], in which use cases are derived based on the analysis of goals interactions. Introducing the notion of goals clustering enables the goal-driven use case model to address crosscutting concerns in the early stage of software development. GEA consists of three main features: 1) To analyze a system by formulating goals and use cases. Goals are represented by an extended goal structure to consider various facets of requirements, such as functional or non-functional, rigid or soft, and actor-specific or system-specific. Use cases are identified to achieve the goals. Developers can assign relationships between goals and use cases numerically and in a pairwise manner. To discover early aspects by means of a clustering algorithm that organizes goals into goal clusters for discovering early aspectual candidates through the exploration of interactions among goals and use cases. The clustering algorithm engages similarity degree among goals for clustering goals, and total
+
+SPECT-ORIENTED software development (AOSD) has become an important development and maintenance approach to software engineering across requirements and design [1], [2], and coding [1], [3], [4], [5], [6], [7], [8]. It provides explicit means to model important stakeholders' concerns that tend to crosscut multiple system components. However, identifying concerns that crosscut the systems in the early stages of software development are still hindered from the difficulty that most programming and modeling formalisms enforce a dominant decomposition that allows only a few concerns to be separated [9]. To address this issue, many researches [10], [11], [12], [13], [14] have suggested that the coupling of goal-based and user-centered approaches is a good way to elicit user requirements that contain recurring properties or important stakeholders' concerns. It is generally agreed that the occurrence of crosscutting is not limited to non-functional requirements but also to functional requirements [15], [16], [17]. The tenet of goal-based approaches focuses on why systems are constructed, which provides the motivation and rationale to justify software functional and non-functional requirements [18]. User-centered approach is also useful in elicitation, analysis and requirements documentation [19]. In [20], discovering of concerns in early phases of
+
+A
+
+ 
+
+J. Lee is with the Department of Computer Science and Information Engineering, National Taiwan University, Taipei, Taiwan. E-mail: jlee@csie.ntu.edu.tw. K.-H. Hsu is with the Department of Computer Science, National Taichung University of Education, Taichung, Taiwan. E-mail: glenn@mail.ntcu.edu.tw.
+
+2)
+
+Manuscript received 3 Mar. 2013; revised 22 Apr. 2014; accepted 1 May 2014. Date of publication 28 May 2014; date of current version 19 June 2014. Recommended for acceptance by M. Dwyer. For information on obtaining reprints of this article, please send e-mail to: reprints@ieee.org, and reference the Digital Object Identifier below. Digital Object Identifier no. 10.1109/TSE.2014.2322368
+
+0098-5589 ß 2014 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. See http://www.ieee.org/publications_standards/publications/rights/index.html for more information.
+
+

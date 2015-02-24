@@ -1,0 +1,17 @@
+602
+
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING,
+
+VOL. 40,
+
+NO. 6,
+
+JUNE 2014
+
+[46] Y. Yu, J. C. S. D. P. Leite, and J. Mylopoulos, "From goals to aspects: Discovering aspects from requirements goal models," in Proc. 12th IEEE Int. Requirements Eng. Conf., 2004, pp. 38­47. [47] A. Sampaio, R. Chitchyan, A. Rashid, and P. Rayson, "Ea-miner: A tool for automating aspect-oriented requirements identification," in Proc. 20th IEEE/ACM Int. Conf. Autom. Softw. Eng., 2005, pp. 352­355. [48] J. Kienzle, W. A. Abed, and J. Klein, "Aspect-oriented multi-view modeling," in Proc. 8th ACM Int. Conf. Aspect-Oriented Softw. Develop., 2009, pp. 87­98. [49] L. K. Kit, C. K. Man, and E. Baniassad, "Isolating and relating concerns in requirements using latent semantic analysis," in Proc. 21st Annu. ACM SIGPLAN Conf. Object-Oriented Programm. Syst., Lang., Appl., 2006, pp. 383­396. [50] J. Ara jo, A. Moreira, I. Brito, and A. Rashid, "Aspect-oriented u requirements with UML," in Proc. Workshop Aspect-Oriented Model. UML, vol. 7, 2002. [51] R. A. Ribeiro, A. M. Moreira, P. Van den Broek, and A. Pimentel, "Hybrid assessment method for software engineering decisions," Decis. Support Syst., vol. 51, no. 1, pp. 208­219, 2011. Jonathan Lee received the PhD degree in computer science from Texas A&M University in 1993. He is a professor in the Department of Computer Science and Information Engineering at National Taiwan University (NTU) in Taiwan. He was the department chairman from 1999 to 2002 and was the director of Computer Center at National Central University from 2006 to 2012. His research interests include software engineering, service-oriented computing, and software engineering with computational intelligence. He received IBM Shared University Research Award (2010), CIEE Electrical Engineering Outstanding Professor Award, NCU Distinguished Professor Award, (2006-2013), and NCU Distinguished Research Award (2004). He also served as the program chairs of the 12th Asia-Pacific Software Engineering Conference (APSEC 2005) and the 8th International Fuzzy Systems Association World Congress (IFSA 1999). He is a senior member of the IEEE Computer Society.
+
+Kuo-Hsun Hsu received the BS degree in computer and information science from the National Chiao-Tung University, Taiwan, in 1996 and the PhD degree in computer science and information engineering from National Central University, Taiwan, in 2003. He is an assistant professor in the Department of Computer Science at National Taichung University of Education in Taiwan. His research interests include software engineering, requirement engineering, software architecture, service-oriented architecture, and CMMI. He is a member of the IEEE.
+
+" For more information on this or any other computing topic, please visit our Digital Library at www.computer.org/publications/dlib.
+
+

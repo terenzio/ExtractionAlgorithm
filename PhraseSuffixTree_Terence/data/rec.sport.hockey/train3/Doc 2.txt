@@ -1,0 +1,32 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at BPEL Engine Adapters
+
+SOAP Service
+SOAP Service RESTful Service OSGi Service
+Non SOAP Service
+
+Transformation Mechanisms
+
+Non Web Service
+
+Android Application
+
+Web Content
+
+Fig. 1. Conceptual model of the framework for invoking and composing SOAP, non-SOAP and non-web services
+
+services without modifying the core BPEL engine; and two transformation mechanisms devised to enable the transformation of Web contents and Android activities into OSGi services that can be composed by the extended BPEL engine. Figure 1 shows the conceptual model of the framework for invoking and composing SOAP, non-SOAP and non-web services. Three adapters for invoking SOAP, RESTful, and OSGi services are developed to extend our BPEL engine, and two transformation mechanisms for converting Web contents and Android activities are undergone a conversion into OSGi services before being invoked and composed at runtime by the extended BPEL engine through adapters. This paper is organized as follows. We discuss the related work in Section 2. Section 3 describes fully the proposed framework. In Section 4, we conduct two experimental evaluations. Finally, in Section 5, we summarize the contributions of the proposed framework.
+
+2
+
+R ELATED WORK
+
+It is widely accepted that combining multiple web services into a composite service is more beneficial to users than finding a complex and preparatory atomic service that satisfy a special request [26], [27], [28], [18], [17]. The resulted composite services can be used as atomic services by themselves in other service compositions to satisfy clients requests. BPEL4WS [6] provides a mixture of block-structured and graph-structured process models, and variables associated with message types can be specified as input or output variables to invoke, receive, and reply web services. Recently, BPEL has been extended to support modeling the composition of heterogeneous web services, such as RESTful and OSGi services. REST [29] (REpresentational State Transfer) is a style of software architecture for distributing hypermedia systems such as the World Wide Web. REST defines a set of architectural principles [29] by which one can design web services that focus on a system's resources, including how resource states are addressed and transferred over HTTP by a wide range of clients written in different languages.
+
+In [8], F. Curbera et al. offer a service-composite development model for composing RESTful services. During the invocations of RESTful services, the messages returned from a service are stored as BPEL process variables. However, how to transform the messages to different content types for follow-up service invocations is unclear. In [16], K. He proposes a composite system for integrating both SOAP and RESTful services with a hybrid orchestration based on a BPEL engine and a REST orchestration engine. The composite service workflow is divided into two kinds of sub-workflows according to the types (SOAP or RESTful) of services to be composed. However, the message transformation between the SOAP and RESTful is not discussed. In [11], S. Farokhi. et al. propose a framework, called MDCHeS, to support dynamic composition and to use both SOAP-based and RESTful Web services simultaneously in composite services with three different views: data, process, and component view. However, the approach, like the other approaches, does not discuss the message transformation between the SOAP and RESTful. In [33], J. Nitzsche et al. extended BPEL 2.0 with a WSDL-less interaction model, call BPELlight , to enable coupling business logic and Web service technology, including WSDL, by introducing a new and single type of interaction activity resuming all BPEL interaction activities. The main focus of the paper is to enable modeling processes or process fragments that can be reused and bound to specific service interfaces in any interface description language. Our approach, however, focuses more on how to model and implement the binding relationships among heterogeneous services. In [31][32], C. Pautasso proposed a process-based composition language for composing RESTful and traditional WSDL-based services based on BPEL. The local adapters (e.g. XSLT, JavaScript) are used to process the data and transform it to make it compatible with what the other service requires. In our approach, SOAP, RESTful and OSGi services are all supported for invocation while executing a composite process. Furthermore, SOAP, JSON, YAML, Protocol Buffer, and Java object messages returned from a service can be transformed into Java objects used as variables of a BPEL process. After the first transformation, the variables can then be transformed again into messages of different content types for followup service invocations.
+
+3 H ETEROGENEOUS S ERVICE C OMPOSITION F RAMEWORK
+In this work, an extended BPEL engine is developed by applying Adapter pattern [21] to compose SOAP, RESTful and OSGi services. Figure 2 shows the system architecture of the heterogeneous service composition framework. A concise description of our BPEL engine is given below without going into details of its modules.
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

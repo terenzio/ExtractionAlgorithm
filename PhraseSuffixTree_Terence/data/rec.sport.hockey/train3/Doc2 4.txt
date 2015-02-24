@@ -1,0 +1,19 @@
+LEE AND HSU: GEA: A GOAL-DRIVEN APPROACH TO DISCOVERING EARLY ASPECTS
+
+587
+
+Fig. 2. Goal-driven use case model of meeting scheduler system.
+
+account various types of goals, extension use cases are created for various situations: optimizing/maintaining a soft goal, achieving a system-specific goal, or achieving a nonfunctional goal. Refer to the meeting scheduler system, use cases are established according to the system goals identified, and the goal-driven use case diagram is then constructed as shown in Fig. 2. A detail discussion of our goal-driven use case model can be found in [24].
+
+3
+
+EARLY ASPECTS DISCOVERY
+
+above-mentioned features, an experiment to evaluate the benefits of the proposed approach is also conducted. Fig. 3 illustrates the concept of goals with and without crosscutting concerns. In GDUC modeling, each use case is viewed as a process that can be associated with a goal to be achieved, ceased, impaired, optimized, or maintained by the use case. In addition to the direct associated goal, a use case can also have side effects to achieve, cease, impair, optimize or maintain other goals in the target system. Consequently, if goals G1 and G2 have crosscutting concerns, these goals will share common properties influenced by the
+
+An early aspect is a crosscutting concern that scatters over various modules or components in the early life cycle phase of a software system [8], [21]. It is pinpointed out in [32] that identifying clusters that aggregate these modules or components in spotting early aspects can be beneficial for software development. As a continuation of our previous work on goal-driven use cases model [22], [24], [33] and early aspects identification method [33], we focus our attention in this work, called Goal-driven Early Aspect, on the improvement of the following three main features: reduce the time complexity from Oðnn Þ to Oðn!Þ of our clustering algorithm, streamline the GEA process as shown in Fig. 1, and enhance the supporting tool by integrating MapReduce and HBase for increasing the performance of our clustering algorithm and an ArgoUML plug-in for drawing or importing use case diagrams. In addition to the
+
+Fig. 3. Illustration of the concepts of goals, use cases and crosscutting concerns.
+
+

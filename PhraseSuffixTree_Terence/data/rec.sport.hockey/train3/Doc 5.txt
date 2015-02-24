@@ -1,0 +1,82 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+5
+
+Mobile Applications Transformer
+
+BPEL Engine
+
+Partner Link Handler
+
+RESTful Adapter
+
+RESTfulService.wsdl . . . <service> <wsdlrestful:address .../> </service>
+
+New apk
+Android Platform install
+
+Felix apk
+src res lib MF
+
+src res lib MF
+
+Integrate res Integrate src Import lib Integrate Android MF Modefy Felix export package
+
+start
+
+Apk 1
+src res lib MF
+develope
+
+describe
+Java Object to JSON/YAML/Pr otocol Buffer JSON/YAML/Pr otocol Buffer to Java Object
+
+invoke RESTful Service return
+OSGi service Container
+
+Install & Start
+
+Bundle1 Bundle2
+
+Add bundle Activator Create classes.dex
+
+Apk 2
+src res lib MF
+
+Apk Service Container
+
+Function Bundle
+
+System
+
+...
+
+5
+
+Fig. 6. RESTful adapter architecture
+<wsdl:service name="TimerService"> <wsdlosgi:address type="local" serviceName="ntu.osgi.Timer" filter="" /> </wsdl:service>
+
+Fig. 9. Mobile applications transformer architecture
+
+Fig. 7. An example of describing an OSGi service Figure 7 shows an example of describing an OSGi service. The WSDL describes that an OSGi TimerService is run on a local device and its service name registered is ntu.osgi.Timer. Figure 8 shows the architecture of the OSGi service adapter. By referring to the extended WSDL, the extended BPEL engine reads the properties of the OSGi service by using the OSGi adapter, which inherits a partner link handler interface. The adapter searches for the OSGi service through the OSGi registry to get the service's reference, and then invokes the services through method call. 3.4 Composing Mobile Applications In this section, we describe a mobile application transformation mechanism that enables transforming Android Activities to OSGi bundles. The transformed OSGi bundles can be invoked and composed by the extended BPEL engine. Figure 9 shows the architecture of the mobile applications transformer. The inputs of the transformer include
+
+BPEL Engine
+
+Partner Link Handler
+
+OSGi Adapter search for service OSGi Service Registry invoke
+
+OSGiService.wsdl . . . <service> <wsdlosgi:address ... /> </service>
+
+describe
+
+register
+
+OSGi Service
+
+Fig. 8. OSGi Adapter Architecture
+
+the project assets of an Android application that runs on an OSGi platform (Apache Felix) and several existing Android applications. The output is a new Android application together with several OSGi bundles that provide services for invoking the Activities of the existing Android applications. The project assets of developing an Android application include source code files (src) , resource files (res), libraries (lib), and a Manifest file. The main functions of the transformer are as follows: 1) Integrate resources: In order to prevent the conflicts among the resource file names of the Android applications, all resource files (images, strings, layouts, etc.) will be renamed during the transformation process. 2) Integrate source code: The parts of the code that originally refer to the resource files will be modified to refer to the renamed resource files. 3) Import libraries: All of the libraries of each Android application will be copied into a new directory, and the new classpath file will include the references to these libraries. 4) Integrate manifests: The AndroidManifest.xml is a configuration file that contains Android application information and describes all package components, including the activities, services, and receivers. This function is to integrate the manifest files into a new one. 5) Modify the Felix export packages: To deploy the OSGi framework on the new Android application, the Apache Felix library (Felix.jar) was transformed into an OSGi bundle. The Context.startService() function is used to start (bind) the OSGi framework, and the Context.stopService() is used to stop (unbind) the OSGi framework. After the OSGi framework environment is established, OSGi bundles can be installed and uninstalled on the Android platform. The activities of transforming the Android applications into OSGi bundles are as follows: 1) Add a bundle activator: For each Android activity, an OSGi bundle activator class will be automatically generated for the invocation of the Android
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+

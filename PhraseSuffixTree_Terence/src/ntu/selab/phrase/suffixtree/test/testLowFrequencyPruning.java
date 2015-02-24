@@ -78,7 +78,7 @@ public class testLowFrequencyPruning extends TestCase {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
 		
-		PhraseSuffix_Tree st1 = new PhraseSuffix_Tree(500);
+		PhraseSuffix_Tree st1 = new PhraseSuffix_Tree(50000);
 		
 		
 		 String phrase;
@@ -101,11 +101,11 @@ public class testLowFrequencyPruning extends TestCase {
 		st1.labelLowFrequency("you call");
 	//	st1.displayLowFrequencyNodes();
 		
-		//STEP1: §R±¼½ñ§Cªºfrequency¦bST1¸Ì­±
+		//STEP1: ï¿½Rï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½frequencyï¿½bST1ï¿½Ì­ï¿½
 		st1.removeLowFrequencyNodes();
 		
 		
-		//STEP2: st1°õ¦æTELESCOPE
+		//STEP2: st1ï¿½ï¿½ï¿½ï¿½TELESCOPE
 		//st1.telescope(1);
 		//st1.traveralNode(1);
 		

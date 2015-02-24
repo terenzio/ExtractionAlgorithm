@@ -1,0 +1,11 @@
+ASPECT-ENHANCED GOAL-DRIVEN SEQUENCE DIAGRAM
+
+731
+
+Figure 11. Aspect-enhanced sequence diagram of replan a meeting use case.
+
+References
+1. 2. 3. 4. 5. 6. 7. 8. 9. 10. Miller S. Aspect-oriented programming takes aim at software complexity. IEEE Comput 2001;34:18­21. Noda N, Kishi T. On aspect-oriented design-an approach to designing quality attributes. In: Proc 6th Asia PaciÞc Software Engineering Conf; 1999. pp 230­237. Shomrat M, Yehudai A. Obvious or not? regulating architectural decisions using aspectoriented programming. In: Proc 1st Int Conf on Aspect-Oriented Software Development; April 2002. pp 3­9. Viega J, Voas J. Can aspect-oriented programming lead to more reliable software? IEEE Softw 2000;17:19­21. Rashid A, Moreira A, Tekinerdogan B. Early aspects--aspect-oriented requirements engineering and architecture design. Softw IEE Proc 2004;151(4):153­155. Baniassad E, Clements PC, Ar´ ujo J, Moreira A, Rashid A, Tekinerdÿ gan B. Discovering a o early aspects. IEEE Softw 2006;23(1):61­70. Rashid A, Moreira A, Ar´ ujo J. Modularisation and composition of aspectual requirements. a In: Proc Second Aspect-Oriented Software Development Conf; 2003. pp 11­21. Lee J, Fanjiang Y. Modeling imprecise requirements with XML. Inf Softw Technol 2003;45(7):445­460. Lee J, Hsu K. Modeling software architectures with goals in virtual university environment. Inf Softw Technol 2002;44:361­380. Lee J, Xue N. Analyzing user requirements by use cases: a goal-driven approach. IEEE Softw 1999;16(4):92­101.
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

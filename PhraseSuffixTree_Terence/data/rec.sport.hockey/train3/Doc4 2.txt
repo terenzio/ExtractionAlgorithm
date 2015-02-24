@@ -1,0 +1,14 @@
+ASPECT-ENHANCED GOAL-DRIVEN SEQUENCE DIAGRAM
+
+713
+
+artifact activity
+Figure 1. Overview of the proposed approach.
+
+In this work, we propose a goal-driven approach enhanced with early aspects as an attempt toward the analysis of software systems. The proposed approach is an extension to our previous work on goal-driven use cases (GDUC),8-10 in which use cases are derived on the basis of the analysis of goals interactions. By introducing early aspects, the goal-driven approach can be further enhanced to address crosscutting properties in the early stage of software development. There are three main features involved in the proposed approach shown in Figure 1:
+1. To specify the responsibilities of use cases in GDUC diagram (see Figure 1,"specify the responsibilities of each use cases"). 2. To specify the aspectual behavior based on the extended state-based join point model and clarify the weaving behavior in aspect-enhanced sequence diagrams (see Figure 1, "specify the aspectual behavior in aspectual sequence diagram," "specify the aspectual states and construct the aspectual state machine," and "specify detail weaving behavior in extended use case speciﬁcation"). 3. To compose the early aspects behavior with the base behavior to provide an overall picture of the systems behavior (see Figure 1,"construct a system-level aspect-enhanced sequence diagram").
+
+We choose the meeting scheduler system11 as an illustrative example throughout this paper to demonstrate the idea of aspect-enhanced goal-driven sequence diagram modeling. In the sequel, we ﬁrst describe the related work on early aspects in Section 2. The weaving of early aspects is discussed in terms of the modeling of the aspectual
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

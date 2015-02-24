@@ -1,0 +1,15 @@
+718
+Use Case ID Use Case Name Woven Base Use Cases Actors Precondition Postcondition Join-points Basic Flow Alternative Flow Types of Weaving Operators
+
+LEE ET AL.
+<A unique identification that is used to organize all the use cases> <The name of this use case> Type <The type that is used to specify if this use case is an aspectual or not>
+
+<A collection of base use cases that are affected by this aspectual use case> <A list of roles that are involved in this use case> <A list of conditions that must be true before the use case starts> <A list of conditions that must be true when the use case ends> <A description of joinpoints belonging to the woven use cases where the respective behavior of this aspectual use case will interleave> <The basic path that is written as if everything goes right> <The alternative paths that allows an alternative sequence of events> <The type of weaving operators that is used to express what kinds of weaving operation this aspectual use case performs>
+
+Figure 2. Detailed use case speciﬁcation template.
+
+As a continuation of our previous research,8-10,24 we augment the use case speciﬁcation with aspectual property to document the responsibility of an aspectual use case. Through the speciﬁcation of aspectual property, aspectual behavior can be modeled within the proposed aspectual sequence diagrams together with three types of aspectual interaction operators to perform on the base use cases. An aspect weaver is also introduced to the aspectual sequence diagram to specify the weaving semantics by depicting which weaving operator to be applied. 3.1. Augment Use Case Speciﬁcation with Aspects Each use case includes details about what needs to be done to achieve its functionalities (also called responsibilities), which are documented and maintained in each use case speciﬁcation. The basic properties of a use case speciﬁcation include use case id, use case name, preconditions, postconditions, actors, a basic ﬂow, and alternative ﬂows. Figure 2 shows the use case speciﬁcations augmented with aspectual property to address the responsibility of aspectual use cases, including
+∑ Type: Type is used to specify what kinds of categories a use case belongs to. A use case belongs to either an aspectual use case that interleaves with base use cases or a base use case that may be affected by aspectual use cases.
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

@@ -1,0 +1,13 @@
+ASPECT-ENHANCED GOAL-DRIVEN SEQUENCE DIAGRAM
+
+723
+
+Preference set modification Meeting accommodation
+
+Figure 5. Aspectual sequence diagram for handle ﬂexibility.
+
+calls, constructor invocations, exception handlers, or other points in the execution of a program. In aspect-oriented modeling, how to represent join points and their corresponding behaviors with a suitable notation is the main focus of aspect modeling. Noorazean Mohd Ali.17 proposed an SJPM that supports, from systems' dynamic behavior point of view, the implementation of crosscutting concerns in systems that are needed to be monitored constantly, such as a safety-critical system, which complements the deﬁciency of existing ﬁxed code-based behavioral JPM. The SJPM offers a high-level conceptual perspective to deﬁne and capture concerns of a software system and assists analysts to represent nonﬁx code-based aspectual behavior in a systematic way. An extension to the previous work,17 called ESJPM, is proposed to assist the capturing and representing the dynamic behavior of aspectual use cases for aspect weaving in the early stage of software development, which is devised with the following three features:
+∑ attaching state machines to aspectual use cases to represent the aspectual behavior and join points, ∑ enriching the weaving semantics by introducing weaving operators into action expressions in each state of early aspects, and ∑ augmenting the possible weaving location, called aspect interception in SJPM, to state entry point, inside state, and state exit point, to better address the inclusion of aspectual behavior into the software system.
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

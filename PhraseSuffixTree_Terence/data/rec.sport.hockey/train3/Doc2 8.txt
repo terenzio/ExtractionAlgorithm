@@ -1,0 +1,31 @@
+LEE AND HSU: GEA: A GOAL-DRIVEN APPROACH TO DISCOVERING EARLY ASPECTS
+
+591
+
+TABLE 5 Interaction Degrees among Goals of the Meeting Scheduler System
+
+Definition 7. Let TotalInteractionDegreeðsystemstateÞ be a function for representing the total interaction degree as a summation of interaction degrees in all goal clusters. Then, TotalInteractionDegreeðsystemstateÞ m n n X X X SysðGi ; Gj Þ; ¼
+k¼1 i¼jþ1 j¼1
+
+where m is the number of goal clusters in a systemstate, n is the number of goals in the kth goal cluster, and i 6¼ j. A system state is a snapshot of the grouping of goals. The clustering algorithm and its activity diagram for discovering the aspectual candidates are described below. Algorithm 1 (Clustering Algorithm) 1) The interaction degree between two goals at the system level is then defined as the difference between the sum of cooperative degrees and that of conflicting degrees (see Definitions 4 and 5) with respect to all use cases in a target system, which can be obtained by applying fuzzy union operation to the cooperative and conflicting degrees with respect to all use cases and is shown in Definition 6. Definition 6. Let SysðGi ; Gj Þ be a function for representing the interaction degree between two goals at the system level. Then, SysðGi ; Gj Þ ¼
+n [ k¼1
+
+Initialization a)
+
+Construct a similarity matrix (SM) and an interaction relation matrix (IR) for evaluating clustering of goals/goal clusters. b) Construct a starting clustering matrix CM1 of size N Ã N, where N is the number of goals and all the goals are labelled on the Top-most row and Left-most column. c) Compute similarity degrees in CM1 using SM. d) Create a queue (Q) for storing unprocessed CMs, and put CM1 into Q. 2) Clustering a) b) Pick CMi from Q. If Q is empty, then go to step 2f. Mark CMi as processing, and find the highest similarity score goal pairs in CMi , named Hj . i)
+
+CooperativeUk ðGi ; Gj Þ ConflictingUk ðGi ; Gj Þ;
+
+À
+
+n [
+
+k¼1
+
+where n is the number of use cases in the system. Table 5 shows the interaction degrees between goals in the meeting scheduler system. In this table, the larger the value is, the higher cooperative level the two goals are. For example, GMP has higher cooperative degree with respect to GMR (SysðGMP ; GMR Þ ¼ 0:4) than GSF (SysðGMP ; GSF Þ ¼ 0:2). Noted that Tables 4 and 5 are symmetric matrices since the relationship between any two goals is bidirectional.
+
+If there is no more highest score, mark CMi as finished and go to step 2a. ii) If there are more then one highest scores Hj , go to step 2d. iii) otherwise, go to step 2c. c) Examine whether the goal/goal cluster associated with the highest score Hj can be grouped. If yes, group the goals or goal clusters to form a new CMiþ1 , and compute similarity degrees in CMiþ1 . Then go to step 2b. ii) If no, set the highest score entries to zero in CMi , then go to step 2b. d) If any one of the goals/goal clusters associated with Hj is to be grouped, group those goals/ goal clusters to form new CMs and add them to Q. Then go to step 2a. e) If none of the goals/goal clusters associated with Hj is to be grouped, set the highest score entries to zero in CMi , then go to step 2b. f) Goal clusters in CMs that marked as finished are the final result of the clustering algorithm. Based on this algorithm, goals are grouped into goal clusters as a basis for discovering early aspects. Each goal cluster with a frequency indicates the odds of goals sharing a same common property, namely, the early aspect. Fig. 7 shows the activity diagram of the clustering algorithm for a better understanding of the process. i)
+
+3.4 Classification: Establish Goal Clusters In developing a target system, it is usually desirable to aggregate goals with a high cooperative degree, which makes the system conform to the principle of high cohesion in software design. On the other hand, a goal cluster with a large number of goals would probably violate the principle of high cohesion, which may lead to a problematic design. Based on this belief, the clustering begins with the checking of similarity degree to find out whether two goals should be grouped into a goal cluster, which is followed by the checking of total interaction degree of all goal clusters to validate the clustering. In the clustering, the grouping procedure of goals/goal clusters is based on similarity degrees. To validate the clustering, a total interaction degree is proposed to control the progress of the grouping procedure. A total interaction degree is defined as a summation of interaction degrees for all goal clusters.
+
+

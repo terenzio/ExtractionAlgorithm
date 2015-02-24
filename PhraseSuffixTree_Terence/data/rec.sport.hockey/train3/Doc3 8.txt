@@ -1,0 +1,17 @@
+206
+
+International Journal of Fuzzy Systems, Vol. 7, No. 4, December 2005
+
+ontology. The service agents perform the tasks through these tokens to achieve the services published. WSDL grounding: In distinguishing from the agent grounding, this is used to indicate that the service is provided by a web service. This grounding contains the following attributes: WebURL, WsdlURL and InstructionURL. WsdlURL keeps the references to the WSDL documents of the web service. WebURL is related to the front-end web site of the web service. Through the web site, user can use the backend services directly. InstructionURL stores the references of the instruction description documents of web services that prohibit a web site from being accessed directly. The instruction description is a DAML-S process model like language in helping describe how an agent can access it automatically. If the matched services are web services, the request agents can get the WSDL and the instruction description documents, parse them to find related information, and access the web services via SOAP messages.
+
+Refer to appendix A and B for more detail about the specifications of the generic service profile ontology and the grounding ontology. Figure 7 is a part of an SAM-ASDL document that describes a hotel reservation service agent. In figure 7(a), there are two conditions. The first one is the room type provided by the hotel is Single or Twin, and the second one is the location of the hotel is in Chungli. The middle agent then can use these conditions to perform service matchmaking. On the other hand, the service grounding information is described in figure 7(b). It depicts the URL of the service agent and its name in that agent community. The task name, which is RequestForService, and related data, which are Name, CheckInDate and CheckOutDate, for requesting the task are also provided.
+
+Figure 8. SAM-ASDL Related Ontologies
+
+Figure 6. Service Grounding Ontology
+
+Figure 7. A part of an ASDL document that describes a hotel reservation service agent: (a) service profile (b) service grounding and Check Out Date, for requesting the task are also provided.
+
+4.3 SAM-ASDL Ontologies The semantics used in SAM-ASDL makes easy the matchmaking process. We have leveraged on the well addressed researches on semantics web [14, 15], and developed a set of DAML+OIL based ontologies to lay the ground work for SAM-ASDL (see figure 8). Category domain ontology: This ontology defines a categorization scheme used by the middle agent to filter unrelated services of different service domains. Each service domain refers to a specific service profile ontology. Users can search the service domain they are interested in first and use the specific service profile ontology of this service domain to fill in a request form in ASDL. Specific service profile ontologies: In order to precisely describe a service, a corresponding specific service profile ontology is created for each service domain. In this ontology, basic concepts in generic service profile ontology are specialized with more specific concepts related to the service domain. These concepts may be defined in a domain specific ontology or from types defined in an XML schema. These specific concepts can then be used to describe the services requested or published in the same service
+
+

@@ -1,0 +1,10 @@
+722
+
+LEE ET AL.
+
+Figure 4. Aspectual weaving behavior modeling. 3. Once the condition is matched, interaction operators, such as insert, replace, and impose constraint, can be applied to weave the aspectual behavior into the sequence diagrams of base use cases.
+
+The Weaver plays a crucial role in the sequence diagram by representing the concept of aspect weaving with the three types of interaction operators with respect to their corresponding aspects to be woven. The weaving operators can be explicitly speciﬁed as a message delivered to GoalImp. The sequence diagram in Figure 5 indicates a speciﬁc weaving scenario, the high-level aspectual sequence diagram of HandleFlexibility use case, which contains three lifelines, such as replanAMeeting, handleFlexibility, and weaver. The sequence diagram illustrates that there are two join points where aspectual behavior could be woven and the employed weaving operator is WeaveOPinsert , which means the weaving operation will take over the control ﬂow of the execution of replanning a meeting behavior until the end of performing the aspectual behavior. 4. EXTENDED STATE-BASED JOIN POINT MODEL In AOP,21 the key concept: join point, is a well-deﬁned location within the primary code where a concern crosscuts an application. Join points can be method
+International Journal of Intelligent Systems DOI 10.1002/int
+
+

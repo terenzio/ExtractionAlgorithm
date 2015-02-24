@@ -1,0 +1,21 @@
+210
+
+International Journal of Fuzzy Systems, Vol. 7, No. 4, December 2005
+
+the web server converts the request form into an SAM-ASDL document and sends it to the request agent.
+
+the integration of web service infrastructure with SAM. Finally, a standalone service searching tool named UDDI Browser leverages some works developed previously to provide a basic and convenient user interface to search services in any standard UDDI registries. In the future, we will focus more on how to combine the quality of web services with the PPN matchmaker to increase the confidence of the matching results.
+
+Acknowledgment
+This research was sponsored by Ministry of Education in Taiwan under the grant EX-92-E-FA06-4-4.
+Figure 14. A Scenario of Requesting for Traveling Service
+
+References
+[1] A. Ankolekar, M. Burstein, and J. H. et al. DAML-S: Web service description for the semantic web. In First International Semantic Web Conference (ISWC01), 2002. [2] K. Arisha, T. Eiter, S. Kraus, R. R. F. Ozcan, and V.S.Subrahmanian. Impact: Interactive Maryland platform for agents collaborating together. IEEE Intelligent Systems Magazine, 14(2):64­72, 1999. [3] K. Arisha, F. Ozcan, R. Ross, V. Subrahmanian, T. Eiter, and S. Kraus. Impact: A platform for collaborating agents. IEEE Intelligent Systems, 14(2):64-72, 1999. [4] T. Bellwood, L. Clement, and D. E. et al. UDDI version 3.0 published specification. W3C, 19 July 2002. [5] D. E. D. Box, G. Kakivaya, A. Layman, H. F. N. N. Mendelsohn, S. Thatte, and D. Winer. Simple object access protocol (SOAP) 1.1. W3C, 2000, http://www.w3.org/TR/SOAP. [6] H. Bulskov, R. Knappe, and T. Andreasen. On measuring similarity for conceptual querying. In Proc. of Fifth International Conference on Flexible Query Answering Systems, Copenhagen, Denmark, 2002. [7] A. Cassandra, D. Chandrasekara, and M. Nodine. Capability-based agent matching. In Agent 2000 Conference on Autonomous Agents, pages 201-202, Barcelona, Spain, 2000. [8] R. Chinnici, M. Gudgin, J. J. Moreau, and S. Weerawarana. Web services description language (WSDL) version 1.2 w3c working draft. W3C, 9 July 2002. [9] K. Decker, K. Sycara, and M. Williamson. Middle-agents for the internet. In Proc. of the 15th International Joint Conference on Artificial Intelligence, Nagoya, Japan, 1997. [10] A. Dogac, I. Cingil, G. Laleci, and Y. Kabak.
+
+The request agent fetches the request to the middle agent for service matchmaking. This time, it is a composite service agent with four simple services that matches the request. The composite service agent accesses these services and composes the results according to its domain knowledge. Finally, this service result is sent to the web server, and the user gets the message to utilize the services in a Map Viewer tool which is embedded in the web page for rendering map information. The user then follows the shortest path and voice guidance to the hotel. The parking lot information is delivered automatically half mile before arriving the hotel.
+
+6. Conclusion
+In this paper, we devise a PPN-based matchmaker for the proposed multi-agent system (MAS) called SAM, Service-oriented Architecture for Multi-agents, as an attempt towards the construction of an MAS structure that can better integrate agents, web applications, and information sources. In the making of the matchmaker resides in the middle agents for SAM, we build this construction based on the following works. First, the formation of possibilistic reasoning and the model of possibilistic petri-net (PPN) serve as the basis for representing and matching services. Second, an extension of our previous work on a PPN-based agent service description language (PPN-ASDL) called SAM-ASDL, ASDL for SAM, is developed to capture characteristics of a service involved in SAM. Third, a set of ontologies related to SAM-ASDL are designed and used for semantics matching. Fourth, an SAM-ASDL Translator that accompanies with the middle agent utilizes our newly-defined tModels for the UDDI registry in helping
+
+

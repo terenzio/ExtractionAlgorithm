@@ -1,0 +1,12 @@
+Aspect-Enhanced Goal-Driven Sequence Diagram
+Jonathan Lee,1, Chia-Ling Wu,1, Wen-Tin Lee,1, Kuo-Hsun Hsu2,ß 1 Software Engineering Laboratory, Department of Computer Science and Information Engineering, National Central University, Jhongli, Taiwan 320 2 Department of Computer and Information Science, National Taichung University, Taichung, Taiwan 403
+
+Recently, aspect-oriented approaches have resulted in a tremendous impact on the processing of broadly scoped properties during the development of software systems. However, the weaving mechanism of these crosscutting concerns cannot be easily represented with the extant uniﬁed modeling language (UML) notation at the early stage of software development life cycle. As an attempt toward the investigation of how the crosscutting behavior takes place, we proposed, in this work, an aspect-enhanced goal-driven approach to modeling the aspectual behavior in UML state transition diagrams and sequence diagrams with the proposed interaction operators based on the aspectual weaving semantics. By introducing the proposed interaction operations in the UML combined fragment, UML sequence diagrams can be further enhanced to support the modeling of the interactions between aspectual and base behavior in the analysis and design stage of software development. To further exemplify our points, the meeting scheduler system is chosen as a vehicle to illustrate the proposed approach. C 2010 Wiley Periodicals, Inc.
+
+1. INTRODUCTION Recently, aspect-oriented approaches have resulted in a tremendous impact on the processing of the system properties, such as recurring properties or important stakeholders' concerns during the design and coding phases. By addressing these properties, such as performance, reusability, reliability, scalability, and so on, in an effective way, many aspect-oriented researches have been proposed and addressed in the coding phase1-6 as well as in the design and requirements phases.6,7
+
+ Author to whom all correspondence should be addressed: e-mail: yjlee@selab.csie.ncu .edu.tw.  e-mail: wucl@selab.csie.ncu.edu.tw.  e-mail: wtlee@selab.csie.ncu.edu.tw. ß e-mail: glenn@mail.ntcu.edu.tw.
+
+INTERNATIONAL JOURNAL OF INTELLIGENT SYSTEMS, VOL. 25, 712≠732 (2010) C 2010 Wiley Periodicals, Inc. Published online in Wiley InterScience (www.interscience.wiley.com). ∑ DOI 10.1002/int.20428
+
+

@@ -1,0 +1,29 @@
+590
+
+IEEE TRANSACTIONS ON SOFTWARE ENGINEERING,
+
+VOL. 40,
+
+NO. 6,
+
+JUNE 2014
+
+TABLE 3 A Tuple Form Representation of Relationships between Goals and Use Cases of the Meeting Scheduler System
+
+TABLE 4 Similarity Degrees among Goals of the Meeting Scheduler System
+
+relationships among goals and use cases in Tables 2, and 3 can be obtained in a tuple form for each entry.
+
+3.3 Classification: Obtain Goals Relationships In order to facilitate the clustering of goals, two factors are further explored: one is the similarity degree of goals for grouping a goal clusters, and the other is the interaction degree for evaluating the validity of the grouping procedure of goals from a system-wise point of view, where cooperative and conflicting degrees are introduced at use case level to serve as a basis for measuring interaction degrees among goals at the system level. It is noted that the larger the summation of the differences between the scores of two goals wrt a designated use case, the more different the two goals are. Therefore, the function to represent the similarity degree between two goals is defined by subtracting the summation by 1 (see Definition 3 below). Definition 3. Let Similarity(Gi , Gj ) be a function for representing the similarity degree between two goals: Then,
+SimilarityðGi ; Gj Þ ¼ 1 À
+n X À  uSatðU ;G Þ ðxÞ À uSatðU ;G Þ ðxÞ k i k j k¼0
+
+In the definition of similarity function, the computation of the similarity degrees is normalized, that is, only those whose satisfying/denying degrees of Gi and Gj with respect to Uk are not equal to 0 will be considered. This is to exclude out those relationships that are rated as irrelevant (i.e., the goal is not affected after the use case is performed). For example (see Fig. 6), to compute the similarity degree of GMP and GMR , SimilarityðGMP ; GMR Þ ¼ 1 À ð2:0=7Þ ¼ 0:714, where 7 is the adjusting factor to indicate the counts of satisfying/denying degrees of GMP and GMR with respect to use cases whose values are not equal to 0. The pair-wise similarity degrees among goals in the meeting scheduler system in shown in Table 4, in which the larger the value is, the more similar the two goals are. For example, GMR is more similar to GMP (SimilarityðGMR ; GMP Þ ¼ 0:71) than GSF (SimilarityðGSF ; GMP Þ ¼ 0:5) is. To compute the interaction degree between two goals, two kinds of interaction relationships, cooperative and conflicting degrees, are introduced at the use case level to serve as a basis for measuring interaction degrees among goals at the system level. Definitions 4 and 5 show the definitions of the two degrees. Definition 4. Let CooperativeUk ðGi ; Gj Þ be a function for representing the cooperative degree of two goals Gi and Gj wrt a designated use case Uk . Then, CooperativeUk ðGi ; Gj Þ ¼ ðuSatðUk ;Gi Þ ðxÞ \ uSatðUk ;Gj Þ xðxÞÞ [ ðuDenðUk ;Gi Þ ðxÞ \ uDenðUk ;Gj Þ ðxÞÞ; where \ stands for fuzzy AND representing the intersection operation, [ stands for fuzzy OR representing the union operation, and À5 x 5. Definition 5. Let ConflictingUk ðGi ; Gj Þ be a function for representing the conflicting degree of two goals Gi and Gj wrt a designated use case Uk . Then, ConflictingUk ðGi ; Gj Þ ¼ ðuSatðUk ;Gi Þ ðxÞ \ uDenðUk ;Gj Þ ðxÞÞ [ ðuDenðUk ;Gi Þ ðxÞ \ uSatðUk ;Gj Þ ðxÞÞ where \ stands for fuzzy AND representing the intersection operation, [ stands for fuzzy OR representing the union operation, and À5 x 5.
+
+!  Á uDenðU ;G Þ ðxÞ À uDenðU ;G Þ ðxÞ =Si;j ; þ k i k j
+
+where i 6¼ j, n is the number of use cases in the system, À5 x 5, and Si;j is an adjusting factor, which is the counts of satisfying/denying degrees of Gi and Gj with respect to Uk that are not equal to 0.
+
+Fig. 6. Illustration of computing similarity degree.
+
+

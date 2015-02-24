@@ -1,0 +1,108 @@
+This is the author's version of an article that has been published in this journal. Changes were made to this version by the publisher prior to publication. The final version of record is available at http://dx.doi.org/10.1109/TSC.2014.2310213
+9
+
+Turnaround Time (millisec.)
+
+The Proposed Approach 2500 2000 1500 1000 500 0 1 5 10 15
+
+The Traditional Approach
+
+The Proposed Approach
+
+The Traditional Approach
+
+Turnaround Time (millisec.)
+
+5000 4000 3000 2000 1000 0 1 5 10 15 20 25 30 35 40
+
+20
+
+25
+
+30
+
+35
+
+40
+
+Number of Sites
+
+Fig. 14. The turnaround time of invoking weather data Android activity
+
+Number of Sites
+
+Fig. 16. The turnaround time of invoking motorized roller blinds controller RESTful service
+
+Turnaround Time (millisec.)
+
+The Proposed Approach 2000 1500
+
+The Traditional Approach
+
+Turnaround Time (millisec.)
+
+The Proposed Approach 7000 6000 5000 4000 3000 2000 1000 0 1 5 10 15
+
+The Traditional Approach
+
+1000 500 0 1 5 10 15 20 25 30 35 40
+
+Number of Sites
+
+Fig. 15. service
+
+The turnaround time of invoking PMV soap
+
+20
+
+25
+
+30
+
+35
+
+40
+
+Number of Sites
+
+Fig. 17. The turnaround time of invoking lighting controller RESTful service approach and the traditional one are small in invoking PMV SOAP service. The experimental results shown in Figures 16, 17 and 18 point out that the turnaround time of invoking the controller RESTful services in our approach is less than those of the traditional one due to the request message data are directly transferred in between the extended BPEL engine and the RESTful services without being transferred through server-side SOAP services. Figure 20 shows the total turnaround time of the two approaches. In the experiment, the turnaround time is largely influenced by the transferred data size. Table 1 shows that the t value for comparing the total turnaround time is 4.463 (>2.306) with degrees-of-freedom=8 and =0.05, which indicates that there is a significant difference between the total turnaround time of the two approaches. The evaluation results shown in Figure 21 indicate that our approach generates less network traffic than the traditional approach. The traditional approach requires server-side soap services to connect to the RESTful services and OSGi bundles. The traditional approach requires server-side soap services located in a server site (room) to connect to the RESTful services and OSGi bundles. As the number of the server sites (rooms) increases, our approach is significantly superior to the traditional approach on the network traffics. Table 2 shows that the t value for comparing the network traffic is 4.753 (>2.306) with degrees-of-freedom=8 and =0.05, which indicates that there is a significant difference between the average values of the network traffics of the two approaches.
+Turnaround Time (millisec.)
+The Proposed Approach 3000 2500 2000 1500 1000 500 0 1 5 10 15 20 25 30 35 40 The Traditional Approach
+
+Number of Sites
+
+Fig. 18. The turnaround time of invoking HAVC controller RESTful service
+
+Turnaround Time (millisec.)
+
+20000 15000 10000 5000 0
+
+The Proposed Approach
+
+The Traditional Approach
+
+1
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+35
+
+40
+
+Number of Sites
+
+Fig. 19. The turnaround time of retrieving energy saving recommendations web content
+
+Copyright (c) 2014 IEEE. Personal use is permitted. For any other purposes, permission must be obtained from the IEEE by emailing pubs-permissions@ieee.org.
+
+
