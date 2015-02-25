@@ -23,7 +23,7 @@ public class testConstructTable {
 			//sc.scan(line);
 			sc.scanToMix(line, 3);
 		}
-		sc.printM();
+	//	sc.printM();
 		br.close();
 		} catch(IOException e){
 			e.printStackTrace();

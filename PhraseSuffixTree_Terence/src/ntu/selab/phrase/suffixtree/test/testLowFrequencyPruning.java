@@ -74,7 +74,7 @@ public class testLowFrequencyPruning extends TestCase {
 	   // st1.printNodes();
 	  //  st1.printFullTree(out);
 	 
-		File file = new File("input.txt");
+		File file = new File("complex2gram.txt");
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
 		
@@ -114,28 +114,21 @@ public class testLowFrequencyPruning extends TestCase {
 		String searchWord; 
 	 	System.out.print("Enter a phrase: ");
 	 	searchWord=in.readLine();    
+	 	st1.setInitialMessage(searchWord);
+	// 	System.out.println("Select a prediction: ");
 		st1.queryTree(1, searchWord);
-		System.out.println("");
-		System.out.print("Select a prediction: ");
 	 	searchWord=in.readLine();
-	 	st1.queryPredictionTable(1, Integer.parseInt(searchWord));
-		//st1.queryTree(1, searchWord);
-		System.out.println("");
-		System.out.print("Select a prediction: ");
-	 	searchWord=in.readLine();
-	 	st1.queryPredictionTable(1, Integer.parseInt(searchWord));
-		//st1.queryTree(1, searchWord);
-		System.out.println("");
-		System.out.print("Select a prediction: ");
-	 	searchWord=in.readLine();
-	 	st1.queryPredictionTable(1, Integer.parseInt(searchWord));
-		//st1.queryTree(1, searchWord);
+	 	System.out.println("");
+	 	 do {
+	 		st1.queryPredictionTable(1, Integer.parseInt(searchWord));
+		 	searchWord=in.readLine();
+	 	} while (Integer.parseInt(searchWord)!=0);	 	
+	 	st1.getMessage();
 	    out.close();
 	 	
-	 	
-	 	
-	 	
 	 }
+
+	
 
 	
  

@@ -5,6 +5,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.SortedSet;
+
+import com.aliasi.lm.TokenizedLM;
+import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
+import com.aliasi.tokenizer.TokenizerFactory;
+import com.aliasi.util.ScoredObject;
 
 //import ST.SuffixTree.Node;
 
@@ -29,7 +35,8 @@ public class PhraseSuffix_Tree {
        
        int active_node, active_length, active_edge;
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
-       
+       int suggestionNo; 
+       String message = "";
        
        public PhraseSuffix_Tree(int length) {
            nodes = new PhraseSuffix_Node[2* length + 2];
@@ -135,7 +142,18 @@ public class PhraseSuffix_Tree {
           return a;
        }
 
-       public void printTree(PrintWriter out) {
+       int nodeCount=1;
+       public static String [] collocationStrings = new String [500];
+       public void printTree(PrintWriter out) throws Exception{
+    	  TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
+    	  TokenizedLM backgroundModel = Collocation.buildModel(tokenizerFactory,
+    			  Collocation.NGRAM,
+    			  Collocation.BACKGROUND_DIR);
+          backgroundModel.sequenceCounter().prune(3);
+          SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(Collocation.NGRAM_REPORTING_LENGTH,
+        		  Collocation.MIN_COUNT,Collocation.MAX_COUNT);
+           Collocation.report(coll);
+           
            out.println("digraph {");
            out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
@@ -146,11 +164,17 @@ public class PhraseSuffix_Tree {
 //           printInternalNodes(root, out);
            out.println("//------edges------");
            printEdges(root, out);
+           for(int i=0; i < Collocation.collocationCount; i++){
+        	   nodeCount++;
+        	   System.out.print("node1 -> " + "node" + nodeCount + " [label=\""+collocationStrings[i]+"\",weight=3]\n");
+           }
+           
 //           out.println("//------suffix links------");
 //           printSLinks(root);
            out.println("}");
-           telescope(root);
-           traveralNode(root);
+//           telescope(root);
+//           traveralNode(root);
+           System.out.println();
        } 
 
 //       void printLeaves(int x, PrintWriter out) {
@@ -315,6 +339,38 @@ public class PhraseSuffix_Tree {
 	   		 searchTree_Advanced(root, lowfreqPhrase);   
        }
        
+       
+//       String edgeString1(int node) {
+//           String[] s= Arrays.copyOfRange(text, nodes[node].start, Math.min(position + 1, nodes[node].end));
+//           String[] shortWord= Arrays.copyOfRange(text, nodes[node].start, nodes[node].end);
+//           
+//           System.out.println("START: " + nodes[node].start);
+//           System.out.println("Pos+1: " + position + 1 );
+//           System.out.println("END: " + nodes[node].end);
+//           System.out.println("MIN: " + Math.min(position + 1, nodes[node].end));
+//           String a = "";
+//           int count = 0;
+//           for(String t:s){
+//        	   ++count;
+//         	   a+=t;
+//        	   if(count != s.length) a+=" ";
+//           }
+//           System.out.println("a: " + a);
+//           System.out.println("shortWord: " + shortWord.toString());
+//           String b = "";
+//           int countb = 0;
+//           for(String t1:shortWord){
+//        	   ++countb;
+//        	   if (countb == 2)
+//         	   {   System.out.println("REAL second word: " + t1 );   }  
+//         	   b+=t1;
+//        	   if(countb != shortWord.length) b+=" ";
+//         	   
+//           }
+//           System.out.println("shortWord_b: " + b);
+//           return a;
+//        }
+       
        String firstWord(int node) {
            String[] s= Arrays.copyOfRange(text, nodes[node].start, nodes[node].start+1);
            String a = "";
@@ -329,6 +385,10 @@ public class PhraseSuffix_Tree {
        
        String secondWord(int node) {
            String[] s= Arrays.copyOfRange(text, nodes[node].start, nodes[node].start+2);
+           
+           System.out.println("SecondSTART: " + nodes[node].start);
+           System.out.println("SecondMIN: " + nodes[node].start+2);
+           
            String a = "";
            int count = 0;
            for(String t:s){
@@ -337,6 +397,20 @@ public class PhraseSuffix_Tree {
         	   if(count != s.length) a+=" ";
            }
            return a;
+        }
+       
+       String secondWordOnly(int node) {
+           String[] s= Arrays.copyOfRange(text, nodes[node].start+1, Math.min(position + 1, nodes[node].end));
+           String secondWord = "";
+           int countb = 0;
+           for(String t1:s){
+        	   ++countb;
+        	   if (countb == 2)
+         	   {   System.out.println("REAL second word: " + t1 );   }
+        	   secondWord = t1;
+        	   break;
+           }
+           return secondWord;
         }
        
        
@@ -404,18 +478,21 @@ public class PhraseSuffix_Tree {
        public void queryTree(int x, String searchWord) {
     	   
     	   int suggestionCt = 0;
-    	   
-    	   
+    	   //String prediction = new String;
+    	   String prediction = null;
+    	 
 	       	for (int child : nodes[x].next.values()) {
 	       		
 	       	
 	       		
 	       		if (edgeString(child).startsWith(searchWord)) { 
 	       			
-//	       		  System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
-//	       		  System.out.println("First word: " + firstWord(child));
-//		          System.out.println("Second word: " + secondWord(child));
-//  	       		  System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
+	//       		  System.out.println("----------------------------------------------------------------");
+	//       		  System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+	//       		  System.out.println("First word: " + firstWord(child));
+		         // System.out.println("Second word: " + secondWord(child));
+	//	          System.out.println("Second word only: " + secondWordOnly(child));
+  	//       		  System.out.println("Displaying nodes No:" + child + " with Value: "+ edgeString(child));
   	       		
 		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
 		 	 			  String key = entry.getKey();
@@ -423,23 +500,49 @@ public class PhraseSuffix_Tree {
 		 	 			//  System.out.println("With Key:" +key + " => Value:" + value);
 		 	 			  suggestionCt++;
 		 	 			  tempPrediction[suggestionCt] = edgeString(value);
-		 	 			  System.out.println("Next phrase prediction"+suggestionCt+": "+ edgeString(value));
+		 	 			  if (secondWordOnly(child)!="null") {
+		 	 				  prediction = secondWordOnly(child) +" "+ edgeString(value);
+		 	 			  }
+		 	 			  else prediction = edgeString(value);
+		 	 			  
+		 	 			  System.out.println("Prediction "+suggestionCt+": "+ prediction);
+		 	 			//System.out.println("Next phrase prediction"+suggestionCt+": "+ edgeString(value));
+		 	 			  
 		  	       	}
 	       	}
 	       		queryTree(child, searchWord);
       	}
-	       	
+	       	suggestionNo = suggestionCt;
       }
        
        public void queryPredictionTable(int x, int searchIndex) {
 	    
     	   String searchWord;
     	   searchWord = tempPrediction[searchIndex];
-    	   System.out.println("Selected the phrase: "+ searchWord);
+    	   
+    	   message = message + " " + searchWord;
+    	   System.out.println("Your Message: "+ message);
+    	   System.out.println("-----------------------------------------------------------------------");
     	   System.out.println("");
+   		   suggestionNo = 0;   
     	   queryTree(1, searchWord);
+    	   if (suggestionNo==0) System.out.println("End of Sentence!");
+    	  
 	    	
 	    }
+       
+       public void setInitialMessage(String searchWord) {
+    	   
+    	   message = message + " " + searchWord;
+	    }
+       
+       public String getMessage() {
+    	   
+    	   return message;
+	    }
+       
+       
+       
 //Terence's Code END: *********************************************************************************************************************
        
    } //End of Class PhraseSuffix_Node.java
