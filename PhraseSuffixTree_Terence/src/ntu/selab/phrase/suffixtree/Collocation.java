@@ -35,7 +35,7 @@ public class Collocation {
         TokenizedLM model = 
             new TokenizedLM(tokenizerFactory,
                             ngram);
-        System.out.println("Training on "+directory);
+        System.out.println("Calculating Collcations...");
                     
 //        for (int j = 0; j < trainingFiles.length; ++j) {
 //            String text = Files.readFromFile(new File(directory,
@@ -81,7 +81,7 @@ public class Collocation {
             accum += " "+toks[j];
         }
         System.out.println("Score: "+score+" with :"+accum);
-//        PhraseSuffix_Tree.collocationStrings[collocationCount] = accum;
+        PhraseSuffix_Tree.collocationStrings[collocationCount] = accum;
         collocationCount++;
     }
 

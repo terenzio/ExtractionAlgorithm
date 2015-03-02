@@ -62,7 +62,7 @@ public class runStackOverF_Tree extends TestCase {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
 		
-		PhraseSuffix_Tree st = new PhraseSuffix_Tree(500);
+		PhraseSuffix_Tree st = new PhraseSuffix_Tree(500000);
 		
 		
 		 String phrase;

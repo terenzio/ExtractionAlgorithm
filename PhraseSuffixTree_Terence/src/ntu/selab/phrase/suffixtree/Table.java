@@ -1,5 +1,6 @@
 package ntu.selab.phrase.suffixtree;
 
+import java.io.PrintWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -19,11 +20,14 @@ public class Table {
 		else
 			mixed.put(word, 1/total);
 	}
-	public void printMix(){
+	public void printMix(PrintWriter out){
 		for(Map.Entry<String, Float> entry : mixed.entrySet()) {
 			String key = entry.getKey();
 			Float value = entry.getValue();
-			System.out.println(key + "=" + value);
+			//System.out.println(key + "=" + value);
+			//System.out.println(key);
+			
+			 out.println(key);
 		}
 	}
 	public Map<String, Float> getMap(){

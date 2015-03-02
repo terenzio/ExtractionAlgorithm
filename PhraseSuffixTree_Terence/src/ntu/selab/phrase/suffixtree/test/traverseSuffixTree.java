@@ -17,18 +17,20 @@ import org.junit.Test;
 import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
 
 
-public class forEmily extends TestCase {
+public class traverseSuffixTree extends TestCase {
 	
 		
 	@Test
 	public void test() throws Exception {
 	 
-		File file = new File("complex2gram2.txt");
+		File file = new File("complex2gram.txt");
 		BufferedReader in = new BufferedReader(new FileReader(file));
+		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
 		
-		PhraseSuffix_Tree st1 = new PhraseSuffix_Tree(50000);
+		PhraseSuffix_Tree st1 = new PhraseSuffix_Tree(500000);
 		
-		String phrase;
+		
+		 String phrase;
 		while((phrase=in.readLine()) != null){
 			String [] word=phrase.split(" ");
 			for(int i = 0; i < word.length; i++){
@@ -40,11 +42,18 @@ public class forEmily extends TestCase {
 		in.close();
 		
 		in = new BufferedReader(new InputStreamReader(System.in));
+		
+	
+		st1.printFullTree(out);
+		
 		String searchWord; 
 	 	System.out.print("Enter a phrase: ");
 	 	searchWord=in.readLine();    
 	 	st1.setInitialMessage(searchWord);
 		st1.queryTree(1, searchWord);
+		
+	  	if (st1.suggestionNo == 0)  System.out.println("No Prediction Yet!");
+		
 	 	searchWord=in.readLine();
 	 	System.out.println("");
 	 	 do {
@@ -52,6 +61,13 @@ public class forEmily extends TestCase {
 		 	searchWord=in.readLine();
 	 	} while (Integer.parseInt(searchWord)!=0);	 	
 	 	st1.getMessage();
+	    out.close();
+	 	
 	 }
+
+	
+
+	
+ 
  
 }

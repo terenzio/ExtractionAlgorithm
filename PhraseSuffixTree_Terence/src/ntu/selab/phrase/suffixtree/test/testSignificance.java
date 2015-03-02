@@ -20,10 +20,10 @@ public class testSignificance {
 	public void test() throws IOException {
 		
 		PrintWriter out;
-		 out = new PrintWriter(new FileWriter("parsedDocument2.txt"));
+		 out = new PrintWriter(new FileWriter("complex2gram2.txt"));
 		
 		Scanner sc = new Scanner();
-		File file = new File("input.txt");
+		File file = new File("input3.txt");
 		try{
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;

@@ -1,6 +1,9 @@
 package ntu.selab.phrase.suffixtree;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +21,7 @@ public class PhraseSuffix_Tree {
 	
 	   final int oo = Integer.MAX_VALUE/2;
        PhraseSuffix_Node [] nodes;
-       String [] text;
+       String[] text = new String[5000];
        static int root, position = -1,
                currentNode,
                needSuffixLink,
@@ -35,7 +38,7 @@ public class PhraseSuffix_Tree {
        
        int active_node, active_length, active_edge;
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
-       int suggestionNo; 
+      public int suggestionNo; 
        String message = "";
        
        public PhraseSuffix_Tree(int length) {
@@ -146,12 +149,9 @@ public class PhraseSuffix_Tree {
        public static String [] collocationStrings = new String [500];
        public void printTree(PrintWriter out) throws Exception{
     	  TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
-    	  TokenizedLM backgroundModel = Collocation.buildModel(tokenizerFactory,
-    			  Collocation.NGRAM,
-    			  Collocation.BACKGROUND_DIR);
+    	  TokenizedLM backgroundModel = Collocation.buildModel(tokenizerFactory, Collocation.NGRAM, Collocation.BACKGROUND_DIR);
           backgroundModel.sequenceCounter().prune(3);
-          SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(Collocation.NGRAM_REPORTING_LENGTH,
-        		  Collocation.MIN_COUNT,Collocation.MAX_COUNT);
+          SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(Collocation.NGRAM_REPORTING_LENGTH, Collocation.MIN_COUNT,Collocation.MAX_COUNT);
            Collocation.report(coll);
            
            out.println("digraph {");
@@ -164,9 +164,34 @@ public class PhraseSuffix_Tree {
 //           printInternalNodes(root, out);
            out.println("//------edges------");
            printEdges(root, out);
+           System.out.println("");
+           System.out.println("Inserting Collocations into the SuffixTree...");
            for(int i=0; i < Collocation.collocationCount; i++){
         	   nodeCount++;
         	   System.out.print("node1 -> " + "node" + nodeCount + " [label=\""+collocationStrings[i]+"\",weight=3]\n");
+        	   
+        	   try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram.txt", true)))) {
+        		   
+        		  // 	System.out.println("collocationStrings.length: "+collocationStrings[i].length());    
+        			 String phrase;
+        				//while((collocationStrings[i]) != collocationStrings[i].length()){
+        					String [] word=collocationStrings[i].split(" ");
+        					//for(int ct = 1; ct < word.length; ct++){
+        						//if(i==word.length-1) word[i]+="$";
+        						//System.out.println("word["+ct+"]: "+word[ct]);
+        						
+        				//	}
+        				//}
+        					out2.println(word[1]);
+    						out2.println(collocationStrings[i]);
+        		   	
+        		   	
+        		   	
+       		    	
+	       		}catch (IOException e) {
+	       		    //exception handling left as an exercise for the reader
+	       		}
+        	   
            }
            
 //           out.println("//------suffix links------");
@@ -487,12 +512,12 @@ public class PhraseSuffix_Tree {
 	       		
 	       		if (edgeString(child).startsWith(searchWord)) { 
 	       			
-	//       		  System.out.println("----------------------------------------------------------------");
-	//       		  System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
-	//       		  System.out.println("First word: " + firstWord(child));
-		         // System.out.println("Second word: " + secondWord(child));
-	//	          System.out.println("Second word only: " + secondWordOnly(child));
-  	//       		  System.out.println("Displaying nodes No:" + child + " with Value: "+ edgeString(child));
+	       		  //System.out.println("----------------------------------------------------------------");
+	       		  //System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+	       		  //System.out.println("First word: " + firstWord(child));
+	        // System.out.println("Second word: " + secondWord(child));
+		          //System.out.println("Second word only: " + secondWordOnly(child));
+  	       		  //System.out.println("Displaying nodes No:" + child + " with Value: "+ edgeString(child));
   	       		
 		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
 		 	 			  String key = entry.getKey();
@@ -509,10 +534,12 @@ public class PhraseSuffix_Tree {
 		 	 			//System.out.println("Next phrase prediction"+suggestionCt+": "+ edgeString(value));
 		 	 			  
 		  	       	}
-	       	}
+	       		}
 	       		queryTree(child, searchWord);
       	}
 	       	suggestionNo = suggestionCt;
+	       	
+	     
       }
        
        public void queryPredictionTable(int x, int searchIndex) {
