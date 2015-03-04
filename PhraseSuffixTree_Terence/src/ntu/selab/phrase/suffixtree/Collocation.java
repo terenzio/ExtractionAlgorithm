@@ -31,10 +31,9 @@ public class Collocation {
                                           File directory) 
         throws IOException {
 
-        String[] trainingFiles = directory.list();
-        TokenizedLM model = 
-            new TokenizedLM(tokenizerFactory,
-                            ngram);
+//        String[] trainingFiles = directory.list();
+        TokenizedLM model = new TokenizedLM(tokenizerFactory,ngram);
+        
         System.out.println("Calculating Collcations...");
                     
 //        for (int j = 0; j < trainingFiles.length; ++j) {
@@ -50,18 +49,12 @@ public class Collocation {
 			BufferedReader br = new BufferedReader(new FileReader(file2));
 			String line;
 				while((line=br.readLine()) != null){
-					//sc.scan(line);
-					//sc.scanToMix(line, 3);
-				//	  System.out.println( "Line: " + line);
 					  model.handle(line);
 				}
-	//	sc.printM();
 		br.close();
 		} catch(IOException e){
 			e.printStackTrace();
 		}
-        
-        
         return model;
     }
 

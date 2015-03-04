@@ -8,14 +8,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 
 import com.aliasi.lm.TokenizedLM;
 import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.util.ScoredObject;
+import com.google.common.collect.*;
 
-//import ST.SuffixTree.Node;
 
 public class PhraseSuffix_Tree {
 	
@@ -26,20 +29,21 @@ public class PhraseSuffix_Tree {
                currentNode,
                needSuffixLink,
                remainder;
-       
        int foundNodesCt = 0;
        int[] foundNodes = new int[1000];
        int nodesToIgnoreCt = 0;
        int[] nodesToIgnore = new int[1000];
        int[] nodesToIgnoreParent = new int[1000];
        String[] nodesToIgnoreKey = new String[1000];
-       
        String[] tempPrediction = new String[1000];
-       
        int active_node, active_length, active_edge;
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
-      public int suggestionNo; 
+       public int suggestionNo; 
        String message = "";
+       
+       public TreeMap<String, Integer> collocationTree = new TreeMap<String, Integer>();
+       public TreeMap<Double, String> suggestionsMap = new TreeMap<Double, String>();
+       public Multimap<Double,String> suggestionsMultimap = TreeMultimap.create(Ordering.natural().reverse(),Ordering.natural());
        
        public PhraseSuffix_Tree(int length) {
            nodes = new PhraseSuffix_Node[2* length + 2];
@@ -80,7 +84,7 @@ public class PhraseSuffix_Tree {
            needSuffixLink = -1;
            remainder++;
            while(remainder > 0) {
-//           	System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
+           	//System.out.println("active pt: node "+active_node+" length: "+active_length+" edge: "+active_edge);
                if (active_length == 0) active_edge = position;
                if (!nodes[active_node].next.containsKey(active_edge()) ){
                    int leaf = newNode(position, oo);
@@ -170,24 +174,10 @@ public class PhraseSuffix_Tree {
         	   nodeCount++;
         	   System.out.print("node1 -> " + "node" + nodeCount + " [label=\""+collocationStrings[i]+"\",weight=3]\n");
         	   
-        	   try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram.txt", true)))) {
-        		   
-        		  // 	System.out.println("collocationStrings.length: "+collocationStrings[i].length());    
-        			 String phrase;
-        				//while((collocationStrings[i]) != collocationStrings[i].length()){
-        					String [] word=collocationStrings[i].split(" ");
-        					//for(int ct = 1; ct < word.length; ct++){
-        						//if(i==word.length-1) word[i]+="$";
-        						//System.out.println("word["+ct+"]: "+word[ct]);
-        						
-        				//	}
-        				//}
-        					out2.println(word[1]);
-    						out2.println(collocationStrings[i]);
-        		   	
-        		   	
-        		   	
-       		    	
+        	   try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram2.txt", true)))) {
+        			String [] word=collocationStrings[i].split(" ");
+        			out2.println(word[1]);
+    				out2.println(collocationStrings[i]);
 	       		}catch (IOException e) {
 	       		    //exception handling left as an exercise for the reader
 	       		}
@@ -500,9 +490,32 @@ public class PhraseSuffix_Tree {
        }
        
        
+       
+ public void updateFrequency(int x, String searchWord, double freqCt) {
+    	   int suggestionCt = 0;
+    	   String prediction = null;
+    	 
+	       	for (int child : nodes[x].next.values()) {
+	       		if (edgeString(child).equals(searchWord)) { 
+	       		//  System.out.println("----------------------------------------------------------------");
+	       		  //System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
+	       		  //System.out.println("First word: " + firstWord(child));
+	             // System.out.println("Second word: " + secondWord(child));
+		         // System.out.println("Second word only: " + secondWordOnly(child));
+  	       		  nodes[child].setFrequency(freqCt);
+  	       		 // System.out.println("Updated Node: "+edgeString(child)+" with freq of: "+nodes[child].getFrequency());
+	       		}
+	       		updateFrequency(child, searchWord, freqCt);
+      	}
+	       	suggestionNo = suggestionCt;
+      }
+       
+       
        public void queryTree(int x, String searchWord) {
     	   
     	   int suggestionCt = 0;
+    	  
+
     	   //String prediction = new String;
     	   String prediction = null;
     	 
@@ -510,37 +523,66 @@ public class PhraseSuffix_Tree {
 	       		
 	       	
 	       		
-	       		if (edgeString(child).startsWith(searchWord)) { 
+	       		//if (edgeString(child).startsWith(searchWord)) {
+	       		if (edgeString(child).equals(searchWord)) { 
+	       			
 	       			
 	       		  //System.out.println("----------------------------------------------------------------");
-	       		  //System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +">");
+	       		  //System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> "+"FreqCt: "+ nodes[child].getFrequency());
 	       		  //System.out.println("First word: " + firstWord(child));
-	        // System.out.println("Second word: " + secondWord(child));
+	             // System.out.println("Second word: " + secondWord(child));
 		          //System.out.println("Second word only: " + secondWordOnly(child));
-  	       		  //System.out.println("Displaying nodes No:" + child + " with Value: "+ edgeString(child));
   	       		
 		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
 		 	 			  String key = entry.getKey();
 		 	 			  Integer value = entry.getValue();
-		 	 			//  System.out.println("With Key:" +key + " => Value:" + value);
+		 	 			  //System.out.println("With Key:" +key + " => Value:" + value);
 		 	 			  suggestionCt++;
 		 	 			  tempPrediction[suggestionCt] = edgeString(value);
 		 	 			  if (secondWordOnly(child)!="null") {
 		 	 				  prediction = secondWordOnly(child) +" "+ edgeString(value);
 		 	 			  }
 		 	 			  else prediction = edgeString(value);
+		 	 			
+		 	 			  //	for(Entry<Double, String> suggestionsMapEntry : suggestionsMap.entrySet()) {
+		 		 			//  System.out.println(suggestionsMapEntry.getKey() + " => " +suggestionsMapEntry.getValue());
+		 		 			//  if (!suggestionsMap.containsValue(prediction)) {
+		 		 				suggestionsMap.put(nodes[value].getFrequency(), prediction);
+		 		 				suggestionsMultimap.put(nodes[value].getFrequency(), prediction);
+		 		 			//  }
+		 		 			//}
 		 	 			  
-		 	 			  System.out.println("Prediction "+suggestionCt+": "+ prediction);
-		 	 			//System.out.println("Next phrase prediction"+suggestionCt+": "+ edgeString(value));
 		 	 			  
+		 	 			
+		 	 			  System.out.println("Prediction "+suggestionCt+":"+ prediction +" (Freq: "+nodes[value].frequencyCount+")");
+		 	 			   
 		  	       	}
 	       		}
+	       		//System.out.println("Next phrase prediction in order: ");
+	 			
+	       		
 	       		queryTree(child, searchWord);
       	}
 	       	suggestionNo = suggestionCt;
-	       	
-	     
+	        //suggestionsMap = new TreeMap<Double, String>();
       }
+       
+       public void queryPredsuggestionsMap() {
+
+			System.out.println("queryPredsuggestionsMap");
+	    	   for(Entry<Double, String> suggestionsMapEntry : suggestionsMap.entrySet()) {
+		 			  System.out.println(suggestionsMapEntry.getKey() + " => " +suggestionsMapEntry.getValue());
+		 		}
+	    	suggestionsMap.clear();
+	    	
+	    	// Iterating over entire Mutlimap
+	    	  for(Double keys : suggestionsMultimap.keySet()) {
+	    	   System.out.println("Mutlimap: K="+keys + " V="+suggestionsMultimap.get(keys) );
+	    	  }
+	    	  suggestionsMultimap.clear();
+       }
+       
+       
        
        public void queryPredictionTable(int x, int searchIndex) {
 	    

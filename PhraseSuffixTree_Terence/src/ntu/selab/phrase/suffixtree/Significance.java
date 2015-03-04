@@ -32,7 +32,7 @@ public class Significance {
 				{
 					isSignificant = true;
 					tmpS = entry.getKey();
-					System.out.println(tmpS);
+					//System.out.println(tmpS);
 					tmpF = entry.getValue();
 					String[] s = tmpS.split(" ");
 					String s1 = s[0];
