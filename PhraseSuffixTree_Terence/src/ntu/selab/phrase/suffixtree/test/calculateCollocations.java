@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import junit.framework.TestCase;
+import ntu.selab.phrase.suffixtree.Collocation;
 import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
 
 public class calculateCollocations extends TestCase {
@@ -38,6 +39,20 @@ public class calculateCollocations extends TestCase {
 		st.signSignificance();
 		st.printSignificanceNodes();
 		st.printTree(out);
+		
+		
+		//It can write into printTree method
+//		double [] Normalization= new double [500];
+//		double [] Frequency= new double [500];
+//		for(int i=0 ; i <Collocation.collocationCount;i++){
+//			System.out.print("Score: "+PhraseSuffix_Tree.collocationStrings[i]+" with :"+Collocation.collcationSignificance[i]);
+//			Normalization[i]=Collocation.collcationSignificance[i]/Collocation.totalScorce;
+//			System.out.print("\tNormalization: "+Normalization[i]);
+//			Frequency[i]=Normalization[i]/2;
+//			System.out.println("\tFrequency: "+Frequency[i]);
+//		}
+		
+		
 		
 		
 //		try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram.txt", true)))) {

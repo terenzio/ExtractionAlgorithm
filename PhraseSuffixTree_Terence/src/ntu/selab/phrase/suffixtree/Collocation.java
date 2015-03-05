@@ -20,7 +20,11 @@ public class Collocation {
     public static int MAX_NGRAM_REPORTING_LENGTH = 2;
     public static int NGRAM_REPORTING_LENGTH = 2;
     public static int MAX_COUNT = 100;
-
+    
+    public static double totalScorce=0;
+    public static double [] collcationSignificance = new double [500];
+    public static int collocationCount = 0;
+    
     public static File BACKGROUND_DIR 
         = new File("data/rec.sport.hockey/train");
     public static File FOREGROUND_DIR 
@@ -66,14 +70,16 @@ public class Collocation {
         }
     }
     
-    public static int collocationCount = 0;
     public static void report_filter(double score, String[] toks) {
         String accum = "";
         for (int j=0; j<toks.length; ++j) {
             if (nonCapWord(toks[j])) return;
             accum += " "+toks[j];
         }
-        System.out.println("Score: "+score+" with :"+accum);
+//        System.out.println("Score: "+score+" with :"+accum);
+        collcationSignificance[collocationCount]=score;
+        totalScorce+=score;
+//        System.out.println("Total Score: "+totalScorce);
         PhraseSuffix_Tree.collocationStrings[collocationCount] = accum;
         collocationCount++;
     }
