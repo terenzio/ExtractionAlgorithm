@@ -39,12 +39,13 @@ public class calculateCollocations extends TestCase {
 		st.printSignificanceNodes();
 		st.printTree(out);
 		
+//For Carson:
 		
-//		try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram.txt", true)))) {
-//		    out2.println("the text");
-//		}catch (IOException e) {
-//		    //exception handling left as an exercise for the reader
-//		}
+//1) Total the Collocation Significance Scores
+//2) Perfrom Normalization
+//3) /2
+//4) output to a .txt file		
+
 		
 		
         out.close();

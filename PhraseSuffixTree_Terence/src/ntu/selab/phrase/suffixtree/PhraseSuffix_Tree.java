@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -577,8 +578,18 @@ public class PhraseSuffix_Tree {
 	    	
 	    	// Iterating over entire Mutlimap
 	    	  for(Double keys : suggestionsMultimap.keySet()) {
-	    	   System.out.println("Mutlimap: K="+keys + " V="+suggestionsMultimap.get(keys) );
+	    		  Collection<String> suggestions = suggestionsMultimap.get(keys) ;
+	    		 System.out.println("Mutlimap: K="+keys + " V="+suggestions);
+	    		  
+//	    		  String result = String.format("#.00", keys); 
+//	    		  for (String suggestions1:suggestions) 
+//	    	       { 
+//	    	       	result = result+" "+suggestions1; 
+//	    	       } 
+//	    	       System.out.println(result); 
+	    		  
 	    	  }
+	    	  
 	    	  suggestionsMultimap.clear();
        }
        
