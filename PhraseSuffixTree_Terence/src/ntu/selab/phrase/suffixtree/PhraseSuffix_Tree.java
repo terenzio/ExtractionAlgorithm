@@ -149,18 +149,11 @@ public class PhraseSuffix_Tree {
           }
           return a;
        }
-
-       int nodeCount=1;
-       public static String [] collocationStrings = new String [500];
-       public void printTree(PrintWriter out) throws Exception{
-    	  TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
-    	  TokenizedLM backgroundModel = Collocation.buildModel(tokenizerFactory, Collocation.NGRAM, Collocation.BACKGROUND_DIR);
-          backgroundModel.sequenceCounter().prune(3);
-          SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(Collocation.NGRAM_REPORTING_LENGTH, Collocation.MIN_COUNT,Collocation.MAX_COUNT);
-           Collocation.report(coll);
-           
-           out.println("digraph {");
-           out.println("\trankdir = LR;");
+       
+       
+       public void printTelescopeTree(PrintWriter out){
+    	   out.println("digraph origin {");
+    	   out.println("\trankdir = LR;");
            out.println("\tedge [arrowsize=0.4,fontsize=10]");
            out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
 //           out.println("//------leaves------");
@@ -169,7 +162,23 @@ public class PhraseSuffix_Tree {
 //           printInternalNodes(root, out);
            out.println("//------edges------");
            printEdges(root, out);
-           System.out.println("");
+//         out.println("//------suffix links------");
+//         printSLinks(root);
+           out.println("}");
+           telescope(root);
+           traveralNode(root);
+           System.out.println();
+       }
+       
+       int nodeCount=1;
+       public static String [] collocationStrings = new String [500];
+       public void printTree(PrintWriter out) throws Exception{
+    	  TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
+    	  TokenizedLM backgroundModel = Collocation.buildModel(tokenizerFactory, Collocation.NGRAM, Collocation.BACKGROUND_DIR);
+          backgroundModel.sequenceCounter().prune(3);
+          SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(Collocation.NGRAM_REPORTING_LENGTH, Collocation.MIN_COUNT,Collocation.MAX_COUNT);
+           Collocation.report(coll);
+           System.out.println(" ");
            System.out.println("Inserting Collocations into the SuffixTree...");
            for(int i=0; i < Collocation.collocationCount; i++){
         	   nodeCount++;
@@ -193,12 +202,6 @@ public class PhraseSuffix_Tree {
         	   
            }
            
-//           out.println("//------suffix links------");
-//           printSLinks(root);
-           out.println("}");
-//           telescope(root);
-//           traveralNode(root);
-           System.out.println();
        } 
 
 //       void printLeaves(int x, PrintWriter out) {

@@ -18,7 +18,7 @@ import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
 public class calculateCollocations extends TestCase {
 	
 	
-	public void testTelescope() throws Exception {
+	public void testCollectionFreqency() throws Exception {
 		File file = new File("input3.txt");
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
