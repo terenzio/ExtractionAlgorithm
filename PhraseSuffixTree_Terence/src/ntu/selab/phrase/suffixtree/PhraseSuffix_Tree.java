@@ -175,13 +175,21 @@ public class PhraseSuffix_Tree {
         	   nodeCount++;
         	   System.out.print("node1 -> " + "node" + nodeCount + " [label=\""+collocationStrings[i]+"\",weight=3]\n");
         	   
+        	   double [] Normalization= new double [500];
+        	   double [] Frequency= new double [500];
+        	   
+        	   System.out.print("Score: "+PhraseSuffix_Tree.collocationStrings[i]+" with :"+Collocation.collcationSignificance[i]);
+        	   Normalization[i]=Collocation.collcationSignificance[i]/Collocation.totalScorce;
+        	   System.out.print("\tNormalization: "+Normalization[i]);
+        	   Frequency[i]=Normalization[i]/2;
+        	   System.out.println("\tFrequency: "+Frequency[i]);
         	   try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram2.txt", true)))) {
-        			String [] word=collocationStrings[i].split(" ");
-        			out2.println(word[1]);
-    				out2.println(collocationStrings[i]);
-	       		}catch (IOException e) {
-	       		    //exception handling left as an exercise for the reader
-	       		}
+        		   String [] word=collocationStrings[i].split(" ");
+        		   out2.println(word[1]+"="+Frequency[i]);
+        		   out2.println(collocationStrings[i]+"="+Frequency[i]);
+        		   }catch (IOException e) {
+        	    	       		    //exception handling left as an exercise for the reader
+        		}
         	   
            }
            
