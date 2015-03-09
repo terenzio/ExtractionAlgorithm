@@ -21,7 +21,7 @@ public class calculateNGramFrequencies {
 		File file = new File("input3.txt");
 		
 		PrintWriter out;
-		out = new PrintWriter(new FileWriter("complex2gram2.txt"));
+		out = new PrintWriter(new FileWriter("complex2gram.txt"));
 		
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(file));

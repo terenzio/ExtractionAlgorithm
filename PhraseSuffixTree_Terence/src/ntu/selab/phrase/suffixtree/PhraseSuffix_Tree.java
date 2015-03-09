@@ -42,6 +42,8 @@ public class PhraseSuffix_Tree {
        public int suggestionNo; 
        String message = "";
        
+       int suggestionKey = 0;
+       
        public TreeMap<String, Integer> collocationTree = new TreeMap<String, Integer>();
        public TreeMap<Double, String> suggestionsMap = new TreeMap<Double, String>();
        public Multimap<Double,String> suggestionsMultimap = TreeMultimap.create(Ordering.natural().reverse(),Ordering.natural());
@@ -501,7 +503,7 @@ public class PhraseSuffix_Tree {
        
        
  public void updateFrequency(int x, String searchWord, double freqCt) {
-    	   int suggestionCt = 0;
+    	   int suggestionCt= 0;
     	   String prediction = null;
     	 
 	       	for (int child : nodes[x].next.values()) {
@@ -522,7 +524,7 @@ public class PhraseSuffix_Tree {
        
        public void queryTree(int x, String searchWord) {
     	   
-    	   int suggestionCt = 0;
+    	   int suggestionKey = 0;
     	  
 
     	   //String prediction = new String;
@@ -546,8 +548,8 @@ public class PhraseSuffix_Tree {
 		 	 			  String key = entry.getKey();
 		 	 			  Integer value = entry.getValue();
 		 	 			  //System.out.println("With Key:" +key + " => Value:" + value);
-		 	 			  suggestionCt++;
-		 	 			  tempPrediction[suggestionCt] = edgeString(value);
+		 	 			suggestionKey++;
+		 	 			  tempPrediction[suggestionKey] = edgeString(value);
 		 	 			  if (secondWordOnly(child)!="null") {
 		 	 				  prediction = secondWordOnly(child) +" "+ edgeString(value);
 		 	 			  }
@@ -563,7 +565,7 @@ public class PhraseSuffix_Tree {
 		 	 			  
 		 	 			  
 		 	 			
-		 	 			  System.out.println("Prediction "+suggestionCt+":"+ prediction +" (Freq: "+nodes[value].frequencyCount+")");
+		 	 			//  System.out.println("Press Key: "+suggestionCt+" to select: "+ prediction +" temp: "+ tempPrediction[suggestionCt]);
 		 	 			   
 		  	       	}
 	       		}
@@ -572,22 +574,23 @@ public class PhraseSuffix_Tree {
 	       		
 	       		queryTree(child, searchWord);
       	}
-	       	suggestionNo = suggestionCt;
+	        
+	       	suggestionNo = suggestionKey; 
 	        //suggestionsMap = new TreeMap<Double, String>();
       }
        
        public void queryPredsuggestionsMap() {
 
-			System.out.println("queryPredsuggestionsMap");
-	    	   for(Entry<Double, String> suggestionsMapEntry : suggestionsMap.entrySet()) {
-		 			  System.out.println(suggestionsMapEntry.getKey() + " => " +suggestionsMapEntry.getValue());
-		 		}
-	    	suggestionsMap.clear();
+//			System.out.println("queryPredsuggestionsMap");
+//	    	   for(Entry<Double, String> suggestionsMapEntry : suggestionsMap.entrySet()) {
+//		 			  System.out.println(suggestionsMapEntry.getKey() + " => " +suggestionsMapEntry.getValue());
+//		 		}
+//	    	suggestionsMap.clear();
 	    	
 	    	// Iterating over entire Mutlimap
 	    	  for(Double keys : suggestionsMultimap.keySet()) {
 	    		  Collection<String> suggestions = suggestionsMultimap.get(keys) ;
-	    		 System.out.println("Mutlimap: K="+keys + " V="+suggestions);
+	    		 System.out.println("Suggestion: Rank="+keys + " "+suggestions);
 	    		  
 //	    		  String result = String.format("#.00", keys); 
 //	    		  for (String suggestions1:suggestions) 
@@ -601,6 +604,19 @@ public class PhraseSuffix_Tree {
 	    	  suggestionsMultimap.clear();
        }
        
+       
+       
+       public void querySuggestionKey() {
+    	   
+    	   
+    	   for (int i = 1; i<=suggestionNo; i++) {
+    		   System.out.println("Press Key: "+i+" to select: "+ tempPrediction[i]);
+    	   }
+    		   
+    	 //  suggestionCt = 0;
+       }
+       
+     
        
        
        public void queryPredictionTable(int x, int searchIndex) {

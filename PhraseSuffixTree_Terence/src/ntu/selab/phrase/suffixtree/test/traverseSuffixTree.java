@@ -76,12 +76,18 @@ public class traverseSuffixTree extends TestCase {
 	 	st1.setInitialMessage(searchWord);
 		st1.queryTree(1, searchWord);
 	  	if (st1.suggestionNo == 0)  System.out.println("No Prediction Yet!");
-	  	st1.queryPredsuggestionsMap();		
+	 	System.out.println("");
+	 	st1.querySuggestionKey();
+	 	System.out.println("");
+	 	st1.queryPredsuggestionsMap();
 	 	searchWord=in.readLine();
 	 	System.out.println("");
 	 	 do {
 	 		st1.queryPredictionTable(1, Integer.parseInt(searchWord));
-	 		st1.queryPredsuggestionsMap();
+	 	 	System.out.println("");
+	 	 	st1.querySuggestionKey();
+	 	 	System.out.println("");
+	 	 	st1.queryPredsuggestionsMap();
 		 	searchWord=in.readLine();
 	 	} while (Integer.parseInt(searchWord)!=0);	 	
 	 	st1.getMessage();
