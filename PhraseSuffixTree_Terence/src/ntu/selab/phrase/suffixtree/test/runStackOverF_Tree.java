@@ -58,7 +58,7 @@ public class runStackOverF_Tree extends TestCase {
 //	}
 	
 	public void testTelescope() throws Exception {
-		File file = new File("input.txt");
+		File file = new File("doc1.txt");
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
 		
@@ -69,7 +69,7 @@ public class runStackOverF_Tree extends TestCase {
 		while((phrase=in.readLine()) != null){
 			String [] word=phrase.split(" ");
 			for(int i = 0; i < word.length; i++){
-				if(i==word.length-1) word[i]+="$";
+//				if(i==word.length-1) word[i]+="$";
 				st.addWord(word[i]);
 			}
 			st.sep();
@@ -77,7 +77,7 @@ public class runStackOverF_Tree extends TestCase {
 		in.close();
 		st.signSignificance();
 		st.printSignificanceNodes();
-		st.printTree(out);
+		st.printTelescopeTree(out);
         out.close();
 	}
 	
