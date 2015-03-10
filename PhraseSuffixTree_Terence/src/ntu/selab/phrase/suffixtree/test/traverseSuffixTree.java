@@ -1,20 +1,17 @@
 package ntu.selab.phrase.suffixtree.test;
 
+import ntu.selab.phrase.suffixtree.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
-
 import junit.framework.TestCase;
 
 import org.junit.Test;
-
-import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
 
 
 public class traverseSuffixTree extends TestCase {
@@ -27,17 +24,32 @@ public class traverseSuffixTree extends TestCase {
 		 * Read in the Corpus File
 		 */
 		System.out.print("STEP1: Reading Input Corpus.... ");
-		File inCorpus = new File("input3.txt");
+		File inCorpus = new File("input2.txt");
 		System.out.println("Done!"); System.out.println("");
 		
 		/*
-		 * 
+		 *  Tokenizing and Parsing
 		 */
 		System.out.print("STEP2: Tokenizing and Parsing.... ");
+		DocumentScanner sc = new DocumentScanner();
+		PrintWriter outFrequency;
+		outFrequency = new PrintWriter(new FileWriter("complex2gram.txt"));
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(inCorpus));
+			String line;
+			while((line=br.readLine()) != null){
+				sc.scanToMix(line, 2); //nGram = 2
+			}
+			sc.printM(outFrequency);
+			br.close();
+			outFrequency.close();
+		} catch(IOException e){
+			e.printStackTrace();
+		}
 		System.out.println("Done!"); System.out.println("");
 		
 		/*
-		 * 
+		 * Calculate Frequencies
 		 */
 		System.out.print("STEP3: Calculating Frequencies.... ");
 		System.out.println("Done!"); System.out.println("");
@@ -46,16 +58,16 @@ public class traverseSuffixTree extends TestCase {
 		 * Calculating Collocations from Frequency and Print into Corpus
 		 */
 		System.out.print("STEP4: Calculating Collocations.... ");
-		PrintWriter outCollocations = new PrintWriter(new FileWriter("complex2gram2.txt",true));
+		PrintWriter outCollocations = new PrintWriter(new FileWriter("complex2gram.txt",true));
 		PhraseSuffix_Tree st = new PhraseSuffix_Tree(500000);
 		st.printCollocationFrequencies(inCorpus, outCollocations);
 		System.out.println("Done!"); System.out.println("");
 		
 		/*
-		 * 
+		 * Constructing Suffix Tree
 		 */
 		System.out.print("STEP5: Constructing Suffix Tree.... ");
-		BufferedReader in5 = new BufferedReader(new FileReader("complex2gram2.txt"));
+		BufferedReader in5 = new BufferedReader(new FileReader("complex2gram.txt"));
 		PrintWriter outGraphV = new PrintWriter(new FileWriter("st.dot"));
 		String phrasePrior;
 		while((phrasePrior=in5.readLine()) != null){
@@ -74,14 +86,15 @@ public class traverseSuffixTree extends TestCase {
 		System.out.println("Done!"); System.out.println("");
 		
 		/*
-		 * 
+		 * Updating Frequency
 		 */
 		System.out.print("Updating Frequency.... ");
-		BufferedReader in52 = new BufferedReader(new FileReader("complex2gram2.txt"));
+		BufferedReader in52 = new BufferedReader(new FileReader("complex2gram.txt"));
 		String phrasePriorPrior;
 		while((phrasePriorPrior=in52.readLine()) != null){
 			String [] word2=phrasePriorPrior.split("=");
 				String updatePhrase =  word2[0];
+				System.out.println("Checking: "+word2[0]);
 				Double updateFreq = Double.parseDouble(word2[1]);
 				String [] wordPriorPrior=updatePhrase.split(" ");
 				for(int j = 0; j < wordPriorPrior.length; j++){
@@ -91,19 +104,12 @@ public class traverseSuffixTree extends TestCase {
 		}
 		in52.close();
 		System.out.println("Done!"); System.out.println("");
-		
 		outCollocations.close();
 		
 		/*
-		 * 
-		 */
-		
-		BufferedReader inSystem = new BufferedReader(new InputStreamReader(System.in));
-		
-	
-		/*
 		 *Suffix Tree Search and Traversal 
 		 */
+		BufferedReader inSystem = new BufferedReader(new InputStreamReader(System.in));
 		String searchWord; 
 	 	System.out.print("Enter a phrase: ");
 	 	searchWord=inSystem.readLine();    
@@ -125,13 +131,7 @@ public class traverseSuffixTree extends TestCase {
 		 	searchWord=inSystem.readLine();
 	 	} while (Integer.parseInt(searchWord)!=0);	 	
 	 	st.getMessage();
-	 
-	 	
 	 }
-
-	
-
-	
  
  
 }

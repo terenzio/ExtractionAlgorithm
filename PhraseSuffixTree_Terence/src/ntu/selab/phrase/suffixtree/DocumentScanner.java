@@ -3,10 +3,10 @@ package ntu.selab.phrase.suffixtree;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class Scanner{
+public class DocumentScanner{
 
 	private Table table;
-	public Scanner (){
+	public DocumentScanner (){
 		table = new Table();
 	}
 	
@@ -18,7 +18,7 @@ public class Scanner{
 				String str = tmp[j];
 				for(int k = 0; k < i; ++k)
 					str=str+" "+tmp[j+k+1];
-				System.out.println(str+ " " + i);
+				//System.out.println(str+ " " + i);
 				table.addToMix(str);
 			}
 		}

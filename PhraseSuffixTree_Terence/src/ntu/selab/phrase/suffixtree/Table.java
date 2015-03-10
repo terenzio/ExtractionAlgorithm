@@ -28,7 +28,7 @@ public class Table {
 			String key = entry.getKey();
 			Float value = entry.getValue();
 			//System.out.println(key + " = " + value);
-			System.out.println(key);
+			//System.out.println(key);
 			out.println(key + "=" + value);
 			//out.println(key);
 		}

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Map;
-import ntu.selab.phrase.suffixtree.Scanner;
+import ntu.selab.phrase.suffixtree.DocumentScanner;
 import ntu.selab.phrase.suffixtree.SignificanceBuilder;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class calculateNGramFrequencies {
 	@Test
 	public void test() throws IOException {
 	
-		Scanner sc = new Scanner();
+		DocumentScanner sc = new DocumentScanner();
 		File file = new File("input3.txt");
 		
 		PrintWriter out;
@@ -36,7 +36,7 @@ public class calculateNGramFrequencies {
 			e.printStackTrace();
 		}
 		
-		System.out.println("------------------------------");
+	//	System.out.println("------------------------------");
 		float thr = (float) 0;
 		SignificanceBuilder sig = new SignificanceBuilder();
 		sig.threshold(sc.getTable(), thr);
@@ -45,7 +45,7 @@ public class calculateNGramFrequencies {
 //			System.out.println(entry.getKey() + " : "+entry.getValue());
 //		}
 		
-		System.out.println("------------------------------");
+		//System.out.println("------------------------------");
 		HashSet<String> si = sig.markSignificant(sc.getTable());
 //		for(String s: si)
 //			System.out.println("* "+s);
