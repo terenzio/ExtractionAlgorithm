@@ -3,7 +3,7 @@ package ntu.selab.phrase.suffixtree;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Iterator;
-public class Significance {
+public class SignificanceBuilder {
 	
 
 	

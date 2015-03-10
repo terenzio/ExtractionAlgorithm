@@ -3,7 +3,7 @@ package ntu.selab.phrase.suffixtree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SuffixTokenizer {
+public class SuffixTokenBuilder {
 
 	//Input: "please call me asap"
 	

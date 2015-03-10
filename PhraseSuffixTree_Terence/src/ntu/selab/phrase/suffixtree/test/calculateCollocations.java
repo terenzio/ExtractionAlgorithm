@@ -12,21 +12,22 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import junit.framework.TestCase;
-import ntu.selab.phrase.suffixtree.Collocation;
+import ntu.selab.phrase.suffixtree.CollocationsBuilder;
 import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
 
 public class calculateCollocations extends TestCase {
 	
 	
 	public void testCollectionFreqency() throws Exception {
-		File file = new File("input3.txt");
-		BufferedReader in = new BufferedReader(new FileReader(file));
-		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
-		
+		File inCorpus = new File("input3.txt");
+		BufferedReader in = new BufferedReader(new FileReader(inCorpus));
+		PrintWriter out = new PrintWriter(new FileWriter("complex2gram2"));
 		PhraseSuffix_Tree st = new PhraseSuffix_Tree(500000);
+		String phrase;
 		
 		
-		 String phrase;
+		//CollocationsBuilder CB = new CollocationsBuilder();
+		
 		while((phrase=in.readLine()) != null){
 			String [] word=phrase.split(" ");
 			for(int i = 0; i < word.length; i++){
@@ -38,7 +39,7 @@ public class calculateCollocations extends TestCase {
 		in.close();
 		st.signSignificance();
 		st.printSignificanceNodes();
-		st.printTree(out);
+		st.printCollocationFrequencies(inCorpus, out);
 		
 		
 		//It can write into printTree method

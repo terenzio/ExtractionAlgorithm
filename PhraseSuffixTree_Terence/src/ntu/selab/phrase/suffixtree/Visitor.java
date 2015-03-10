@@ -1,6 +1,6 @@
 package ntu.selab.phrase.suffixtree;
 
-public interface Iterator {
+public interface Visitor {
 	
 //	PhraseTree_Root phraseTree = new PhraseTree_Root();
 // 	

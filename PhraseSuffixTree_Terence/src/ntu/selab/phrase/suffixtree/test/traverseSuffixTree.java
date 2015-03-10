@@ -23,75 +23,109 @@ public class traverseSuffixTree extends TestCase {
 	@Test
 	public void test() throws Exception {
 	 
-		File file = new File("complex2gram2.txt");
-		BufferedReader in = new BufferedReader(new FileReader(file));
-		BufferedReader in2 = new BufferedReader(new FileReader(file));
-		PrintWriter out = new PrintWriter(new FileWriter("st.dot"));
+		/*
+		 * Read in the Corpus File
+		 */
+		System.out.print("STEP1: Reading Input Corpus.... ");
+		File inCorpus = new File("input3.txt");
+		System.out.println("Done!"); System.out.println("");
 		
-		PhraseSuffix_Tree st1 = new PhraseSuffix_Tree(500000);
+		/*
+		 * 
+		 */
+		System.out.print("STEP2: Tokenizing and Parsing.... ");
+		System.out.println("Done!"); System.out.println("");
 		
-		System.out.println("Constructing Tree.... ");
-		String phrase;
-		while((phrase=in.readLine()) != null){
-			String [] wordPrior=phrase.split("=");
-		//	for(int i = 0; i < wordPrior.length; i++){
+		/*
+		 * 
+		 */
+		System.out.print("STEP3: Calculating Frequencies.... ");
+		System.out.println("Done!"); System.out.println("");
+		
+		/*
+		 * Calculating Collocations from Frequency and Print into Corpus
+		 */
+		System.out.print("STEP4: Calculating Collocations.... ");
+		PrintWriter outCollocations = new PrintWriter(new FileWriter("complex2gram2.txt",true));
+		PhraseSuffix_Tree st = new PhraseSuffix_Tree(500000);
+		st.printCollocationFrequencies(inCorpus, outCollocations);
+		System.out.println("Done!"); System.out.println("");
+		
+		/*
+		 * 
+		 */
+		System.out.print("STEP5: Constructing Suffix Tree.... ");
+		BufferedReader in5 = new BufferedReader(new FileReader("complex2gram2.txt"));
+		PrintWriter outGraphV = new PrintWriter(new FileWriter("st.dot"));
+		String phrasePrior;
+		while((phrasePrior=in5.readLine()) != null){
+			String [] wordPrior=phrasePrior.split("=");
 				String wordPrior1 = wordPrior[0];
 				String [] wordPriorPrior=wordPrior1.split(" ");
 				for(int j = 0; j < wordPriorPrior.length; j++){
 					//if(i==word.length-1) word[i]+="$";
-					//System.out.println("Adding phrase "+j+": "+wordPriorPrior[j]);
-					st1.addWord(wordPriorPrior[j]);
+					st.addWord(wordPriorPrior[j]);
 				}
-				st1.sep();
-	//		}
+				st.sep();
 		}
+		st.printFullTree(outGraphV);
+		outGraphV.close();
+		in5.close();
+		System.out.println("Done!"); System.out.println("");
 		
-		System.out.println("Updating Frequency.... ");
-		String phrase2;
-		while((phrase2=in2.readLine()) != null){
-			String [] word2=phrase2.split("=");
+		/*
+		 * 
+		 */
+		System.out.print("Updating Frequency.... ");
+		BufferedReader in52 = new BufferedReader(new FileReader("complex2gram2.txt"));
+		String phrasePriorPrior;
+		while((phrasePriorPrior=in52.readLine()) != null){
+			String [] word2=phrasePriorPrior.split("=");
 				String updatePhrase =  word2[0];
 				Double updateFreq = Double.parseDouble(word2[1]);
 				String [] wordPriorPrior=updatePhrase.split(" ");
 				for(int j = 0; j < wordPriorPrior.length; j++){
-				//	if (j!=0) {
-						//System.out.print("Updating phrase: ["+wordPriorPrior[j]+"]");
-						//System.out.println(" with freq: "+updateFreq);
-						st1.updateFrequency(1, wordPriorPrior[j], updateFreq);
-				//	}
+					//System.out.println("Checking: "+wordPriorPrior[j]+updateFreq);
+						st.updateFrequency(1, wordPriorPrior[j], updateFreq);
 			}
 		}
+		in52.close();
+		System.out.println("Done!"); System.out.println("");
 		
-		in.close();
-		in2.close();
+		outCollocations.close();
 		
-		in = new BufferedReader(new InputStreamReader(System.in));
+		/*
+		 * 
+		 */
+		
+		BufferedReader inSystem = new BufferedReader(new InputStreamReader(System.in));
 		
 	
-		st1.printFullTree(out);
-		
+		/*
+		 *Suffix Tree Search and Traversal 
+		 */
 		String searchWord; 
 	 	System.out.print("Enter a phrase: ");
-	 	searchWord=in.readLine();    
-	 	st1.setInitialMessage(searchWord);
-		st1.queryTree(1, searchWord);
-	  	if (st1.suggestionNo == 0)  System.out.println("No Prediction Yet!");
+	 	searchWord=inSystem.readLine();    
+	 	st.setInitialMessage(searchWord);
+		st.queryTree(1, searchWord);
+	  	if (st.suggestionNo == 0)  System.out.println("No Prediction Yet!");
 	 	System.out.println("");
-	 	st1.querySuggestionKey();
+	 	st.querySuggestionKey();
 	 	System.out.println("");
-	 	st1.queryPredsuggestionsMap();
-	 	searchWord=in.readLine();
+	 	st.queryPredsuggestionsMap();
+	 	searchWord=inSystem.readLine();
 	 	System.out.println("");
 	 	 do {
-	 		st1.queryPredictionTable(1, Integer.parseInt(searchWord));
+	 		st.queryPredictionTable(1, Integer.parseInt(searchWord));
 	 	 	System.out.println("");
-	 	 	st1.querySuggestionKey();
+	 	 	st.querySuggestionKey();
 	 	 	System.out.println("");
-	 	 	st1.queryPredsuggestionsMap();
-		 	searchWord=in.readLine();
+	 	 	st.queryPredsuggestionsMap();
+		 	searchWord=inSystem.readLine();
 	 	} while (Integer.parseInt(searchWord)!=0);	 	
-	 	st1.getMessage();
-	    out.close();
+	 	st.getMessage();
+	 
 	 	
 	 }
 

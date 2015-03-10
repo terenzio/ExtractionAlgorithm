@@ -8,19 +8,21 @@ import com.aliasi.util.ScoredObject;
 import com.aliasi.util.AbstractExternalizable;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.SortedSet;
 
-public class Collocation {
+public class CollocationsBuilder {
 
     public static int NGRAM = 3;
     public static int MIN_COUNT = 5;
     public static int MAX_NGRAM_REPORTING_LENGTH = 2;
     public static int NGRAM_REPORTING_LENGTH = 2;
     public static int MAX_COUNT = 100;
-    
     public static double totalScorce=0;
     public static double [] collcationSignificance = new double [500];
     public static int collocationCount = 0;
@@ -30,7 +32,7 @@ public class Collocation {
     public static File FOREGROUND_DIR 
         = new File("data/rec.sport.hockey/test");
 
-    public static TokenizedLM buildModel(TokenizerFactory tokenizerFactory,
+    public static TokenizedLM buildModel(File inCorpus, TokenizerFactory tokenizerFactory,
                                           int ngram,
                                           File directory) 
         throws IOException {
@@ -48,7 +50,7 @@ public class Collocation {
 //            model.handle(text);
 //        }
         
-        File file2 = new File("input3.txt");
+        File file2 = inCorpus;
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(file2));
 			String line;
@@ -92,5 +94,7 @@ public class Collocation {
                 return true;
         return false;
     }
-
+    
+    
+  
 }

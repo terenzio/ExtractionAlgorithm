@@ -2,6 +2,7 @@ package ntu.selab.phrase.suffixtree;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,6 @@ import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.util.ScoredObject;
 import com.google.common.collect.*;
-
 
 public class PhraseSuffix_Tree {
 	
@@ -133,79 +133,86 @@ public class PhraseSuffix_Tree {
        	 }
    
        }
-      
-       /*
-           printing the Suffix Tree in a format understandable by graphviz. The output is written into
-           st.dot file. In order to see the suffix tree as a PNG image, run the following command:
-           dot -Tpng -O st.dot
-        */
-
-       String edgeString(int node) {
-          String[] s= Arrays.copyOfRange(text, nodes[node].start, Math.min(position + 1, nodes[node].end));
-          String a = "";
-          int count = 0;
-          for(String t:s){
-       	   ++count;
-        	   a+=t;
-       	   if(count != s.length) a+=" ";
-          }
-          return a;
+       /**************************************************************************************************
+        * Display Tree Actions
+       		printing the Suffix Tree in a format understandable by graphviz. The output is written into
+       		st.dot file. In order to see the suffix tree as a PNG image, run the following command:
+       		dot -Tpng -O st.dot
+        **************************************************************************************************/
+       void printEdges(int x, PrintWriter out) {
+           for (int child : nodes[x].next.values()) {
+        	   if(nodes[child]!=null){
+        		   out.println("\tnode"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
+        		   printEdges(child, out);
+        	   }
+           }
        }
-       
-       
-       public void printTelescopeTree(PrintWriter out){
-    	   out.println("digraph origin {");
-    	   out.println("\trankdir = LR;");
-           out.println("\tedge [arrowsize=0.4,fontsize=10]");
-           out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
-//           out.println("//------leaves------");
-//           printLeaves(root, out);
-//           out.println("//------internal nodes------");
-//           printInternalNodes(root, out);
-           out.println("//------edges------");
-           printEdges(root, out);
-//         out.println("//------suffix links------");
-//         printSLinks(root);
-           out.println("}");
-           telescope(root);
-           traveralNode(root);
-           System.out.println();
+	   String edgeString(int node) {
+	      String[] s= Arrays.copyOfRange(text, nodes[node].start, Math.min(position + 1, nodes[node].end));
+	      String a = "";
+	      int count = 0;
+	      for(String t:s){
+	   	   ++count;
+	    	   a+=t;
+	   	   if(count != s.length) a+=" ";
+	      }
+	      return a;
+	   }
+       public void printAllPhrases(int nodeNumber, String str){
+    	   if (nodes[nodeNumber].next.isEmpty()){
+    		   System.out.println(str);
+    		   return;
+    	   }
+    	   else
+    		   for(Map.Entry<String, Integer> entry : nodes[nodeNumber].next.entrySet()){
+    			   String s="";
+    			   for(int i = nodes[entry.getValue()].start; i < nodes[entry.getValue()].end; i++)
+    			   {
+    				   s+=text[i];
+//    				   if(i != nodes[entry.getValue()].end - 1)
+    					   s+=" ";
+    			   }
+    			   printAllPhrases(entry.getValue(), str+s);
+    		   }
+    	   
        }
-       
+     
+       /**************************************************************************************************
+        Calculating Collocations and its Frequency counts.
+        **************************************************************************************************/
        int nodeCount=1;
        public static String [] collocationStrings = new String [500];
-       public void printTree(PrintWriter out) throws Exception{
-    	  TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
-    	  TokenizedLM backgroundModel = Collocation.buildModel(tokenizerFactory, Collocation.NGRAM, Collocation.BACKGROUND_DIR);
-          backgroundModel.sequenceCounter().prune(3);
-          SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(Collocation.NGRAM_REPORTING_LENGTH, Collocation.MIN_COUNT,Collocation.MAX_COUNT);
-           Collocation.report(coll);
+       public void printCollocationFrequencies(File inCorpus, PrintWriter out) throws Exception{
+    	   TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
+    	   TokenizedLM backgroundModel = CollocationsBuilder.buildModel(inCorpus, tokenizerFactory, CollocationsBuilder.NGRAM, CollocationsBuilder.BACKGROUND_DIR);
+    	   backgroundModel.sequenceCounter().prune(3);
+    	   SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(CollocationsBuilder.NGRAM_REPORTING_LENGTH, CollocationsBuilder.MIN_COUNT,CollocationsBuilder.MAX_COUNT);
+           CollocationsBuilder.report(coll);
            System.out.println(" ");
            System.out.println("Inserting Collocations into the SuffixTree...");
-           for(int i=0; i < Collocation.collocationCount; i++){
+           for(int i=0; i < CollocationsBuilder.collocationCount; i++){
         	   nodeCount++;
         	   System.out.print("node1 -> " + "node" + nodeCount + " [label=\""+collocationStrings[i]+"\",weight=3]\n");
         	   
         	   double [] Normalization= new double [500];
         	   double [] Frequency= new double [500];
         	   
-        	   System.out.print("Score: "+PhraseSuffix_Tree.collocationStrings[i]+" with :"+Collocation.collcationSignificance[i]);
-        	   Normalization[i]=Collocation.collcationSignificance[i]/Collocation.totalScorce;
+        	   System.out.print("Score: "+PhraseSuffix_Tree.collocationStrings[i]+" with :"+CollocationsBuilder.collcationSignificance[i]);
+        	   Normalization[i]=CollocationsBuilder.collcationSignificance[i]/CollocationsBuilder.totalScorce;
         	   System.out.print("\tNormalization: "+Normalization[i]);
         	   Frequency[i]=Normalization[i]/2;
         	   System.out.println("\tFrequency: "+Frequency[i]);
-        	   try(PrintWriter out2 = new PrintWriter(new BufferedWriter(new FileWriter("complex2gram2.txt", true)))) {
-        		   String [] word=collocationStrings[i].split(" ");
-        		   out2.println(word[1]+"="+Frequency[i]);
-        		   out2.println(collocationStrings[i]+"="+Frequency[i]);
-        		   }catch (IOException e) {
-        	    	       		    //exception handling left as an exercise for the reader
-        		}
+        	   String [] word=collocationStrings[i].split(" ");
         	   
+        //	   while((out.append(c)) != null){
+        		   out.append(word[1]+"="+Frequency[i]+"\n");
+            	   out.append(collocationStrings[i]+"="+Frequency[i]+"\n"); 
+        	//   }
+        	  // out.println(word[1]+"="+Frequency[i]);
+        	 //  out.println(collocationStrings[i]+"="+Frequency[i]);
            }
            
        } 
-
 //       void printLeaves(int x, PrintWriter out) {
 //           if (nodes[x].next.size() == 0)
 //               out.println("\tnode"+x+" [label=\"\",shape=point]");
@@ -223,7 +230,11 @@ public class PhraseSuffix_Tree {
 //               printInternalNodes(child, out);
 //       }
        
-       String [] telescopeStrings = new String[500];
+       
+       /**************************************************************************************************
+        * Telescoping Actions
+        **************************************************************************************************/
+              String [] telescopeStrings = new String[500];
        int count=0;
        int [] parentNode = new int[500];
        int [] childNode = new int[500];
@@ -243,7 +254,6 @@ public class PhraseSuffix_Tree {
         	   telescope(child);
            }
        }
-       
        boolean telescoping=false;
        public void traveralNode (int x) {
     	   for (int child : nodes[x].next.values()){
@@ -263,26 +273,35 @@ public class PhraseSuffix_Tree {
     	   
     	   //update new frequency to parent node 
        }
-       
-       void printEdges(int x, PrintWriter out) {
-           for (int child : nodes[x].next.values()) {
-        	   if(nodes[child]!=null){
-        		   out.println("\tnode"+x+" -> node"+child+" [label=\""+edgeString(child)+"\",weight=3]");
-        		   printEdges(child, out);
-        	   }
-           }
+       public void printTelescopeTree(PrintWriter out){
+    	   out.println("digraph origin {");
+    	   out.println("\trankdir = LR;");
+           out.println("\tedge [arrowsize=0.4,fontsize=10]");
+           out.println("\tnode1 [label=\"\",style=filled,fillcolor=lightgrey,shape=circle,width=.1,height=.1];");
+//           out.println("//------leaves------");
+//           printLeaves(root, out);
+//           out.println("//------internal nodes------");
+//           printInternalNodes(root, out);
+           out.println("//------edges------");
+           printEdges(root, out);
+//         out.println("//------suffix links------");
+//         printSLinks(root);
+           out.println("}");
+           telescope(root);
+           traveralNode(root);
+           System.out.println();
        }
-
-
        
        
+       /**************************************************************************************************
+        * Significance Actions
+        **************************************************************************************************/   
        public void signSignificance(){
         	for(int i = 1; i < nodes.length;++i){
         		if(nodes[i]==null) break;
         		if (nodes[i].next.size() == 0)   nodes[i].Significance=true;
         	}
        }
-       
        public void printSignificanceNodes(){
           	for(int i = 1; i < nodes.length;++i){
           		if(nodes[i]==null) break;
@@ -293,35 +312,8 @@ public class PhraseSuffix_Tree {
        }
        
        
-       void searchTree(int x, String searchWord) {
-       	for (int child : nodes[x].next.values()) {
-       		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
-       		if (edgeString(child).equals(searchWord)) { 
-       			System.out.println("Searching for:"+searchWord+ " Found Node is:" + child);
-       		}
-       		searchTree(child, searchWord);
-       	}
-       }
-       
-       public void printAllPhrases(int nodeNumber, String str){
-    	   if (nodes[nodeNumber].next.isEmpty()){
-    		   System.out.println(str);
-    		   return;
-    	   }
-    		   
-    	   else
-    		   for(Map.Entry<String, Integer> entry : nodes[nodeNumber].next.entrySet()){
-    			   String s="";
-    			   for(int i = nodes[entry.getValue()].start; i < nodes[entry.getValue()].end; i++)
-    			   {
-    				   s+=text[i];
-//    				   if(i != nodes[entry.getValue()].end - 1)
-    					   s+=" ";
-    			   }
-    			   printAllPhrases(entry.getValue(), str+s);
-    		   }
-    	   
-       }
+    
+
        
 //Terence's Code to Label Low Frequency and Remove Subsequent Nodes: *********************************************************************************************************************
        public void printFullTree(PrintWriter out) {
@@ -368,38 +360,6 @@ public class PhraseSuffix_Tree {
 	   		 searchTree_Advanced(root, lowfreqPhrase);   
        }
        
-       
-//       String edgeString1(int node) {
-//           String[] s= Arrays.copyOfRange(text, nodes[node].start, Math.min(position + 1, nodes[node].end));
-//           String[] shortWord= Arrays.copyOfRange(text, nodes[node].start, nodes[node].end);
-//           
-//           System.out.println("START: " + nodes[node].start);
-//           System.out.println("Pos+1: " + position + 1 );
-//           System.out.println("END: " + nodes[node].end);
-//           System.out.println("MIN: " + Math.min(position + 1, nodes[node].end));
-//           String a = "";
-//           int count = 0;
-//           for(String t:s){
-//        	   ++count;
-//         	   a+=t;
-//        	   if(count != s.length) a+=" ";
-//           }
-//           System.out.println("a: " + a);
-//           System.out.println("shortWord: " + shortWord.toString());
-//           String b = "";
-//           int countb = 0;
-//           for(String t1:shortWord){
-//        	   ++countb;
-//        	   if (countb == 2)
-//         	   {   System.out.println("REAL second word: " + t1 );   }  
-//         	   b+=t1;
-//        	   if(countb != shortWord.length) b+=" ";
-//         	   
-//           }
-//           System.out.println("shortWord_b: " + b);
-//           return a;
-//        }
-       
        String firstWord(int node) {
            String[] s= Arrays.copyOfRange(text, nodes[node].start, nodes[node].start+1);
            String a = "";
@@ -427,6 +387,18 @@ public class PhraseSuffix_Tree {
            }
            return a;
         }
+       
+       
+       void searchTree(int x, String searchWord) {
+          	for (int child : nodes[x].next.values()) {
+          		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
+          		if (edgeString(child).equals(searchWord)) { 
+          			System.out.println("Searching for:"+searchWord+ " Found Node is:" + child);
+          		}
+          		searchTree(child, searchWord);
+          	}
+          }
+          
        
        String secondWordOnly(int node) {
            String[] s= Arrays.copyOfRange(text, nodes[node].start+1, Math.min(position + 1, nodes[node].end));
@@ -510,14 +482,15 @@ public class PhraseSuffix_Tree {
     	   String prediction = null;
     	 
 	       	for (int child : nodes[x].next.values()) {
+	       	//	System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
 	       		if (edgeString(child).equals(searchWord)) { 
 	       		//  System.out.println("----------------------------------------------------------------");
-	       		  //System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
+	       		//  System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
 	       		  //System.out.println("First word: " + firstWord(child));
 	             // System.out.println("Second word: " + secondWord(child));
 		         // System.out.println("Second word only: " + secondWordOnly(child));
   	       		  nodes[child].setFrequency(freqCt);
-  	       		 // System.out.println("Updated Node: "+edgeString(child)+" with freq of: "+nodes[child].getFrequency());
+  	       	//	  System.out.println("Updated Node: "+edgeString(child)+" with freq of: "+nodes[child].getFrequency());
 	       		}
 	       		updateFrequency(child, searchWord, freqCt);
       	}

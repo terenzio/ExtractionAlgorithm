@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Map;
 import ntu.selab.phrase.suffixtree.Scanner;
-import ntu.selab.phrase.suffixtree.Significance;
+import ntu.selab.phrase.suffixtree.SignificanceBuilder;
 import org.junit.Test;
 
 public class calculateNGramFrequencies {
@@ -38,7 +38,7 @@ public class calculateNGramFrequencies {
 		
 		System.out.println("------------------------------");
 		float thr = (float) 0;
-		Significance sig = new Significance();
+		SignificanceBuilder sig = new SignificanceBuilder();
 		sig.threshold(sc.getTable(), thr);
 //		for(Map.Entry<String, Float> entry: sc.getTable().entrySet())
 //		{

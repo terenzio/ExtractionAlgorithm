@@ -1,5 +1,5 @@
 package ntu.selab.phrase.suffixtree;
 
-public class ConcreteIterator implements Iterator {
+public class ConcreteVisitor implements Visitor {
 
 }
