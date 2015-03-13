@@ -4,11 +4,11 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Table {
+public class FrequencyBuilder {
 	
 	private Map<String, Float> mixed;
 	private float total = 1000; //From 500 word corpus and collocations of 500
-	public Table(){
+	public FrequencyBuilder(){
 	
 	mixed = new TreeMap<String, Float>();
 	}

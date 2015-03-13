@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Map;
-import ntu.selab.phrase.suffixtree.DocumentScanner;
+import ntu.selab.phrase.suffixtree.DocumentBuilder;
 import ntu.selab.phrase.suffixtree.SignificanceBuilder;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class calculateNGramFrequencies {
 	@Test
 	public void test() throws IOException {
 	
-		DocumentScanner sc = new DocumentScanner();
+		DocumentBuilder sc = new DocumentBuilder();
 		File file = new File("input3.txt");
 		
 		PrintWriter out;

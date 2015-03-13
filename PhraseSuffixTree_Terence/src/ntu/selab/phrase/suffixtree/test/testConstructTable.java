@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import ntu.selab.phrase.suffixtree.DocumentScanner;
+import ntu.selab.phrase.suffixtree.DocumentBuilder;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class testConstructTable {
 
 	@Test
 	public void test() {
-		DocumentScanner sc = new DocumentScanner();
+		DocumentBuilder sc = new DocumentBuilder();
 		File file = new File("doc1.txt");
 		try{
 		BufferedReader br = new BufferedReader(new FileReader(file));

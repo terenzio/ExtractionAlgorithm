@@ -1,6 +1,4 @@
-package ntu.selab.phrase.suffixtree.test;
-
-import ntu.selab.phrase.suffixtree.*;
+package ntu.selab.phrase.suffixtree;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,17 +7,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import junit.framework.TestCase;
 
-import org.junit.Test;
+public class TreeVisitor implements Visitor {
 
-
-public class traverseSuffixTree extends TestCase {
-	
+	public static void main(String[] args) throws Exception 
+	{
+		System.out.println("Starting Program.... ");
 		
-	@Test
-	public void test() throws Exception {
-	 
+		TreeVisitor concreteVist = new TreeVisitor();
+			try {
+				concreteVist.visitTree();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	
+	/*
+	 *Suffix Tree Search and Traversal 
+	 */
+	public void visitTree() throws Exception{
+	
 		/*
 		 * Read in the Corpus File
 		 */
@@ -32,8 +41,13 @@ public class traverseSuffixTree extends TestCase {
 		 */
 		System.out.print("STEP2: Tokenizing and Parsing.... ");
 		DocumentBuilder sc = new DocumentBuilder();
-		PrintWriter outFrequency;
-		outFrequency = new PrintWriter(new FileWriter("complex2gram.txt"));
+		PrintWriter outFrequency = null;
+		try {
+			outFrequency = new PrintWriter(new FileWriter("complex2gram.txt"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(inCorpus));
 			String line;
@@ -96,7 +110,7 @@ public class traverseSuffixTree extends TestCase {
 		while((phrasePriorPrior=in52.readLine()) != null){
 			String [] word2=phrasePriorPrior.split("=");
 				String updatePhrase =  word2[0];
-				System.out.println("Checking: "+word2[0]);
+				//System.out.println("Checking: "+word2[0]);
 				Double updateFreq = Double.parseDouble(word2[1]);
 				String [] wordPriorPrior=updatePhrase.split(" ");
 				for(int j = 0; j < wordPriorPrior.length; j++){
@@ -135,5 +149,11 @@ public class traverseSuffixTree extends TestCase {
 	 	st.getMessage();
 	 }
  
- 
+		
+		
+		
+		
+	
+	
+	
 }

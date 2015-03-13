@@ -41,7 +41,6 @@ public class PhraseSuffix_Tree {
        ArrayList<Integer> hasLink= new ArrayList<Integer>(); 
        public int suggestionNo; 
        String message = "";
-       
        int suggestionKey = 0;
        
        public TreeMap<String, Integer> collocationTree = new TreeMap<String, Integer>();
@@ -311,10 +310,6 @@ public class PhraseSuffix_Tree {
           	}
        }
        
-       
-    
-
-       
 //Terence's Code to Label Low Frequency and Remove Subsequent Nodes: *********************************************************************************************************************
        public void printFullTree(PrintWriter out) {
            out.println("digraph {");
@@ -388,7 +383,10 @@ public class PhraseSuffix_Tree {
            return a;
         }
        
-       
+
+       /**************************************************************************************************
+        Search Tree
+        **************************************************************************************************/
        void searchTree(int x, String searchWord) {
           	for (int child : nodes[x].next.values()) {
           		System.out.println("Displaying nodes No:" + child + "Value: "+ edgeString(child));
@@ -399,7 +397,6 @@ public class PhraseSuffix_Tree {
           	}
           }
           
-       
        String secondWordOnly(int node) {
            String[] s= Arrays.copyOfRange(text, nodes[node].start+1, Math.min(position + 1, nodes[node].end));
            String secondWord = "";
@@ -413,8 +410,6 @@ public class PhraseSuffix_Tree {
            }
            return secondWord;
         }
-       
-       
        public void searchTree_Basic(int x, String searchWord) {
 	       	for (int child : nodes[x].next.values()) {
 	       		if (edgeString(child).equals(searchWord)) { 
@@ -426,7 +421,6 @@ public class PhraseSuffix_Tree {
 	       		searchTree_Basic(child, searchWord);
        	}
        }
-       
        public void searchTree_Advanced(int x, String searchWord) {
         	String[] word; 
        	
@@ -457,69 +451,21 @@ public class PhraseSuffix_Tree {
 		       	}
        }
        
-       
-       public void displayLowFrequencyNodes() {
-    	   System.out.println(nodesToIgnoreCt+" Nodes To Ignore due to Low Frequency: ");
-   			for(int i = 0; i < nodesToIgnoreCt; ++i)
-   			{
-   				System.out.println("nodesToIgnore2: "+ nodesToIgnore[i] + " with ParentNode:  " + nodesToIgnoreParent[i] + " and Key: "+ nodesToIgnoreKey[i] );
-   			}
-       }
-       
-       
-       public void removeLowFrequencyNodes() {
-    	   for(int i = 0; i < nodesToIgnoreCt; ++i)
-  			{
-  		//	  System.out.println("Removing link from parent node=" + nodesToIgnoreParent[i] + "to child node=" + nodesToIgnore[i] + " with Key: " + nodesToIgnoreKey[i]  );
-  			  nodes[nodesToIgnoreParent[i]].next.remove(nodesToIgnoreKey[i]);
-  			}
-       }
-       
-       
-       
- public void updateFrequency(int x, String searchWord, double freqCt) {
-    	   int suggestionCt= 0;
-    	   String prediction = null;
-    	 
-	       	for (int child : nodes[x].next.values()) {
-	       	//	System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
-	       		if (edgeString(child).equals(searchWord)) { 
-	       		//  System.out.println("----------------------------------------------------------------");
-	       		//  System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
-	       		  //System.out.println("First word: " + firstWord(child));
-	             // System.out.println("Second word: " + secondWord(child));
-		         // System.out.println("Second word only: " + secondWordOnly(child));
-  	       		  nodes[child].setFrequency(freqCt);
-  	       	//	  System.out.println("Updated Node: "+edgeString(child)+" with freq of: "+nodes[child].getFrequency());
-	       		}
-	       		updateFrequency(child, searchWord, freqCt);
-      	}
-	       	suggestionNo = suggestionCt;
-      }
-       
-       
+       /**************************************************************************************************
+       Query Tree
+       **************************************************************************************************/
        public void queryTree(int x, String searchWord) {
-    	   
     	   int suggestionKey = 0;
-    	  
-
     	   //String prediction = new String;
     	   String prediction = null;
-    	 
 	       	for (int child : nodes[x].next.values()) {
-	       		
-	       	
-	       		
 	       		//if (edgeString(child).startsWith(searchWord)) {
 	       		if (edgeString(child).equals(searchWord)) { 
-	       			
-	       			
 	       		  //System.out.println("----------------------------------------------------------------");
 	       		  //System.out.println("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> "+"FreqCt: "+ nodes[child].getFrequency());
 	       		  //System.out.println("First word: " + firstWord(child));
 	             // System.out.println("Second word: " + secondWord(child));
 		          //System.out.println("Second word only: " + secondWordOnly(child));
-  	       		
 		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
 		 	 			  String key = entry.getKey();
 		 	 			  Integer value = entry.getValue();
@@ -538,68 +484,45 @@ public class PhraseSuffix_Tree {
 		 		 				suggestionsMultimap.put(nodes[value].getFrequency(), prediction);
 		 		 			//  }
 		 		 			//}
-		 	 			  
-		 	 			  
-		 	 			
 		 	 			//  System.out.println("Press Key: "+suggestionCt+" to select: "+ prediction +" temp: "+ tempPrediction[suggestionCt]);
-		 	 			   
 		  	       	}
 	       		}
 	       		//System.out.println("Next phrase prediction in order: ");
-	 			
-	       		
 	       		queryTree(child, searchWord);
       	}
-	        
 	       	suggestionNo = suggestionKey; 
 	        //suggestionsMap = new TreeMap<Double, String>();
       }
-       
        public void queryPredsuggestionsMap() {
-
 //			System.out.println("queryPredsuggestionsMap");
 //	    	   for(Entry<Double, String> suggestionsMapEntry : suggestionsMap.entrySet()) {
 //		 			  System.out.println(suggestionsMapEntry.getKey() + " => " +suggestionsMapEntry.getValue());
 //		 		}
 //	    	suggestionsMap.clear();
-	    	
 	    	// Iterating over entire Mutlimap
 	    	  for(Double keys : suggestionsMultimap.keySet()) {
 	    		  Collection<String> suggestions = suggestionsMultimap.get(keys) ;
 	    		 System.out.println("Suggestion: Rank="+keys + " "+suggestions);
-	    		  
 //	    		  String result = String.format("#.00", keys); 
 //	    		  for (String suggestions1:suggestions) 
 //	    	       { 
 //	    	       	result = result+" "+suggestions1; 
 //	    	       } 
 //	    	       System.out.println(result); 
-	    		  
 	    	  }
-	    	  
 	    	  suggestionsMultimap.clear();
        }
        
-       
-       
        public void querySuggestionKey() {
-    	   
     	   
     	   for (int i = 1; i<=suggestionNo; i++) {
     		   System.out.println("Press Key: "+i+" to select: "+ tempPrediction[i]);
     	   }
-    		   
     	 //  suggestionCt = 0;
        }
-       
-     
-       
-       
        public void queryPredictionTable(int x, int searchIndex) {
-	    
     	   String searchWord;
     	   searchWord = tempPrediction[searchIndex];
-    	   
     	   message = message + " " + searchWord;
     	   System.out.println("Your Message: "+ message);
     	   System.out.println("-----------------------------------------------------------------------");
@@ -607,23 +530,56 @@ public class PhraseSuffix_Tree {
    		   suggestionNo = 0;   
     	   queryTree(1, searchWord);
     	   if (suggestionNo==0) System.out.println("End of Sentence!");
-    	  
-	    	
 	    }
        
        public void setInitialMessage(String searchWord) {
-    	   
     	   message = message + " " + searchWord;
 	    }
        
        public String getMessage() {
-    	   
     	   return message;
 	    }
        
        
+       /**************************************************************************************************
+       Low Frequency Pruning
+       **************************************************************************************************/
+       public void displayLowFrequencyNodes() {
+    	   System.out.println(nodesToIgnoreCt+" Nodes To Ignore due to Low Frequency: ");
+   			for(int i = 0; i < nodesToIgnoreCt; ++i)
+   			{
+   				System.out.println("nodesToIgnore2: "+ nodesToIgnore[i] + " with ParentNode:  " + nodesToIgnoreParent[i] + " and Key: "+ nodesToIgnoreKey[i] );
+   			}
+       }
        
-//Terence's Code END: *********************************************************************************************************************
+       public void removeLowFrequencyNodes() {
+    	   for(int i = 0; i < nodesToIgnoreCt; ++i)
+  			{
+  		//	  System.out.println("Removing link from parent node=" + nodesToIgnoreParent[i] + "to child node=" + nodesToIgnore[i] + " with Key: " + nodesToIgnoreKey[i]  );
+  			  nodes[nodesToIgnoreParent[i]].next.remove(nodesToIgnoreKey[i]);
+  			}
+       }
+       
+       /**************************************************************************************************
+       	Update Frequency Count
+       **************************************************************************************************/
+       public void updateFrequency(int x, String searchWord, double freqCt) {
+    	   int suggestionCt= 0;
+	       	for (int child : nodes[x].next.values()) {
+	       	//	System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
+	       		if (edgeString(child).equals(searchWord)) { 
+	       		//  System.out.println("----------------------------------------------------------------");
+	       		//  System.out.print("Searching for: <"+searchWord+ "> Found at Node: <" + child +"> ");
+	       		  //System.out.println("First word: " + firstWord(child));
+	             // System.out.println("Second word: " + secondWord(child));
+		         // System.out.println("Second word only: " + secondWordOnly(child));
+  	       		  nodes[child].setFrequency(freqCt);
+  	       	//	  System.out.println("Updated Node: "+edgeString(child)+" with freq of: "+nodes[child].getFrequency());
+	       		}
+	       		updateFrequency(child, searchWord, freqCt);
+      	}
+	       	suggestionNo = suggestionCt;
+      }
        
    } //End of Class PhraseSuffix_Node.java
 

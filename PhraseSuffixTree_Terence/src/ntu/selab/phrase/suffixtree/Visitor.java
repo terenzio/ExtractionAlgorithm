@@ -1,11 +1,13 @@
 package ntu.selab.phrase.suffixtree;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public interface Visitor {
 	
-//	PhraseTree_Root phraseTree = new PhraseTree_Root();
-// 	
-// 	PhraseTree_Node phraseNode = new PhraseTree_Node();
-// 	
-// 	phraseNode.
+	
+	abstract void visitTree() throws Exception;
+
 
 }

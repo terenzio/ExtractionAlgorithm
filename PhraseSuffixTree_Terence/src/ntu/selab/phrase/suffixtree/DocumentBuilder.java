@@ -3,11 +3,16 @@ package ntu.selab.phrase.suffixtree;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class DocumentScanner{
+public class DocumentBuilder{
 
-	private Table table;
-	public DocumentScanner (){
-		table = new Table();
+	private FrequencyBuilder table;
+	
+	
+	public DocumentBuilder (){
+		table = new FrequencyBuilder();
+		SuffixTokenBuilder suffixBuilder = new SuffixTokenBuilder();
+		CollocationsBuilder collocBuilder = new CollocationsBuilder();
+		SignificanceBuilder sigBuilder = new SignificanceBuilder();  
 	}
 	
 	public void scanToMix(String phrase, int window_size){  //window_size = no. of nGrams
