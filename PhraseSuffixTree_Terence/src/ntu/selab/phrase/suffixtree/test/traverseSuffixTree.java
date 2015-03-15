@@ -1,7 +1,9 @@
 package ntu.selab.phrase.suffixtree.test;
 
-import ntu.selab.phrase.suffixtree.*;
-
+import ntu.selab.phrase.suffixtree.builders.DocumentBuilder;
+import ntu.selab.phrase.suffixtree.tree.PhraseSuffix_Tree;
+import ntu.selab.phrase.suffixtree.tree.TreeBuilder;
+import ntu.selab.phrase.suffixtree.tree.TreeElement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -38,9 +41,9 @@ public class traverseSuffixTree extends TestCase {
 			BufferedReader br = new BufferedReader(new FileReader(inCorpus));
 			String line;
 			while((line=br.readLine()) != null){
-				sc.scanToMix(line, 2); //nGram = 2
+				sc.scanToTable(line, 2); //nGram = 2
 			}
-			sc.printM(outFrequency);
+			sc.printTable(outFrequency);
 			br.close();
 			outFrequency.close();
 		} catch(IOException e){
@@ -60,9 +63,10 @@ public class traverseSuffixTree extends TestCase {
 		System.out.print("STEP4: Calculating Collocations.... ");
 		PrintWriter outCollocations = new PrintWriter(new FileWriter("complex2gram.txt",true));
 		//PhraseSuffix_Tree st = new PhraseSuffix_Tree(500000);
-		TreeBuilder tb = new TreeBuilder();
+		//TreeBuilder tb = new TreeBuilder();
+		TreeBuilder tb = new TreeElement();
 		PhraseSuffix_Tree st = tb.buildTree(500000);
-		st.printCollocationFrequencies(inCorpus, outCollocations);
+		st.caculateCollocationFrequencies(inCorpus, outCollocations);
 		System.out.println("Done!"); System.out.println("");
 		
 		/*

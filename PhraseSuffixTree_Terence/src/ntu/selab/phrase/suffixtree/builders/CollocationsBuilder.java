@@ -1,20 +1,14 @@
-package ntu.selab.phrase.suffixtree;
+package ntu.selab.phrase.suffixtree.builders;
 
-import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.lm.TokenizedLM;
-import com.aliasi.util.Files;
 import com.aliasi.util.ScoredObject;
-import com.aliasi.util.AbstractExternalizable;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.SortedSet;
+import ntu.selab.phrase.suffixtree.tree.PhraseSuffix_Tree;
 
 public class CollocationsBuilder {
 
@@ -27,20 +21,14 @@ public class CollocationsBuilder {
     public static double [] collcationSignificance = new double [500];
     public static int collocationCount = 0;
     
-    public static File BACKGROUND_DIR 
-        = new File("data/rec.sport.hockey/train");
-    public static File FOREGROUND_DIR 
-        = new File("data/rec.sport.hockey/test");
 
     public static TokenizedLM buildModel(File inCorpus, TokenizerFactory tokenizerFactory,
-                                          int ngram,
-                                          File directory) 
+                                          int ngram) 
         throws IOException {
 
 //        String[] trainingFiles = directory.list();
         TokenizedLM model = new TokenizedLM(tokenizerFactory,ngram);
         
-        System.out.println("Calculating Collcations...");
                     
 //        for (int j = 0; j < trainingFiles.length; ++j) {
 //            String text = Files.readFromFile(new File(directory,

@@ -1,4 +1,4 @@
-package ntu.selab.phrase.suffixtree;
+package ntu.selab.phrase.suffixtree.builders;
 
 import java.io.PrintWriter;
 import java.util.Map;
@@ -8,11 +8,10 @@ public class FrequencyBuilder {
 	
 	private Map<String, Float> mixed;
 	private float total = 1000; //From 500 word corpus and collocations of 500
-	public FrequencyBuilder(){
 	
-	mixed = new TreeMap<String, Float>();
+	public FrequencyBuilder(){
+		mixed = new TreeMap<String, Float>();
 	}
-
 
 	public void addToMix(String word){
 		if(mixed.containsKey(word)) {

@@ -1,20 +1,14 @@
-package ntu.selab.phrase.suffixtree;
+package ntu.selab.phrase.suffixtree.tree;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
-
+import ntu.selab.phrase.suffixtree.builders.CollocationsBuilder;
 import com.aliasi.lm.TokenizedLM;
 import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
@@ -181,14 +175,14 @@ public class PhraseSuffix_Tree {
         **************************************************************************************************/
        int nodeCount=1;
        public static String [] collocationStrings = new String [500];
-       public void printCollocationFrequencies(File inCorpus, PrintWriter out) throws Exception{
+       public void caculateCollocationFrequencies(File inCorpus, PrintWriter out) throws Exception{	
     	   TokenizerFactory tokenizerFactory = IndoEuropeanTokenizerFactory.INSTANCE;
-    	   TokenizedLM backgroundModel = CollocationsBuilder.buildModel(inCorpus, tokenizerFactory, CollocationsBuilder.NGRAM, CollocationsBuilder.BACKGROUND_DIR);
+    	   TokenizedLM backgroundModel = CollocationsBuilder.buildModel(inCorpus, tokenizerFactory, CollocationsBuilder.NGRAM);
     	   backgroundModel.sequenceCounter().prune(3);
     	   SortedSet<ScoredObject<String[]>> coll = backgroundModel.collocationSet(CollocationsBuilder.NGRAM_REPORTING_LENGTH, CollocationsBuilder.MIN_COUNT,CollocationsBuilder.MAX_COUNT);
            CollocationsBuilder.report(coll);
-           System.out.println(" ");
-           System.out.println("Inserting Collocations into the SuffixTree...");
+           
+           
            for(int i=0; i < CollocationsBuilder.collocationCount; i++){
         	   nodeCount++;
         	   System.out.print("node1 -> " + "node" + nodeCount + " [label=\""+collocationStrings[i]+"\",weight=3]\n");
@@ -209,8 +203,9 @@ public class PhraseSuffix_Tree {
         	//   }
         	  // out.println(word[1]+"="+Frequency[i]);
         	 //  out.println(collocationStrings[i]+"="+Frequency[i]);
+            		
            }
-           
+
        } 
 //       void printLeaves(int x, PrintWriter out) {
 //           if (nodes[x].next.size() == 0)
@@ -467,7 +462,7 @@ public class PhraseSuffix_Tree {
 	             // System.out.println("Second word: " + secondWord(child));
 		          //System.out.println("Second word only: " + secondWordOnly(child));
 		  	       	for(Map.Entry<String,Integer> entry : nodes[child].next.entrySet() ) {
-		 	 			  String key = entry.getKey();
+		 	 			  //String key = entry.getKey();
 		 	 			  Integer value = entry.getValue();
 		 	 			  //System.out.println("With Key:" +key + " => Value:" + value);
 		 	 			suggestionKey++;

@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import ntu.selab.phrase.suffixtree.DocumentBuilder;
+import ntu.selab.phrase.suffixtree.builders.DocumentBuilder;
 
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class testConstructTable {
 		String line;
 		while((line=br.readLine()) != null){
 			//sc.scan(line);
-			sc.scanToMix(line, 3);
+			sc.scanToTable(line, 3);
 		}
 	//	sc.printM();
 		br.close();

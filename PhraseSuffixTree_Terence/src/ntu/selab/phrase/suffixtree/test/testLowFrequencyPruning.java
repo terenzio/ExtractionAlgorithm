@@ -6,16 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
-
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
-import ntu.selab.phrase.suffixtree.PhraseSuffix_Tree;
-
+import ntu.selab.phrase.suffixtree.tree.PhraseSuffix_Tree;
 
 public class testLowFrequencyPruning extends TestCase {
 	

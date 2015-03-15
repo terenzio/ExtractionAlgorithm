@@ -1,4 +1,4 @@
-package ntu.selab.phrase.suffixtree;
+package ntu.selab.phrase.suffixtree.builders;
 
 import java.util.HashSet;
 import java.util.Map;

@@ -6,10 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
-import java.util.Map;
-import ntu.selab.phrase.suffixtree.DocumentBuilder;
-import ntu.selab.phrase.suffixtree.SignificanceBuilder;
+import ntu.selab.phrase.suffixtree.builders.DocumentBuilder;
+import ntu.selab.phrase.suffixtree.builders.SignificanceBuilder;
+
 import org.junit.Test;
 
 public class calculateNGramFrequencies {
@@ -27,9 +26,9 @@ public class calculateNGramFrequencies {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String line;
 			while((line=br.readLine()) != null){
-				sc.scanToMix(line, 2);
+				sc.scanToTable(line, 2);
 			}
-			sc.printM(out);
+			sc.printTable(out);
 			br.close();
 			out.close();
 		} catch(IOException e){
@@ -46,7 +45,7 @@ public class calculateNGramFrequencies {
 //		}
 		
 		//System.out.println("------------------------------");
-		HashSet<String> si = sig.markSignificant(sc.getTable());
+//		HashSet<String> si = sig.markSignificant(sc.getTable());
 //		for(String s: si)
 //			System.out.println("* "+s);
 	}

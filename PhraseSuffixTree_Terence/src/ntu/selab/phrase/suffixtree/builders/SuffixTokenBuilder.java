@@ -1,14 +1,11 @@
-package ntu.selab.phrase.suffixtree;
+package ntu.selab.phrase.suffixtree.builders;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SuffixTokenBuilder {
-
-	//Input: "please call me asap"
 	
 	public String readLine (String sentence){
-		List<String> childNodes2 = new ArrayList<String>();
 		List<String> childNodes = new ArrayList<String>(); 
 		StringBuilder a = new StringBuilder();
 	    
